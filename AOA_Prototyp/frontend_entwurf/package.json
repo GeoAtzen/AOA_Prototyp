@@ -1,0 +1,38 @@
+{
+  "name": "geoatzen",
+  "version": "1.0.0",
+  "private": false,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "http-errors": "~1.6.3",
+    "leaflet": "^1.8.0",
+    "leaflet-draw": "^1.0.4",
+    "mongodb": "^4.7.0",
+    "mongoose": "^6.5.5",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.5-lts.1",
+    "path": "^0.12.7",
+    "pug": "^3.0.2",
+    "with": "^7.0.2"
+  },
+  "main": "app.js",
+  "author": "Darian Weiß, Luca Hesse, Tim Lehmann, Tobias Krumrein, Erkam Dogan, Jonathan Mader",
+  "license": "GPL-3.0",
+  "description": "Geosoftware II Projekt der GeoAtzen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeoAtzen/frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GeoAtzen/frontend/issues"
+  },
+  "homepage": "https://github.com/GeoAtzen/frontend#readme"
+}
