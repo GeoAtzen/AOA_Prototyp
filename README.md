@@ -6,7 +6,7 @@ Der erste Prototyp unser Anwendung!
 <h4>Node Frontend:</h4>
 <br>
 Klonen Sie das Repository und speichern es Lokal.<br>
-Öffnen Sie den frontend_entwurf Ordner dann in ihrer IDE und öffnen das Terminal. Dort geben Sie folgenden Befehl ein:
+Öffnen Sie den frontend_entwurf Ordner dann in ihrer IDE oder navigieren sie dorthin. Dort geben Sie dann im Terminal folgenden Befehl ein:
 <br>
 $ npm install <br>
 und dann <br>
@@ -17,6 +17,16 @@ http://localhost:3000/
 <br>
 <br>
 <h4>R-Plumber backend:</h4>
+<br>
+Öffnen Sie die Datei "startAPI.R" in RStudio und ändern dort in der 3. Zeile den Pfad zum workdirectory auf den Pfad zum Ordner "backend_entwurf" dieses Repositories
+<br>
+Führen Sie dann (vorrausgesetzt alle Packages aus der "plumber.R" Datei sind installiert) alle Zeilen der "startAPI.R" Datei aus.<br>
+Falls alles geklappt hat, öffnet sich ein neues RStudio Fenster mit der Plumber API und sie können über http://localhost:8000/ 
+auf diese Zugreifen.
+<br>
+Testen Sie die Funktionalität auf der Seite:<br>
+http://localhost:8000/echo
+
 
 Gerade nicht verfügbar:
 Docker: <br>
