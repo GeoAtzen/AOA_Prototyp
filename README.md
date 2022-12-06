@@ -20,9 +20,11 @@ http://localhost:3000/
 <br>
 Öffnen Sie die Datei "startAPI.R" in RStudio und ändern dort in der 3. Zeile den Pfad zum workdirectory auf den Pfad zum Ordner "backend_entwurf" dieses Repositories
 <br>
-Führen Sie dann (vorrausgesetzt alle Packages aus der "plumber.R" Datei sind installiert) alle Zeilen der "startAPI.R" Datei aus.<br>
+<br>
+Führen Sie dann (vorrausgesetzt alle Packages aus der "plumber.R" Datei sind installiert) alle Zeilen der "startAPI.R" Datei aus.<br> <br>
 Falls alles geklappt hat, öffnet sich ein neues RStudio Fenster mit der Plumber API und sie können über http://localhost:8000/ 
 auf diese Zugreifen.
+<br>
 <br>
 Testen Sie die Funktionalität auf der Seite:<br>
 http://localhost:8000/echo
