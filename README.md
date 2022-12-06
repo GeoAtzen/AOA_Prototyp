@@ -4,7 +4,7 @@ Der erste Prototyp unser Anwendung!
 
 <h2>Tutorial</h2>
 <h4>Node Frontend:</h4>
-<br>
+
 Klonen Sie das Repository und speichern es Lokal.<br>
 Öffnen Sie den frontend_entwurf Ordner dann in ihrer IDE oder navigieren sie dorthin. Dort geben Sie dann im Terminal folgenden Befehl ein:
 <br>
@@ -17,7 +17,7 @@ http://localhost:3000/
 <br>
 <br>
 <h4>R-Plumber backend:</h4>
-<br>
+
 Öffnen Sie die Datei "startAPI.R" in RStudio und ändern dort in der 3. Zeile den Pfad zum workdirectory auf den Pfad zum Ordner "backend_entwurf" dieses Repositories
 <br>
 <br>
@@ -28,7 +28,7 @@ auf diese Zugreifen.
 <br>
 Testen Sie die Funktionalität auf der Seite:<br>
 http://localhost:8000/echo
-
+<br><br>
 
 Gerade nicht verfügbar:
 Docker: <br>
