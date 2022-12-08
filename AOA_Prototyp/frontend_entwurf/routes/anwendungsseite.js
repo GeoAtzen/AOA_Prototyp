@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const decompress = require("decompress");
 
 /**
  * GET Befehl für die Messungen ansehen Seite
@@ -18,7 +19,18 @@ router.post("/ergebnisseitemodel", function (req, res, next) {
 });
 
 router.post("/ergebnisseitegpkg", function (req, res, next) {
-  // Code zum ausführen des R Skripts
+  
+  try {
+const files = decompress("./public/uploads/usertrainingsdata.zip", "./public/uploads", {
+         map: file => {
+             file.path = `usertrainingspolygone.gpkg`;
+             return file;
+         }
+     });
+     console.log("done!");
+ } catch (error) {
+    console.log(error);
+}
 
   
   res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffgpkg" })
