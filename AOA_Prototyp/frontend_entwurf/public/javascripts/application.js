@@ -1,8 +1,6 @@
+
 // erstellen einer leaflet Karte mit Europa als Startpunkt und mit OSM als Basiskarte
-
-var rectangle = ""
-
-var map = L.map("anwendungsmap").setView([51.96, 7.6], 12);
+var map = L.map("anwendungsmap").setView([52, 7.8], 12);
 
 L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
   attribution:
@@ -43,3 +41,15 @@ map.on("draw:deleted", function (e) {
   map.addControl(drawControl);
 });
 })
+
+// Anzeigen der hochgeladenen Shapefile
+var shpfile = new L.Shapefile("/uploads/usertrainingsdata.zip");
+shpfile.addTo(map);
+
+// Anzeigen des hochgeladenen geopackages
+// Anmerkung: Layer MUSS layer1 heißen
+var polygons = new L.geoPackageFeatureLayer([], {
+     geoPackageUrl: '/uploads/usertrainingspolygone.gpkg',
+     layerName: 'layer1',
+     style: {color: 'green'}
+}).addTo(map);
