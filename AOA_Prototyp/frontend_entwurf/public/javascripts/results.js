@@ -27,6 +27,124 @@ var drawControl = new L.Control.Draw({
 // adding drawControl
 map.addControl(drawControl)
 
+// Anzeigen der hochgeladenen Shapefile
+var usershapefile = new L.Shapefile("/uploads/usertrainingsdata.zip", {
+        onEachFeature: function(feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                    return k + ": " + feature.properties[k];
+                }).join("<br />"), {
+                    maxHeight: 200
+                });
+            }
+        },
+        style: function (feature) {
+          switch (feature.properties.Label) {
+            case "Acker":
+              return { color: "#d18b2c" };
+            case "Acker_bepflanzt":
+              return { color: "#70843a" };
+            case "Bahnschiene":
+              return { color: "#696969" };
+            case "Baumgruppe":
+              return { color: "#11671e" };
+            case "Binnengewaesser":
+              return { color: "#0a1cb1" };
+            case "Industrie":
+              return { color: "#696969" };
+            case "Innenstadt":
+              return { color: "#696969" };
+            case "Kunstrasen":
+              return { color: "#92e597" };
+            case "Laubwald":
+              return { color: "#11671e" };
+            case "Mischwald":
+              return { color: "#11671e" };
+            case "Parklandschaft":
+              return { color: "#92e597" };
+            case "Siedlung":
+              return { color: "#696969" };
+            case "Strand":
+              return { color: "#ffff00" };
+            case "Versiegelt":
+              return { color: "#696969" };
+            case "Wiese":
+              return { color: "#00FF00" };
+            default:
+              return { color: "##000000" };
+                }
+            },
+      });
+
+// Anzeigen des hochgeladenen geopackages
+// Anmerkung: Layer MUSS layer1 heißen
+var usergeopackage = new L.geoPackageFeatureLayer([], {
+     geoPackageUrl: '/uploads/usertrainingspolygone.gpkg',
+     layerName: 'layer1',
+     onEachFeature: function(feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                    return k + ": " + feature.properties[k];
+                }).join("<br />"), {
+                    maxHeight: 200
+                });
+            }
+        },
+        style: function (feature) {
+          switch (feature.properties.Label) {
+            case "Acker":
+              return { color: "#d18b2c" };
+            case "Acker_bepflanzt":
+              return { color: "#70843a" };
+            case "Bahnschiene":
+              return { color: "#696969" };
+            case "Baumgruppe":
+              return { color: "#11671e" };
+            case "Binnengewaesser":
+              return { color: "#0a1cb1" };
+            case "Industrie":
+              return { color: "#696969" };
+            case "Innenstadt":
+              return { color: "#696969" };
+            case "Kunstrasen":
+              return { color: "#92e597" };
+            case "Laubwald":
+              return { color: "#11671e" };
+            case "Mischwald":
+              return { color: "#11671e" };
+            case "Parklandschaft":
+              return { color: "#92e597" };
+            case "Siedlung":
+              return { color: "#696969" };
+            case "Strand":
+              return { color: "#ffff00" };
+            case "Versiegelt":
+              return { color: "#696969" };
+            case "Wiese":
+              return { color: "#00FF00" };
+            default:
+              return { color: "##000000" };
+                }
+            },
+          });
+
+
+//var tifflayer = L.leafletGeotiff('/downloadloads/prediction.tif').addTo(map);
+
+// Layer Control
+var baseMaps = {
+    "OpenStreetMap": osm
+};
+
+var overlayMaps = {
+    "Shapefile": usershapefile,
+    "Geopackage": usergeopackage,
+    //"tiff": tifflayer
+};
+
+var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+
 // Label
 var getLabel = function (layer) {
   var label = prompt("Label des Polygons", "Label");
@@ -103,117 +221,3 @@ function exportGeoJSON() {
     linkElement.click();
   }
 }
-
-
-// Anzeigen der hochgeladenen Shapefile mit popup und style für verschiedene Label
-var usershapefile = new L.Shapefile("/uploads/usertrainingsdata.zip", {
-        onEachFeature: function(feature, layer) {
-            if (feature.properties) {
-                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                    return k + ": " + feature.properties[k];
-                }).join("<br />"), {
-                    maxHeight: 200
-                });
-            }
-        },
-        style: function (feature) {
-          switch (feature.properties.Label) {
-            case "Acker":
-              return { color: "#d18b2c" };
-            case "Acker_bepflanzt":
-              return { color: "#70843a" };
-            case "Bahnschiene":
-              return { color: "#696969" };
-            case "Baumgruppe":
-              return { color: "#11671e" };
-            case "Binnengewaesser":
-              return { color: "#0a1cb1" };
-            case "Industrie":
-              return { color: "#696969" };
-            case "Innenstadt":
-              return { color: "#696969" };
-            case "Kunstrasen":
-              return { color: "#92e597" };
-            case "Laubwald":
-              return { color: "#11671e" };
-            case "Mischwald":
-              return { color: "#11671e" };
-            case "Parklandschaft":
-              return { color: "#92e597" };
-            case "Siedlung":
-              return { color: "#696969" };
-            case "Strand":
-              return { color: "#ffff00" };
-            case "Versiegelt":
-              return { color: "#696969" };
-            case "Wiese":
-              return { color: "#00FF00" };
-            default:
-              return { color: "##000000" };
-                }
-            },
-    });
-
-// Anzeigen des hochgeladenen geopackages
-// Anmerkung: Layer MUSS layer1 heißen
-var usergeopackage = new L.geoPackageFeatureLayer([], {
-     geoPackageUrl: '/uploads/usertrainingspolygone.gpkg',
-     layerlabel: 'layer1',
-     onEachFeature: function(feature, layer) {
-            if (feature.properties) {
-                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                    return k + ": " + feature.properties[k];
-                }).join("<br />"), {
-                    maxHeight: 200
-                });
-            }
-        },
-        style: function (feature) {
-          switch (feature.properties.Label) {
-            case "Acker":
-              return { color: "#d18b2c" };
-            case "Acker_bepflanzt":
-              return { color: "#70843a" };
-            case "Bahnschiene":
-              return { color: "#696969" };
-            case "Baumgruppe":
-              return { color: "#11671e" };
-            case "Binnengewaesser":
-              return { color: "#0a1cb1" };
-            case "Industrie":
-              return { color: "#696969" };
-            case "Innenstadt":
-              return { color: "#696969" };
-            case "Kunstrasen":
-              return { color: "#92e597" };
-            case "Laubwald":
-              return { color: "#11671e" };
-            case "Mischwald":
-              return { color: "#11671e" };
-            case "Parklandschaft":
-              return { color: "#92e597" };
-            case "Siedlung":
-              return { color: "#696969" };
-            case "Strand":
-              return { color: "#ffff00" };
-            case "Versiegelt":
-              return { color: "#696969" };
-            case "Wiese":
-              return { color: "#00FF00" };
-            default:
-              return { color: "##000000" };
-                }
-            },
-      });
-
-// Layer Control
-var baseMaps = {
-    "OpenStreetMap": osm
-};
-
-var overlayMaps = {
-    "Shapefile": usershapefile,
-    "Geopackage": usergeopackage
-};
-
-var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
