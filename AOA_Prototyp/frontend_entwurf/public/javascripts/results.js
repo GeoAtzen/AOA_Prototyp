@@ -2,18 +2,22 @@
 var map = L.map("ergebnismap").setView([52, 7.8], 12);
 
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap'
+    attribution: '© OpenStreetMap',
+    maxZoom: 19,
 }).addTo(map);
 
 //drawcontrol variables
 var drawnItems = new L.FeatureGroup()
+map.addLayer(drawnItems)
+
 var drawControl = new L.Control.Draw({
   draw: {
     marker: false,
     circle: false,
     polyline: false,
     circlemarker: false,
-    rectangle: false
+    rectangle: false,
+    poylgon: true,
   },
   edit: {
     featureGroup: drawnItems
@@ -21,49 +25,87 @@ var drawControl = new L.Control.Draw({
 })
 
 // adding drawControl
-map.addLayer(drawnItems)
 map.addControl(drawControl)
 
+// Label
+var getLabel = function (layer) {
+  var label = prompt("Label des Polygons", "Label");
+  return label;
+};
 
-/* adding the drawn rectangle to map via event
-map.on(L.Draw.Event.CREATED, (e) => {
-  var type = e.layerType;
-  var layer = e.layer;
-  polygon = layer.toGeoJSON().geometry.coordinates;
+// ClassID
+var getclassID = function (layer) {
+  var classID = prompt("ClassID des Polygons", "ClassID");
+  return classID;
+};
+
+// Global array to store the drawn polygons as GeoJSON
+var polygonsgeojson = []; 
+
+// Source: https://stackoverflow.com/questions/29736345/adding-properties-to-a-leaflet-layer-that-will-become-geojson-options
+map.on(L.Draw.Event.CREATED, function (e) {
+  var layer = e.layer
+    feature = layer.feature = layer.feature || {};
+    feature.type = feature.type || "Feature";
+
+  var label = getLabel(layer);
+  var classID = getclassID(layer);
+  var props = (feature.properties = feature.properties || {}); // Intialize feature.properties
+  props.label = label;
+  props.classID = classID;
   drawnItems.addLayer(layer);
-  map.addLayer(layer);
-})
-*/
 
-// Prototypisches hinzufügen von polygonen und ihrer Einordnung
-map.on(L.Draw.Event.CREATED, (e) => {
-  var type = e.layerType;
-  var layer = e.layer;
-
-  if(type === "polygon"){
-    var drawnItem = layer;
-    var layer = e.layer;
-    polygon = layer.toGeoJSON().geometry.coordinates;
-    console.log("created polygon");
-    var popupString = `
-        <input id="label" label="label" value="" placeholder="Label">
-        <input id="classid" label="classid" value="" placeholder="Classid">
-        <input type="submit" value="Submit">
-    `;
-    drawnItems.addLayer(layer);
-    map.addLayer(layer);
-    layer.bindPopup(popupString).openPopup();
+  if (label == "Label") {
+    layer.bindPopup("Kein Label angegeben");
+  } else if (label == "") {
+    layer.bindPopup("Kein Label angegeben");
+  } else {
+    layer.bindTooltip(label, { permanent: true, direction: "top" });
   }
+  drawnItems.addLayer(layer);
+
+  //polygonsgeojson speichern
+  polygonsgeojson.push(drawnItems.toGeoJSON());
+  
 });
 
-// prototypisches Einfügen der Prediction auf der Leaflet Karte
-var imageUrl = 'http://localhost:8000/tiffmodel',
-imageBounds = [[51.5, 7], [52, 7.5]];
+/**  
+* @function exportGeoJSON
+* @description Export to GeoJSON File
+* Source: https://stackoverflow.com/questions/58126090/leaflet-draw-saving-data-with-geojson
+*/
+function exportGeoJSON() {
+  
+  //test GeoJSON validity
+  console.log(drawnItems.toGeoJSON());
+  console.log(JSON.stringify(drawnItems.toGeoJSON()));
+  
+  // save drawn Polygons as JSON in jsonData
+  let jsonData = JSON.stringify(drawnItems.toGeoJSON());
+  
+  // telling javascript to export jsonData as JSON
+  let dataUri =
+    "data:text/json;charset=utf-8," + encodeURIComponent(jsonData); 
+  
+  // stating the export name
+  let fileexportname = "digitalized_user_trainingspolygons" + ".geojson";
+  
+  // download
+  let linkElement = document.createElement("a");
+  linkElement.setAttribute("href", dataUri);
+  linkElement.setAttribute("download", fileexportname);
 
-var predictionimage = L.imageOverlay(imageUrl, imageBounds).addTo(map);
+  // if polygon is empty give out error
+  let emptypolygon = '{"type":"FeatureCollection","features":[]}';
+  if (jsonData == emptypolygon) {
+    alert("Sie haben noch keine Polygone gezeichnet!");
+  } else {
+    linkElement.click();
+  }
+}
 
 
-// Anzeigen der hochgeladenen Shapefile mit popup
+// Anzeigen der hochgeladenen Shapefile mit popup und style für verschiedene Label
 var usershapefile = new L.Shapefile("/uploads/usertrainingsdata.zip", {
         onEachFeature: function(feature, layer) {
             if (feature.properties) {
@@ -73,17 +115,51 @@ var usershapefile = new L.Shapefile("/uploads/usertrainingsdata.zip", {
                     maxHeight: 200
                 });
             }
-        }
+        },
+        style: function (feature) {
+          switch (feature.properties.Label) {
+            case "Acker":
+              return { color: "#d18b2c" };
+            case "Acker_bepflanzt":
+              return { color: "#70843a" };
+            case "Bahnschiene":
+              return { color: "#696969" };
+            case "Baumgruppe":
+              return { color: "#11671e" };
+            case "Binnengewaesser":
+              return { color: "#0a1cb1" };
+            case "Industrie":
+              return { color: "#696969" };
+            case "Innenstadt":
+              return { color: "#696969" };
+            case "Kunstrasen":
+              return { color: "#92e597" };
+            case "Laubwald":
+              return { color: "#11671e" };
+            case "Mischwald":
+              return { color: "#11671e" };
+            case "Parklandschaft":
+              return { color: "#92e597" };
+            case "Siedlung":
+              return { color: "#696969" };
+            case "Strand":
+              return { color: "#ffff00" };
+            case "Versiegelt":
+              return { color: "#696969" };
+            case "Wiese":
+              return { color: "#00FF00" };
+            default:
+              return { color: "##000000" };
+                }
+            },
     });
 
 // Anzeigen des hochgeladenen geopackages
 // Anmerkung: Layer MUSS layer1 heißen
 var usergeopackage = new L.geoPackageFeatureLayer([], {
      geoPackageUrl: '/uploads/usertrainingspolygone.gpkg',
-     layerName: 'layer1',
+     layerlabel: 'layer1',
      onEachFeature: function(feature, layer) {
-
-      
             if (feature.properties) {
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
                     return k + ": " + feature.properties[k];
@@ -92,17 +168,44 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
                 });
             }
         },
-        style: function(feature) {
-            return {
-                opacity: 1,
-                fillOpacity: 0.7,
-                radius: 6,
-                color: "green"
-            }
-        }
+        style: function (feature) {
+          switch (feature.properties.Label) {
+            case "Acker":
+              return { color: "#d18b2c" };
+            case "Acker_bepflanzt":
+              return { color: "#70843a" };
+            case "Bahnschiene":
+              return { color: "#696969" };
+            case "Baumgruppe":
+              return { color: "#11671e" };
+            case "Binnengewaesser":
+              return { color: "#0a1cb1" };
+            case "Industrie":
+              return { color: "#696969" };
+            case "Innenstadt":
+              return { color: "#696969" };
+            case "Kunstrasen":
+              return { color: "#92e597" };
+            case "Laubwald":
+              return { color: "#11671e" };
+            case "Mischwald":
+              return { color: "#11671e" };
+            case "Parklandschaft":
+              return { color: "#92e597" };
+            case "Siedlung":
+              return { color: "#696969" };
+            case "Strand":
+              return { color: "#ffff00" };
+            case "Versiegelt":
+              return { color: "#696969" };
+            case "Wiese":
+              return { color: "#00FF00" };
+            default:
+              return { color: "##000000" };
+                }
+            },
       });
 
-      
 // Layer Control
 var baseMaps = {
     "OpenStreetMap": osm
@@ -110,8 +213,7 @@ var baseMaps = {
 
 var overlayMaps = {
     "Shapefile": usershapefile,
-    "Geopackage": usergeopackage,
-    "Prediction Image": predictionimage
+    "Geopackage": usergeopackage
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
