@@ -38,77 +38,75 @@ html
     script(type="module", src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js")
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
 
-    script(type='text/javascript', src='/library_path/zip.min.js')
-
     script(src="/javascripts/shp.js")
     script(src='/javascripts/leaflet.shpfile.js')
 
-// Navbar
-.w3-top
-  .w3-bar.w3-theme-d2.w3-left-align
-    a.w3-bar-item.w3-button.w3-hide-medium.w3-hide-large.w3-right.w3-hover-white.w3-theme-d2(href='javascript:void(0);' onclick='openNav()')
-      i.fa.fa-bars
-    a.w3-bar-item.w3-button.w3-teal(href='/')
-      i.fa.fa-home.w3-margin-right
-      | Startseite
-    a.w3-bar-item.w3-button.w3-hide-small.w3-hover-white(href='#team') Team
-    a.w3-bar-item.w3-button.w3-hide-small.w3-hover-white(href='#product') Produkte
-    a.w3-bar-item.w3-button.w3-hide-small.w3-hover-white(href='#contact') Kontakt
-    .w3-dropdown-hover.w3-hide-small
-      button.w3-button(title='Notifications')
-        | Vorschläge    
-        i.fa.fa-caret-down
-      .w3-dropdown-content.w3-card-4.w3-bar-block
-        a.w3-bar-item.w3-button(href='/anwendungsseite') Area of Applicability
-        a.w3-bar-item.w3-button(href='https://github.com/GeoAtzen') Github
-        a.w3-bar-item.w3-button(href='/impressum') Referenzen
-    a.w3-bar-item.w3-button.w3-hide-small.w3-right.w3-hover-teal(href='#' title='Search')
-      i.fa.fa-search
-  // Navbar on small screens
-  #navDemo.w3-bar-block.w3-theme-d2.w3-hide.w3-hide-large.w3-hide-medium
-    a.w3-bar-item.w3-button(href='#team') Team
-    a.w3-bar-item.w3-button(href='#product') Produkte
-    a.w3-bar-item.w3-button(href='#contact') Kontakt
+  // Navbar
+  .w3-top
+    .w3-bar.w3-theme-d2.w3-left-align
+      a.w3-bar-item.w3-button.w3-hide-medium.w3-hide-large.w3-right.w3-hover-white.w3-theme-d2(href='javascript:void(0);' onclick='openNav()')
+        i.fa.fa-bars
+      a.w3-bar-item.w3-button.w3-teal(href='/')
+        i.fa.fa-home.w3-margin-right
+        | Startseite
+      a.w3-bar-item.w3-button.w3-hide-small.w3-hover-white(href='#team') Team
+      a.w3-bar-item.w3-button.w3-hide-small.w3-hover-white(href='#product') Produkte
+      a.w3-bar-item.w3-button.w3-hide-small.w3-hover-white(href='#contact') Kontakt
+      .w3-dropdown-hover.w3-hide-small
+        button.w3-button(title='Notifications')
+          | Vorschläge    
+          i.fa.fa-caret-down
+        .w3-dropdown-content.w3-card-4.w3-bar-block
+          a.w3-bar-item.w3-button(href='/anwendungsseite') Area of Applicability
+          a.w3-bar-item.w3-button(href='https://github.com/GeoAtzen') Github
+          a.w3-bar-item.w3-button(href='/impressum') Referenzen
+      a.w3-bar-item.w3-button.w3-hide-small.w3-right.w3-hover-teal(href='#' title='Search')
+        i.fa.fa-search
+    // Navbar on small screens
+    #navDemo.w3-bar-block.w3-theme-d2.w3-hide.w3-hide-large.w3-hide-medium
+      a.w3-bar-item.w3-button(href='#team') Team
+      a.w3-bar-item.w3-button(href='#product') Produkte
+      a.w3-bar-item.w3-button(href='#contact') Kontakt
 
-.row.px-4.px-lg-5
-    block content
+  .row.px-4.px-lg-5
+      block content
 
-// Footer
-footer.w3-container.w3-padding-32.w3-theme-d1.w3-center
-  h5 © GeoAtzen (2022)
-  h4 Folge uns auf Social Media
-  a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Twitter')
-    i.fa.fa-twitter
-  a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Google +')
-    i.fa.fa-google-plus
-  a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Google +')
-    i.fa.fa-instagram
-  a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Linkedin')
-    i.fa.fa-linkedin
-  .w3-tooltip.w3-right(style='position:relative;bottom:100px;z-index:1;')
-    span.w3-text.w3-padding.w3-teal Nach oben
-    a.w3-button.w3-theme(href='#')
-      span.w3-xlarge
-        i.fa.fa-chevron-circle-up
+  // Footer
+  footer.w3-container.w3-padding-32.w3-theme-d1.w3-center
+    h5 © GeoAtzen (2022)
+    h4 Folge uns auf Social Media
+    a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Twitter')
+      i.fa.fa-twitter
+    a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Google +')
+      i.fa.fa-google-plus
+    a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Google +')
+      i.fa.fa-instagram
+    a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Linkedin')
+      i.fa.fa-linkedin
+    .w3-tooltip.w3-right(style='position:relative;bottom:100px;z-index:1;')
+      span.w3-text.w3-padding.w3-teal Nach oben
+      a.w3-button.w3-theme(href='#')
+        span.w3-xlarge
+          i.fa.fa-chevron-circle-up
 
-script.
-  // Script for side navigation
-  function w3_open() {
-  var x = document.getElementById("mySidebar");
-  x.style.width = "300px";
-  x.style.paddingTop = "10%";
-  x.style.display = "block";
-  }
-  // Close side navigation
-  function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  }
-  // Used to toggle the menu on smaller screens when clicking on the menu button
-  function openNav() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-  x.className += " w3-show";
-  } else {
-  x.className = x.className.replace(" w3-show", "");
-  }
-  }
+  script.
+    // Script for side navigation
+    function w3_open() {
+    var x = document.getElementById("mySidebar");
+    x.style.width = "300px";
+    x.style.paddingTop = "10%";
+    x.style.display = "block";
+    }
+    // Close side navigation
+    function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    }
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    } else {
+    x.className = x.className.replace(" w3-show", "");
+    }
+    }
