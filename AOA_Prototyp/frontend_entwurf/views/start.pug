@@ -1,241 +1,142 @@
-doctype html
-head
-  title GeoAtzen
-  link(rel='icon' type='image/x-icon' href='/images/icon.ico')
-  meta(charset='UTF-8')
-  meta(name="viewport", content="width=device-width, initial-scale=1.0")
-  meta(http-equiv="X-UA-Compatible", content="IE=edge")
-  link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
-  link(rel='stylesheet' href='https://www.w3schools.com/lib/w3-theme-black.css')
-  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-  link(rel='stylesheet' href='/stylesheets/bootstrap.css')
-  link(rel='stylesheet' href='/stylesheets/style.css')
-        
-  // Bootstrap
-  link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous")
-  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous")
-        
-  // jQuery library 
-  script(src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous")
-  script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous")
-        
-  // Leaflet
-  link(rel='stylesheet' href='https://unpkg.com/leaflet@1.8.0/dist/leaflet.css' integrity='sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==' crossorigin='')
-  script(src='https://unpkg.com/leaflet@1.8.0/dist/leaflet.js' ntegrity='sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==' crossorigin='')
+extends layout
 
-  // leaflet draw
-  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js')
-
-  // Mapbox
-  script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js')
-  link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet')
-
-  // Icon libaries
-  script(type="module", src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js")
-  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-// Navbar
-.w3-top
-  .w3-bar.w3-theme-d2.w3-left-align
-    a.w3-bar-item.w3-button.w3-hide-medium.w3-hide-large.w3-right.w3-hover-white.w3-theme-d2(href='javascript:void(0);' onclick='openNav()')
-      i.fa.fa-bars
-    a.w3-bar-item.w3-button.w3-teal(href='/')
-      i.fa.fa-home.w3-margin-right
-      | Startseite
-    a.w3-bar-item.w3-button.w3-hide-small.w3-hover-white(href='#team') Team
-    a.w3-bar-item.w3-button.w3-hide-small.w3-hover-white(href='#product') Produkte
-    a.w3-bar-item.w3-button.w3-hide-small.w3-hover-white(href='#contact') Kontakt
-    .w3-dropdown-hover.w3-hide-small
-      button.w3-button(title='Notifications')
-        | Vorschläge    
-        i.fa.fa-caret-down
-      .w3-dropdown-content.w3-card-4.w3-bar-block
-        a.w3-bar-item.w3-button(href='/anwendungsseite') Area of Applicability
-        a.w3-bar-item.w3-button(href='https://github.com/GeoAtzen') Github
-        a.w3-bar-item.w3-button(href='/impressum') Referenzen
-    a.w3-bar-item.w3-button.w3-hide-small.w3-right.w3-hover-teal(href='#' title='Search')
-      i.fa.fa-search
-  // Navbar on small screens
-  #navDemo.w3-bar-block.w3-theme-d2.w3-hide.w3-hide-large.w3-hide-medium
-    a.w3-bar-item.w3-button(href='#team') Team
-    a.w3-bar-item.w3-button(href='#product') Produkte
-    a.w3-bar-item.w3-button(href='#contact') Kontakt
-
-// Image Header
-.w3-display-container.w3-animate-opacity
-  img.img-fluid(src="/images/bildWebseiteZwei.jpg" style='width:100%')
-  .w3-container.w3-display-bottomleft.w3-margin-bottom
-    button.w3-button.w3-xlarge.w3-theme.w3-hover-teal(onclick="document.getElementById('id01').style.display='block'" title='Go To W3.CSS') GeoAtzen - Münster
-// Modal
-#id01.w3-modal
-  .w3-modal-content.w3-card-4.w3-animate-top
-    header.w3-container.w3-teal.w3-display-container
-      span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id01').style.display='none'")
-        i.fa.fa-remove
-    .w3-container
-      img.img-fluid(src="/images/neuesBild.PNG" style='width: 100%')
-      p
-      p Willkommen auf der Webseite der GeoAtzen!
-      p Hier finden Sie unsere Produkte und Informationen zu uns.
-      p Viel Spaß beim Entdecken!
-    footer.w3-container.w3-teal
-      p
-      p © 2022 Copyright: GeoAtzen
 block content
-// Team Container
-#team.w3-container.w3-padding-64.w3-center
-  h2 DAS TEAM
-  p Die Mitglieder unseres Teams:
-  .w3-row
+
+  .w3-display-container.w3-animate-opacity
+    img.img-fluid(src="/images/bildWebseiteZwei.jpg" style='width:100%')
+    .w3-container.w3-display-bottomleft.w3-margin-bottom
+      button.w3-button.w3-xlarge.w3-theme.w3-hover-teal(onclick="document.getElementById('id01').style.display='block'" title='Go To W3.CSS') GeoAtzen - Münster
+  // Modal
+  #id01.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id01').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+        img.img-fluid(src="/images/neuesBild.PNG" style='width: 100%')
+        p
+        p Willkommen auf der Webseite der GeoAtzen!
+        p Hier finden Sie unsere Produkte und Informationen zu uns.
+        p Viel Spaß beim Entdecken!
+      footer.w3-container.w3-teal
+        p
+        p © 2022 Copyright: GeoAtzen
+  // Team Container
+  #team.w3-container.w3-padding-64.w3-center
+    h2 DAS TEAM
+    p Die Mitglieder unseres Teams:
+    .w3-row
+      br
+      .w3-third
+        img.w3-circle.w3-hover-opacity(src='/images/luca.jpg' alt='Boss' style='width:45%')
+        h3 Luca Hesse
+        p CEO
+      .w3-third
+        img.w3-circle.w3-hover-opacity(src='/images/jona.jpg' alt='Boss' style='width:45%')
+        h3 Jonathan Mader
+        p WebGis Entwickler
+      .w3-third
+        img.w3-circle.w3-hover-opacity(src='/images/tim.jpg' alt='Boss' style='width:45%')
+        h3 Tim Lehmann
+        p Qualitätsmanager
+    br    
+    .w3-row
+      br
+      .w3-third
+        img.w3-circle.w3-hover-opacity(src='/images/erk.jpg' alt='Boss' style='width:45%')
+        h3 Erkam Dogan
+        p Support
+      .w3-third
+        img.w3-circle.w3-hover-opacity(src='/images/tobi.jpg' alt='Boss' style='width:45%')
+        h3 Tobias Krumrein
+        p Programmierer
+      .w3-third
+        img.w3-circle.w3-hover-opacity(src='/images/darian.jpg' alt='Boss' style='width:45%')
+        h3 Darian Weiß
+        p Vertrieb   
+  // Container
+  .w3-container(style='position:relative')
+    a.w3-button.w3-xlarge.w3-circle.w3-teal(onclick='w3_open()' style='position:absolute;top:-28px;right:24px') +
+  // Produkt Row
+  #product.w3-row-padding.w3-center.w3-padding-64
+    h2 UNSERE PRODUKTE
+    p Bitte wählen Sie das Produkt, welches Sie nutzen möchten.
     br
-    .w3-third
-      img.w3-circle.w3-hover-opacity(src='/images/luca.jpg' alt='Boss' style='width:45%')
-      h3 Luca Hesse
-      p CEO
-    .w3-third
-      img.w3-circle.w3-hover-opacity(src='/images/jona.jpg' alt='Boss' style='width:45%')
-      h3 Jonathan Mader
-      p WebGis Entwickler
-    .w3-third
-      img.w3-circle.w3-hover-opacity(src='/images/tim.jpg' alt='Boss' style='width:45%')
-      h3 Tim Lehmann
-      p Qualitätsmanager
-  br    
-  .w3-row
-    br
-    .w3-third
-      img.w3-circle.w3-hover-opacity(src='/images/erk.jpg' alt='Boss' style='width:45%')
-      h3 Erkam Dogan
-      p Support
-    .w3-third
-      img.w3-circle.w3-hover-opacity(src='/images/tobi.jpg' alt='Boss' style='width:45%')
-      h3 Tobias Krumrein
-      p Programmierer
-    .w3-third
-      img.w3-circle.w3-hover-opacity(src='/images/darian.jpg' alt='Boss' style='width:45%')
-      h3 Darian Weiß
-      p Vertrieb   
-// Container
-.w3-container(style='position:relative')
-  a.w3-button.w3-xlarge.w3-circle.w3-teal(onclick='w3_open()' style='position:absolute;top:-28px;right:24px') +
-// Produkt Row
-#product.w3-row-padding.w3-center.w3-padding-64
-  h2 UNSERE PRODUKTE
-  p Bitte wählen Sie das Produkt, welches Sie nutzen möchten.
-  br
-  .w3-third.w3-margin-bottom
-    ul.w3-ul.w3-border.w3-hover-shadow
-      li.w3-theme-l4
-        p.w3-xlarge In Arbeit
-      li.w3-padding-16
-        b Platzhalterseite
-        br
-        |  Hier werden neue Dinge erschaffen, schauen Sie in Zukunft nochmal vorbei!
-      li.w3-padding-16
-        b Platzhalterseite
-        br
-        |  Hier werden neue Dinge erschaffen, schauen Sie in Zukunft nochmal vorbei!
-      li.w3-theme-l5.w3-padding-24
-  .w3-third.w3-margin-bottom
-    ul.w3-ul.w3-border.w3-hover-shadow
-      li.w3-theme-l2
-        p.w3-xlarge Area of Applicability
-      li.w3-padding-16
-        b Anwendungsseite
-        br
-        |  Datenupload, Hochladen von Trainingsdaten, Einstellen von Parametern, ...
-      li.w3-padding-16
-        b Ergebnisseite
-        br
-        |  Anzeigen von Ergebnissen, Herunterladen von Dateien in verschiedenen Formaten, ...
-      li.w3-theme-l5.w3-padding-24
-        a.w3-bar-item.w3-button(href='/anwendungsseite')
-          i.fa.fa-check
-          |  weiter zu Area of Applicability
-  .w3-third.w3-margin-bottom
-    ul.w3-ul.w3-border.w3-hover-shadow
-      li.w3-theme-l4
-        p.w3-xlarge In Arbeit
-      li.w3-padding-16
-        b Platzhalterseite
-        br
-        |  Hier werden neue Dinge erschaffen, schauen Sie in Zukunft nochmal vorbei!
-      li.w3-padding-16
-        b Platzhalterseite
-        br
-        |  Hier werden neue Dinge erschaffen, schauen Sie in Zukunft nochmal vorbei!
-      li.w3-theme-l5.w3-padding-24
-// Contact Container
-#contact.w3-container.w3-padding-64.w3-theme-l5
-  .w3-row
-    .w3-col.m5
-      .w3-padding-16
-        span.w3-xlarge.w3-border-teal.w3-bottombar Kontaktiere Uns
-      p
-        i.fa.fa-map-marker.w3-text-teal.w3-xlarge
-        | &nbsp;&nbsp; Heisenbergstraße 2, 48149 Münster, Deutschland
-      p
-        i.fa.fa-phone.w3-text-teal.w3-xlarge
-        | &nbsp;&nbsp; 01575 53076298
-      p
-        i.fa.fa-envelope-o.w3-text-teal.w3-xlarge
-        | &nbsp;&nbsp; lhesse@uni-muenster.de
-      p
-        i.fa.fa-desktop.w3-text-teal.w3-xlarge 
-        | &nbsp;&nbsp; https://github.com/GeoAtzen
-    .w3-col.m7
-      form.w3-container.w3-card-4.w3-padding-16.w3-white(action='/action_page.php' target='_blank')
-        .w3-section
-          label Name
-          input.w3-input(type='text' name='Name' required='')
-        .w3-section
-          label Email
-          input.w3-input(type='text' name='Email' required='')
-        .w3-section
-          label Message
-          input.w3-input(type='text' name='Message' required='')
-        input.w3-check(type='checkbox' checked='' name='Like')
-        label Like
-        button.w3-button.w3-right.w3-theme(type='submit') Absenden
-// Image of location/map
-img.img-fluid(src="/images/untenbild.jpg")
-// Footer
-footer.w3-container.w3-padding-32.w3-theme-d1.w3-center
-  h5 © GeoAtzen (2022)
-  h4 Folge uns auf Social Media
-  a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Twitter')
-    i.fa.fa-twitter
-  a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Google +')
-    i.fa.fa-google-plus
-  a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Google +')
-    i.fa.fa-instagram
-  a.w3-button.w3-large.w3-teal(href='javascript:void(0)' title='Linkedin')
-    i.fa.fa-linkedin
-  .w3-tooltip.w3-right(style='position:relative;bottom:100px;z-index:1;')
-    span.w3-text.w3-padding.w3-teal Nach oben
-    a.w3-button.w3-theme(href='#')
-      span.w3-xlarge
-        i.fa.fa-chevron-circle-up
-script.
-  // Script for side navigation
-  function w3_open() {
-  var x = document.getElementById("mySidebar");
-  x.style.width = "300px";
-  x.style.paddingTop = "10%";
-  x.style.display = "block";
-  }
-  // Close side navigation
-  function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  }
-  // Used to toggle the menu on smaller screens when clicking on the menu button
-  function openNav() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-  x.className += " w3-show";
-  } else {
-  x.className = x.className.replace(" w3-show", "");
-  }
-  }
+    .w3-third.w3-margin-bottom
+      ul.w3-ul.w3-border.w3-hover-shadow
+        li.w3-theme-l4
+          p.w3-xlarge In Arbeit
+        li.w3-padding-16
+          b Platzhalterseite
+          br
+          |  Hier werden neue Dinge erschaffen, schauen Sie in Zukunft nochmal vorbei!
+        li.w3-padding-16
+          b Platzhalterseite
+          br
+          |  Hier werden neue Dinge erschaffen, schauen Sie in Zukunft nochmal vorbei!
+        li.w3-theme-l5.w3-padding-24
+    .w3-third.w3-margin-bottom
+      ul.w3-ul.w3-border.w3-hover-shadow
+        li.w3-theme-l2
+          p.w3-xlarge Area of Applicability
+        li.w3-padding-16
+          b Anwendungsseite
+          br
+          |  Datenupload, Hochladen von Trainingsdaten, Einstellen von Parametern, ...
+        li.w3-padding-16
+          b Ergebnisseite
+          br
+          |  Anzeigen von Ergebnissen, Herunterladen von Dateien in verschiedenen Formaten, ...
+        li.w3-theme-l5.w3-padding-24
+          a.w3-bar-item.w3-button(href='/anwendungsseite')
+            i.fa.fa-check
+            |  weiter zu Area of Applicability
+    .w3-third.w3-margin-bottom
+      ul.w3-ul.w3-border.w3-hover-shadow
+        li.w3-theme-l4
+          p.w3-xlarge In Arbeit
+        li.w3-padding-16
+          b Platzhalterseite
+          br
+          |  Hier werden neue Dinge erschaffen, schauen Sie in Zukunft nochmal vorbei!
+        li.w3-padding-16
+          b Platzhalterseite
+          br
+          |  Hier werden neue Dinge erschaffen, schauen Sie in Zukunft nochmal vorbei!
+        li.w3-theme-l5.w3-padding-24
+  // Contact Container
+  #contact.w3-container.w3-padding-64.w3-theme-l5
+    .w3-row
+      .w3-col.m5
+        .w3-padding-16
+          span.w3-xlarge.w3-border-teal.w3-bottombar Kontaktiere Uns
+        p
+          i.fa.fa-map-marker.w3-text-teal.w3-xlarge
+          | &nbsp;&nbsp; Heisenbergstraße 2, 48149 Münster, Deutschland
+        p
+          i.fa.fa-phone.w3-text-teal.w3-xlarge
+          | &nbsp;&nbsp; 01575 53076298
+        p
+          i.fa.fa-envelope-o.w3-text-teal.w3-xlarge
+          | &nbsp;&nbsp; lhesse@uni-muenster.de
+        p
+          i.fa.fa-desktop.w3-text-teal.w3-xlarge 
+          | &nbsp;&nbsp; https://github.com/GeoAtzen
+      .w3-col.m7
+        form.w3-container.w3-card-4.w3-padding-16.w3-white(action='/action_page.php' target='_blank')
+          .w3-section
+            label Name
+            input.w3-input(type='text' name='Name' required='')
+          .w3-section
+            label Email
+            input.w3-input(type='text' name='Email' required='')
+          .w3-section
+            label Message
+            input.w3-input(type='text' name='Message' required='')
+          input.w3-check(type='checkbox' checked='' name='Like')
+          label Like
+          button.w3-button.w3-right.w3-theme(type='submit') Absenden
+  // Image of location/map
+  img.img-fluid(src="/images/untenbild.jpg")
 
 
