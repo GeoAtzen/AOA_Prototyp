@@ -33,7 +33,7 @@ block content
                   Input.form-check-input#checkboxNoLabel(type="checkbox", aria-label="...")
                   h4 Trainingsgebiete
                   br
-                  p Laden Sie die Trainingsdaten herunter:
+                  p Laden Sie Ihre hochgeladenen Trainingsdaten als .zip herunter:
                     a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdata.zip', download='usertrainingsdata.zip')
                   p Laden Sie Ihre gezeichneten Trainingsdaten als .geojson herunter:
                     a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()')
@@ -52,8 +52,30 @@ block content
                 br
                 p Herunterladen aller Daten als .zip:
                 a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/', download='')
-
+  
   script(src="/javascripts/shp.js")
-  script(src='/javascripts/leaflet.shpfile.js')             
+  script(src='/javascripts/leaflet.shpfile.js')
   script(src="/javascripts/results.js")
   
+
+  script.
+    // Script for side navigation
+    function w3_open() {
+    var x = document.getElementById("mySidebar");
+    x.style.width = "300px";
+    x.style.paddingTop = "10%";
+    x.style.display = "block";
+    }
+    // Close side navigation
+    function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    }
+    // Used to toggle the menu on smaller screens when clicking on the menu button
+    function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    } else {
+    x.className = x.className.replace(" w3-show", "");
+    }
+    }
