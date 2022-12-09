@@ -74,14 +74,23 @@ block content
                   input.form-check-input#checkboxNoLabel(type="checkbox", aria-label="...")
                   h4 Prediction
                   p Legende:
+                  br
+                  p Laden Sie die Prediction als GeoTIFF herunter:
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:8000/tiffmodel', download='')
                 br
                 .card.text-dark.p-4.border-success.cardprediction
                   input.form-check-input#checkboxNoLabel(type="checkbox", aria-label="...")
                   h4 AOA
+                  br
+                  p Laden Sie die AOA herunter:
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:8000/AOA', download='')
                 br
                 .card.text-dark.p-4.border-success.cardprediction
                   Input.form-check-input#checkboxNoLabel(type="checkbox", aria-label="...")
                   h4 Trainingsgebiete
+                  br
+                  p Laden Sie die Trainingsdaten herunter:
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdata.zip', download='usertrainingsdata.zip')
                 br
                 .card.text-dark.p-4.border-success.cardprediction
                   input.form-check-input#checkboxNoLabel(type="checkbox", aria-label="...")
@@ -91,10 +100,12 @@ block content
                 .card.text-dark.p-4.border-success.cardprediction
                   input.form-check-input#checkboxNoLabel(type="checkbox", aria-label="...")
                   h4 Sentinel 2 Satelliten Bild
+                  p Laden Sie das ursprüngliche Satelliten Bild herunter:
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usersentineldata.tif', download='usersentineldata.tif')
                 br
                 br
                 p Herunterladen aller Daten als .zip:
-                a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/ergebnisseite/Daten', download='')
+                a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/', download='')
 
   script(src="/javascripts/shp.js")
   script(src='/javascripts/leaflet.shpfile.js')             
