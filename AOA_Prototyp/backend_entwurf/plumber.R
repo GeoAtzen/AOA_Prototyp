@@ -40,7 +40,7 @@ function(){
   download.file("http://localhost:3000/uploads/usertrainingsdata.zip", destfile="Classification.zip")
   system("unzip Classification.zip")
   
-  Referenzdaten <- st_read("Trainingspolygone_Warendorf.gpkg")
+  Referenzdaten <- st_read("Trainingspolygone_Warendorf_EPSG_4326_layer1.gpkg")
   
   # Predictors setzen
   predictors <- names(sentinel)
