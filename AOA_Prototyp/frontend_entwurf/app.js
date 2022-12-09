@@ -55,14 +55,14 @@ app.post(
   }
 );
 
-// Uploading data handler for trainingsdata here (.gpkg or .shp as .zip)
+// Uploading data handler for trainingsdata here (gpkg as .zip)
 
 app.post(
-  "/uploadtrainingsdata",
+  "/uploadtrainingsdatagpkg",
   upload.single("file"),
   (req, res) => {
     const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "public/uploads/usertrainingsdata.zip");
+    const targetPath = path.join(__dirname, "public/uploads/usertrainingsdatagpkg.zip");
 
     if (path.extname(req.file.originalname).toLowerCase() === ".zip") {
       fs.rename(tempPath, targetPath, err => {
@@ -81,17 +81,46 @@ app.post(
           .render("fileuploaderror", { title: "Uploadfehler" });
       });
     }
+    // decompressing .zip to .gpkg
     try {
-const files = decompress("./public/uploads/usertrainingsdata.zip", "./public/uploads", {
-         map: file => {
-             file.path = `usertrainingspolygone.gpkg`;
-             return file;
-         }
-     });
-     console.log("done!");
- } catch (error) {
-    console.log(error);
-}
+    const files = decompress("./public/uploads/usertrainingsdatagpkg.zip", "./public/uploads", {
+            map: file => {
+                file.path = `usertrainingspolygone.gpkg`;
+                return file;
+            }
+        });
+        console.log("done!");
+    } catch (error) {
+        console.log(error);
+    }
+  }
+);
+
+// Uploading data handler for trainingsdata as shapefile (.zip)
+app.post(
+  "/uploadtrainingsdatashp",
+  upload.single("file"),
+  (req, res) => {
+    const tempPath = req.file.path;
+    const targetPath = path.join(__dirname, "public/uploads/usertrainingsdatashp.zip");
+
+    if (path.extname(req.file.originalname).toLowerCase() === ".zip") {
+      fs.rename(tempPath, targetPath, err => {
+        if (err) return handleError(err, res);
+
+        res
+          .status(200)
+          .render("fileupload", { title: "Fileupload" })
+      });
+    } else {
+      fs.unlink(tempPath, err => {
+        if (err) return handleError(err, res);
+
+        res
+          .status(403)
+          .render("fileuploaderror", { title: "Uploadfehler" });
+      });
+    }
   }
 );
 
