@@ -35,6 +35,8 @@ block content
                   br
                   p Laden Sie die Trainingsdaten herunter:
                     a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdata.zip', download='usertrainingsdata.zip')
+                  p Laden Sie Ihre gezeichneten Trainingsdaten als .geojson herunter:
+                    a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()')
                 br
                 .card.text-dark.p-4.border-success.cardprediction
                   input.form-check-input#checkboxNoLabel(type="checkbox", aria-label="...")
