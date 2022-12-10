@@ -20,22 +20,27 @@ block content
                   p Legende:
                   br
                   p Laden Sie die Prediction als GeoTIFF herunter:
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:8000/tiffmodel', download='')
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloads/prediction.tif', download='prediction.tif')
                 br
                 .card.text-dark.p-4.border-success.cardprediction
                   input.form-check-input#checkboxNoLabel(type="checkbox", aria-label="...")
                   h4 AOA
                   br
                   p Laden Sie die AOA herunter:
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:8000/AOA', download='')
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloads/aoa.tif', download='aoa.tif')
                 br
                 .card.text-dark.p-4.border-success.cardprediction
                   Input.form-check-input#checkboxNoLabel(type="checkbox", aria-label="...")
                   h4 Trainingsgebiete
                   br
                   p Laden Sie Ihre hochgeladenen Trainingsdaten als .zip herunter:
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdata.zip', download='usertrainingsdata.zip')
-                  p Laden Sie Ihre gezeichneten Trainingsdaten als .geojson herunter:
+                  p GeoPackage:
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingspolygone.gpkg', download='usertrainingspolygone.gpkg')
+                  p Shapefile:
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdatashp.zip', download='usertrainingsdatashp.zip')
+                  p GeoJSON:
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdatagjson.geojson', download='usertrainingsdatagjson.geojson')
+                  p Eigene gezeichnete Trainingspolygone als .geojson:
                     a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()')
                 br
                 .card.text-dark.p-4.border-success.cardprediction
@@ -51,7 +56,7 @@ block content
                 br
                 br
                 p Herunterladen aller Daten als .zip:
-                a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/', download='')
+                a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/', download='alldata.zip')
   
   script(src="/javascripts/shp.js")
   script(src='/javascripts/leaflet.shpfile.js')
