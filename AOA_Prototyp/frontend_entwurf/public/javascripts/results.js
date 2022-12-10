@@ -28,7 +28,7 @@ var drawControl = new L.Control.Draw({
 map.addControl(drawControl)
 
 // Anzeigen der hochgeladenen Shapefile
-var usershapefile = new L.Shapefile("/uploads/usertrainingsdata.zip", {
+var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
         onEachFeature: function(feature, layer) {
             if (feature.properties) {
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
