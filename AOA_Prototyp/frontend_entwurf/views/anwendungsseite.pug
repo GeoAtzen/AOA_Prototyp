@@ -15,13 +15,14 @@ block content
             .card.text-dark.p-4.border-success.cardanwendungsseite
               h3 Durchführungsschritte
               p 1. Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
-              p 2. Datenupload: Laden Sie Ihre Daten, welche zur Durchführung benötigt werden hoch! Hier bitte entweder 2.2 ODER 2.3 hochladen.
-              a   2.1 Sentinel 2 Bilddatei
+              p 2. Datenupload: Laden Sie Ihre Daten, welche zur Durchführung benötigt werden hoch!
+
+              h6   2.1 Sentinel 2 Bilddatei
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
 
-              a   2.2 Sektion Trainingsdaten:
+              h6   2.2 Sektion Trainingsdaten:
 
               a   2.2.1 GPKG
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagpkg' )
@@ -37,8 +38,8 @@ block content
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagjson' )
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
-
-              a   2.3 trainiertes Modell
+              br
+              h6   2.3 trainiertes Modell:
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
