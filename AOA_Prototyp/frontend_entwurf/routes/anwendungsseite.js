@@ -21,7 +21,7 @@ router.post("/ergebnisseitemodel", function (req, res, next) {
 router.post("/ergebnisseitegpkg", function (req, res, next) {
   
   try {
-const files = decompress("./public/uploads/usertrainingsdata.zip", "./public/uploads", {
+const files = decompress("./public/uploads/usertrainingsdatagpkg.zip", "./public/uploads", {
          map: file => {
              file.path = `usertrainingspolygone.gpkg`;
              return file;
