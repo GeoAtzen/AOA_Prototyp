@@ -46,7 +46,7 @@ imageBounds = [[51.5, 7], [52, 7.5]];
 L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
 // Anzeigen der hochgeladenen Shapefile
-var usershapefile = new L.Shapefile("/uploads/usertrainingsdata.zip", {
+var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
         onEachFeature: function(feature, layer) {
             if (feature.properties) {
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
