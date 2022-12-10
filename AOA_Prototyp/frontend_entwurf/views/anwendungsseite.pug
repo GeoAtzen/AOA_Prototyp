@@ -21,8 +21,20 @@ block content
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
 
-              a   2.2 Trainingsdaten
-              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
+              a   2.2 Sektion Trainingsdaten:
+
+              a   2.2.1 GPKG
+              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagpkg' )
+                input(type='file', name='file')
+                input(type='submit', value='Submit')
+
+              a   2.2.2 Shapefile
+              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
+                input(type='file', name='file')
+                input(type='submit', value='Submit')
+
+              a   2.2.2 GeoJSON
+              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagjson' )
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
 
