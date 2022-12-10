@@ -4,9 +4,11 @@ var map = L.map("ergebnismap").setView([52, 7.8], 12);
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap',
     maxZoom: 19,
-}).addTo(map);
+});
 
-//drawcontrol variables
+var googlesat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}').addTo(map);
+
+// drawcontrol variables
 var drawnItems = new L.FeatureGroup()
 map.addLayer(drawnItems)
 
@@ -206,17 +208,67 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
             },
           });
 
-
+// add GeoJSON to map
+var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingsdatagjson.geojson", {
+  onEachFeature: function(feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                    return k + ": " + feature.properties[k];
+                }).join("<br />"), {
+                    maxHeight: 200
+                });
+            }
+        },
+        style: function (feature) {
+          switch (feature.properties.Label) {
+            case "Acker":
+              return { color: "#d18b2c" };
+            case "Acker_bepflanzt":
+              return { color: "#70843a" };
+            case "Bahnschiene":
+              return { color: "#696969" };
+            case "Baumgruppe":
+              return { color: "#11671e" };
+            case "Binnengewaesser":
+              return { color: "#0a1cb1" };
+            case "Industrie":
+              return { color: "#696969" };
+            case "Innenstadt":
+              return { color: "#696969" };
+            case "Kunstrasen":
+              return { color: "#92e597" };
+            case "Laubwald":
+              return { color: "#11671e" };
+            case "Mischwald":
+              return { color: "#11671e" };
+            case "Parklandschaft":
+              return { color: "#92e597" };
+            case "Siedlung":
+              return { color: "#696969" };
+            case "Strand":
+              return { color: "#ffff00" };
+            case "Versiegelt":
+              return { color: "#696969" };
+            case "Wiese":
+              return { color: "#00FF00" };
+            default:
+              return { color: "##000000" };
+                }
+            },
+      });
+      
 //var tifflayer = L.leafletGeotiff('/downloadloads/prediction.tif').addTo(map);
 
 // Layer Control
 var baseMaps = {
-    "OpenStreetMap": osm
+    "OpenStreetMap": osm,
+    "Google Satellite": googlesat
 };
 
 var overlayMaps = {
     "Shapefile": usershapefile,
     "Geopackage": usergeopackage,
+    "GeoJSON": geojsondata,
     //"tiff": tifflayer
     "Eigene Polygone": drawnItems
 };
