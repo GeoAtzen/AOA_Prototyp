@@ -45,6 +45,13 @@ router.post("/ergebnisseiteshape", function (req, res, next) {
   
 });
 
+router.post("/ergebnisseitegjson", function (req, res, next) {
+  // Code zum ausführen des R Skripts
+
+  
+  res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffgjson" })
+  
+});
 
 
 module.exports = router;
