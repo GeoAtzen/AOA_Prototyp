@@ -42,10 +42,6 @@ map.on("draw:deleted", function (e) {
 });
 })
 
-/* geht nicht da .tif statt .png
-var imageUrl = '/uploads/usersentineldata.png',
-imageBounds = [[51.5, 7], [52, 7.5]];
-L.imageOverlay(imageUrl, imageBounds).addTo(map); */
 
 // Anzeigen der hochgeladenen Shapefile
 var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {

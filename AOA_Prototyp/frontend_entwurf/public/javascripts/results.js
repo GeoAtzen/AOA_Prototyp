@@ -4,9 +4,9 @@ var map = L.map("ergebnismap").setView([52, 7.8], 12);
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap',
     maxZoom: 19,
-});
+}).addTo(map);
 
-var googlesat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}').addTo(map);
+var googlesat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}');
 
 // drawcontrol variables
 var drawnItems = new L.FeatureGroup()
@@ -257,7 +257,47 @@ var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingsdatagjson.geojson", 
             },
       });
       
-//var tifflayer = L.leafletGeotiff('/downloadloads/prediction.tif').addTo(map);
+fetch("/uploads/usersentineldata.tif")
+    .then((response) => response.arrayBuffer())
+    .then((arrayBuffer) => {
+      parseGeoraster(arrayBuffer).then((georaster) => {
+        console.log("georaster:", georaster);
+
+        var geotiffdata = new GeoRasterLayer({
+          georaster: georaster,
+          resolution: 256,
+          pixelValuesToColorFn: (values) => {
+            let maxs = georaster.maxs;
+            let mins = georaster.mins;
+
+            values[0] = Math.round(
+              (255 / (4000 - mins[0])) * (values[0] - mins[0])
+            );
+            values[1] = Math.round(
+              (255 / (4000 - mins[1])) * (values[1] - mins[1])
+            );
+            values[2] = Math.round(
+              (255 / (4000 - mins[2])) * (values[2] - mins[2])
+            );
+
+            // make sure no values exceed 255
+            values[0] = Math.min(values[0], 255);
+            values[1] = Math.min(values[1], 255);
+            values[2] = Math.min(values[2], 255);
+
+            // treat all black as no data
+            if (values[0] === 0 && values[1] === 0 && values[2] === 0)
+              return null;
+
+            return `rgb(${values[2]}, ${values[1]}, ${values[0]})`;
+          },
+        });
+        geotiffdata.addTo(map);
+
+        map.fitBounds(geotiffdata.getBounds());
+        layerControl.addOverlay(geotiffdata, 'Satelliten Bild');
+      });
+    });
 
 // Layer Control
 var baseMaps = {
@@ -269,7 +309,6 @@ var overlayMaps = {
     "Shapefile": usershapefile,
     "Geopackage": usergeopackage,
     "GeoJSON": geojsondata,
-    //"tiff": tifflayer
     "Eigene Polygone": drawnItems
 };
 
