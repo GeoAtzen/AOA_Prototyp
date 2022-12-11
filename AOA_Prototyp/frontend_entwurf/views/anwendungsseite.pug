@@ -21,6 +21,8 @@ block content
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
+              p Zur Karte hinzufügen: (Achtung lange Wartezeit)
+                button.btn.btn-success(onclick='addGeotiffToMap()') Add GeoTiff
 
               h6   2.2 Sektion Trainingsdaten:
 
@@ -74,6 +76,8 @@ block content
               br
               form(method='post', action='/anwendungsseite/ergebnisseitegjson')
                 button.btn.btn-success() Ausführen mit GeoJSON Trainingsdaten
+              
+
 
   script(src="/javascripts/application.js")
   
