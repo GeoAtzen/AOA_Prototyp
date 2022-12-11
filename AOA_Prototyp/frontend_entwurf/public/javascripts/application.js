@@ -7,7 +7,6 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 var googlesat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}');
 
-
 //drawcontrol variables
 var drawnItems = new L.FeatureGroup()
 var drawControl = new L.Control.Draw({
@@ -198,16 +197,13 @@ var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingsdatagjson.geojson", 
             },
       });
 
-function addGeotiffToMap(url) {
-  var url = "/uploads/usersentineldata.tif";
-
-  fetch(url)
+  fetch("/uploads/usersentineldata.tif")
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
       parseGeoraster(arrayBuffer).then((georaster) => {
         console.log("georaster:", georaster);
 
-        var layer = new GeoRasterLayer({
+        var geotiffdata = new GeoRasterLayer({
           georaster: georaster,
           resolution: 256,
           pixelValuesToColorFn: (values) => {
@@ -235,18 +231,13 @@ function addGeotiffToMap(url) {
 
             return `rgb(${values[2]}, ${values[1]}, ${values[0]})`;
           },
-          /*
-        pixelValuesToColorFn: (values) =>
-          values[0] > 255
-            ? null
-            : `rgb(${values[0]},${values[1]},${values[2]})`,*/
         });
-        layer.addTo(map);
+        geotiffdata.addTo(map);
 
-        map.fitBounds(layer.getBounds());
+        map.fitBounds(geotiffdata.getBounds());
+        layerControl.addOverlay(geotiffdata, 'Satelliten Bild');
       });
     });
-}
 
 // Layer Control
 var baseMaps = {
@@ -257,9 +248,7 @@ var baseMaps = {
 var overlayMaps = {
     "Shapefile": usershapefile,
     "Geopackage": usergeopackage,
-    //"tiff": tifflayer
     "GeoJSON": geojsondata
-    //"Satelliten Bild": geotiffdata
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);

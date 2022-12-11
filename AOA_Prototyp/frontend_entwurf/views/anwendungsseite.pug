@@ -17,31 +17,31 @@ block content
               p 1. Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
               p 2. Datenupload: Laden Sie Ihre Daten, welche zur Durchführung benötigt werden hoch!
 
-              h6   2.1 Sentinel 2 Bilddatei
+              h6   2.1 Sentinel 2 Bild als .tif
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
-              p Zur Karte hinzufügen: (Achtung lange Wartezeit)
-                button.btn.btn-success(onclick='addGeotiffToMap()') Add GeoTiff
+              p Wenn Sie ein .tif hochgeladen haben, kann es bis zu einer Minute dauern, bis dieses auf der Karte erscheint! 
+              p Danach können Sie es aber ohne weitere Wartezeiten über die Layerkontrollfunktion ein- und ausblenden!
 
               h6   2.2 Sektion Trainingsdaten:
 
-              a   2.2.1 GPKG
+              a   2.2.1 GPKG als .zip
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagpkg' )
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
 
-              a   2.2.2 Shapefile
+              a   2.2.2 Shapefile als .zip
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
 
-              a   2.2.2 GeoJSON
+              a   2.2.2 GeoJSON als .geojson
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagjson' )
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
               br
-              h6   2.3 trainiertes Modell:
+              h6   2.3 trainiertes Modell (ohne .rds)
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                 input(type='file', name='file')
                 input(type='submit', value='Submit')
