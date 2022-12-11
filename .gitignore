@@ -1,1 +1,9 @@
 AOA_Prototyp/frontend_entwurf/package-lock.json
+AOA_Prototyp/Beispieldaten/Sentinel2 Bild.tif
+.gitignore
+.gitignore
+AOA_Prototyp/Beispieldaten/Trainingspolygone_warendorf SHP.zip
+AOA_Prototyp/Beispieldaten/Trainingspolygone_Warendorf_EPSG_4326_layer1.zip
+AOA_Prototyp/Beispieldaten/Trainingspolygone_Warendorf_EPSG_4326_layer1.gpkg
+AOA_Prototyp/Beispieldaten/Trainingspolygone_Warendorf GeoJSON.geojson
+.gitignore
