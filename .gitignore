@@ -9,3 +9,8 @@ AOA_Prototyp/Beispieldaten/Trainingspolygone_Warendorf GeoJSON.geojson
 .gitignore
 AOA_Prototyp/frontend_entwurf/public/uploads/usersentineldata.tif
 AOA_Prototyp/frontend_entwurf/public/uploads/usertrainingsdatagjson.geojson
+AOA_Prototyp/backend_entwurf/.Rhistory
+AOA_Prototyp/backend_entwurf/Classification.zip
+AOA_Prototyp/backend_entwurf/Trainingspolygone_Warendorf_EPSG_4326_layer1.gpkg
+AOA_Prototyp/frontend_entwurf/public/uploads/usertrainingsdatagpkg.zip
+AOA_Prototyp/frontend_entwurf/public/uploads/usertrainingspolygone.gpkg
