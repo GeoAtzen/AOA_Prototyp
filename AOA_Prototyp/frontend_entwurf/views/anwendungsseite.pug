@@ -19,7 +19,7 @@ block content
 
               h6   2.1 Sentinel 2 Bild als .tif
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
-                input(type='file', name='file')
+                input(type='file', name='file' , accept=".tif")
                 input(type='submit', value='Submit')
               p Wenn Sie ein .tif hochgeladen haben, kann es bis zu einer Minute dauern, bis dieses auf der Karte erscheint! 
               p Danach können Sie es aber ohne weitere Wartezeiten über die Layerkontrollfunktion ein- und ausblenden!
@@ -28,22 +28,22 @@ block content
 
               a   2.2.1 GPKG als .gpkg 
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagpkg' )
-                input(type='file', name='file')
+                input(type='file', name='file', accept=".gpkg")
                 input(type='submit', value='Submit')
 
               a   2.2.2 Shapefile als .zip
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
-                input(type='file', name='file')
+                input(type='file', name='file', accept=".zip")
                 input(type='submit', value='Submit')
 
               a   2.2.2 GeoJSON als .geojson
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagjson' )
-                input(type='file', name='file')
+                input(type='file', name='file', accept=".geojson")
                 input(type='submit', value='Submit')
               br
               h6   2.3 trainiertes Modell (ohne .rds)
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
-                input(type='file', name='file')
+                input(type='file', name='file' accept=" ")
                 input(type='submit', value='Submit')
               
               p 3. Wählen Sie eine Auflösung
