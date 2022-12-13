@@ -13,8 +13,8 @@ library(randomForest)
 ################################################################################
 
 # Diese Funktion nimmt Referenzdaten entgegen, die sowohl vom Typ GeoJson,
-# Geopackage oder Shapefile schon weiterverarbeitet wurden und nun mit dem Tif
-# ein Model trainiert wird
+# Geopackage oder Shapefile schon weiterverarbeitet wurden und trainiert 
+# nun mit dem Tif ein Model
 trainModel <- function(Referenzdaten){
   url <- ("http://localhost:3000/uploads/usersentineldata.tif")
   geotiff_file <- tempfile(fileext='.tif')
