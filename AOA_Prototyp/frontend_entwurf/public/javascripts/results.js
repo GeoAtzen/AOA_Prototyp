@@ -159,7 +159,7 @@ var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
 // Anzeigen des hochgeladenen geopackages
 // Anmerkung: Layer MUSS layer1 heißen
 var usergeopackage = new L.geoPackageFeatureLayer([], {
-     geoPackageUrl: '/uploads/usertrainingspolygone.gpkg',
+     geoPackageUrl: '/uploads/usertrainingspolygonegpkg.gpkg',
      layerName: 'layer1',
      onEachFeature: function(feature, layer) {
             if (feature.properties) {
@@ -209,7 +209,7 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
           });
 
 // add GeoJSON to map
-var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingsdatagjson.geojson", {
+var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojson", {
   onEachFeature: function(feature, layer) {
             if (feature.properties) {
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
