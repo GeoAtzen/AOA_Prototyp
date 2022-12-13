@@ -256,7 +256,8 @@ var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojso
                 }
             },
       });
-      
+
+// hinzufügen des .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 fetch("/uploads/usersentineldata.tif")
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
@@ -292,9 +293,12 @@ fetch("/uploads/usersentineldata.tif")
             return `rgb(${values[2]}, ${values[1]}, ${values[0]})`;
           },
         });
+        // direktes hinzufügen zur Karte
         geotiffdata.addTo(map);
 
         map.fitBounds(geotiffdata.getBounds());
+
+        // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
         layerControl.addOverlay(geotiffdata, 'Satelliten Bild');
       });
     });
