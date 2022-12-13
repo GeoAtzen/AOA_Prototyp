@@ -73,7 +73,7 @@ function(){
 function(){
   download.file("http://localhost:3000/uploads/usertrainingsdatashp.zip", destfile = "Classification.zip")
   system("unzip Classification.zip")
-  Referenzdaten <- st_read("Trainingspolygone_warendorf.shp")
+  Referenzdaten <- st_read("usertrainingspolygoneshp.shp")
   trainModel(Referenzdaten)
 }
 

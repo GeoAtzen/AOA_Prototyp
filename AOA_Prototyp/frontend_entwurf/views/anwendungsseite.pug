@@ -26,19 +26,14 @@ block content
 
               h6   2.2 Sektion Trainingsdaten:
 
-              a   2.2.1 GPKG als .gpkg 
+              a   2.2.1 Trainingspolygone als GeoPackage oder GeoJSON: (Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen)0
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagpkg' )
-                input(type='file', name='file', accept=".gpkg")
+                input(type='file', name='file', accept=".gpkg, .geojson")
                 input(type='submit', value='Submit')
 
-              a   2.2.2 Shapefile als .zip
+              a   2.2.2 Zusatz: Trainingspolygone als Shapefile als .zip (Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!) 
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
                 input(type='file', name='file', accept=".zip")
-                input(type='submit', value='Submit')
-
-              a   2.2.2 GeoJSON als .geojson
-              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagjson' )
-                input(type='file', name='file', accept=".geojson")
                 input(type='submit', value='Submit')
               br
               h6   2.3 trainiertes Modell (ohne .rds)
@@ -63,7 +58,7 @@ block content
                       input#flexRadioDefault30m.form-check-input(type='radio', name='flexRadioDefault')
                       label.form-check-label(for='flexRadioDefault20m')
                         | 30 Meter
-              p 4. Beim Klicken des Ausführen Buttons wird das Training, die Prediction, die AOA und die Ermittlung der empfolenen Gebiete, welche nachtrainiert werden müssen, ausgeführt. 
+              p 4. Beim Klicken des "Ausführen mit ..."" Buttons wird das Training, die Prediction, die AOA und die Ermittlung der empfolenen Gebiete, welche nachtrainiert werden müssen, mit den gewählten Trainingsdaten ausgeführt. 
               
               form(method='post', action='/anwendungsseite/ergebnisseitemodel')
                 button.btn.btn-success() Ausführen mit trainiertem Modell

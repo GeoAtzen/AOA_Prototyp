@@ -62,17 +62,27 @@ app.post(
   upload.single("file"),
   (req, res) => {
     const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "public/uploads/usertrainingspolygonegpkg.gpkg");
-
+    const targetPathgpkg = path.join(__dirname, "public/uploads/usertrainingspolygonegpkg.gpkg");
+    const targetPathgjson = path.join(__dirname, "public/uploads/usertrainingspolygonegjson.geojson");
+    
     if (path.extname(req.file.originalname).toLowerCase() === ".gpkg") {
-      fs.rename(tempPath, targetPath, err => {
+      fs.rename(tempPath, targetPathgpkg, err => {
         if (err) return handleError(err, res);
 
         res
           .status(200)
           .render("fileupload", { title: "Fileupload" })
       });
-    } else {
+    } else if (path.extname(req.file.originalname).toLowerCase() === ".geojson") {
+      fs.rename(tempPath, targetPathgjson, err => {
+        if (err) return handleError(err, res);
+
+        res
+          .status(200)
+          .render("fileupload", { title: "Fileupload" })
+      });
+    }
+    else {
       fs.unlink(tempPath, err => {
         if (err) return handleError(err, res);
 
