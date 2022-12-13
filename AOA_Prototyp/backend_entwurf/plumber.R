@@ -47,7 +47,7 @@ calculatePrediction <- function(sentinel, model){
   prediction <- predict(as(sentinel,"Raster"),model)
   prediction_terra <- as(prediction,"SpatRaster")
   
-  writeRaster(prediction_terra, "C:/Users/lucah/OneDrive/Desktop/AOA_Prototyp/AOA_Prototyp/frontend_entwurf/public/uploads/test.tif", overwrite=TRUE)
+  writeRaster(prediction_terra, "D:/Uni/5. Semester/Geosoft2/Prototyp bearbeiten/AOA_Prototyp/AOA_Prototyp/frontend_entwurf/public/downloads/test.tif", overwrite=TRUE)
   plot(prediction_terra)
 }
 
@@ -55,9 +55,7 @@ calculatePrediction <- function(sentinel, model){
 #* @serializer png
 #* @get /tiffgjson
 function(){
-  download.file("http://localhost:3000/uploads/usertrainingsdatagjson.zip", destfile="Classification.zip")
-  system("unzip Classification.zip")
-  Referenzdaten <- st_read("Trainingspolygone_Warendorf_GeoJSON.geojson")
+  Referenzdaten <- st_read("http://localhost:3000/uploads/usertrainingspolygonegjson.geojson")
   trainModel(Referenzdaten)
 }
 
@@ -65,9 +63,7 @@ function(){
 #* @serializer png
 #* @get /tiffgpkg
 function(){
-  download.file("http://localhost:3000/uploads/usertrainingsdatagpkg.zip", destfile="Classification.zip")
-  system("unzip Classification.zip")
-  Referenzdaten <- st_read("Trainingspolygone_Warendorf_EPSG_4326_layer1.gpkg")
+  Referenzdaten <- st_read("http://localhost:3000/uploads/usertrainingspolygonegpkg.gpkg")
   trainModel(Referenzdaten)
 }
 
@@ -75,7 +71,7 @@ function(){
 #* @serializer png
 #* @get /tiffshape
 function(){
-  download.file("http://localhost:3000/uploads/usertrainingsdata.zip", destfile = "Classification.zip")
+  download.file("http://localhost:3000/uploads/usertrainingsdatashp.zip", destfile = "Classification.zip")
   system("unzip Classification.zip")
   Referenzdaten <- st_read("Trainingspolygone_warendorf.shp")
   trainModel(Referenzdaten)

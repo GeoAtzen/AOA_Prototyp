@@ -62,9 +62,9 @@ app.post(
   upload.single("file"),
   (req, res) => {
     const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "public/uploads/usertrainingsdatagpkg.zip");
+    const targetPath = path.join(__dirname, "public/uploads/usertrainingspolygonegpkg.gpkg");
 
-    if (path.extname(req.file.originalname).toLowerCase() === ".zip") {
+    if (path.extname(req.file.originalname).toLowerCase() === ".gpkg") {
       fs.rename(tempPath, targetPath, err => {
         if (err) return handleError(err, res);
 
@@ -80,18 +80,6 @@ app.post(
           .status(403)
           .render("fileuploaderror", { title: "Uploadfehler" });
       });
-    }
-    // decompressing .zip to .gpkg
-    try {
-    const files = decompress("./public/uploads/usertrainingsdatagpkg.zip", "./public/uploads", {
-            map: file => {
-                file.path = `usertrainingspolygone.gpkg`;
-                return file;
-            }
-        });
-        console.log("done!");
-    } catch (error) {
-        console.log(error);
     }
   }
 );
@@ -130,7 +118,7 @@ app.post(
   upload.single("file"),
   (req, res) => {
     const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "public/uploads/usertrainingsdatagjson.geojson");
+    const targetPath = path.join(__dirname, "public/uploads/usertrainingspolygonegjson.geojson");
 
     if (path.extname(req.file.originalname).toLowerCase() === ".geojson") {
       fs.rename(tempPath, targetPath, err => {
