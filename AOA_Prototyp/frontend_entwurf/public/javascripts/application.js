@@ -192,6 +192,7 @@ var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojso
                 }
             },
       });
+      
 // hinzufügen des .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 fetch("/uploads/usersentineldata.tif")
   .then((response) => response.arrayBuffer())
