@@ -13,36 +13,39 @@ block content
         .col-lg-6.col-xs-12.mb-3
             .card.text-dark.p-4.border-success.cardanwendungsseite
               h3 Durchführungsschritte
-              br
+
               b 1. Bereich wählen:
               p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
-              br
+
               b 2. Datenupload:
               p Laden Sie Ihre Daten, welche zur Durchführung benötigt werden hoch!
-              br
+
               b 2.1 Sentinel 2 Bild als .tif </b>
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                 input(type='file', name='file' , accept=".tif")
                 input(type='submit', value='Submit')
                 p(style="font-size: small") Das Anzeigen kann bis zu eine Minute dauern, bitte haben Sie Geduld!
-              br
+
               b 2.2 Sektion Trainingsdaten:
-              br
-              b(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON: (Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen)0
+
+              b(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON:
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagpkg' )
                 input(type='file', name='file', accept=".gpkg, .geojson")
                 input(type='submit', value='Submit')
-              br
-              b(style="color:darkgray") 2.2.2 Zusatz: Trainingspolygone als Shapefile als .zip (Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!) 
+              p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen
+
+              b(style="color:darkgray") 2.2.2 Zusatz: Trainingspolygone als Shapefile als .zip
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
                 input(type='file', name='file', accept=".zip")
                 input(type='submit', value='Submit')
-              br
+              p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
+
               b 2.3 trainiertes Modell (ohne .rds)
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                 input(type='file', name='file' accept=" ")
                 input(type='submit', value='Submit')
-              br
+              p 
+
               b 3. Auflösung wählen
                 .dropdown
                   button.btn.btndropdown.btn-success.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
@@ -60,21 +63,25 @@ block content
                       input#flexRadioDefault30m.form-check-input(type='radio', name='flexRadioDefault')
                       label.form-check-label(for='flexRadioDefault20m')
                         | 30 Meter
-              br
+              p 
+
               b 4. Ausführen
-              p Beim Klicken des "Ausführen mit ..." Buttons wird das Training, die Prediction, die AOA und die Ermittlung der empfolenen Gebiete, welche nachtrainiert werden müssen, mit den gewählten Trainingsdaten ausgeführt. 
-              
-              form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
-                button.btn.btn-success() Ausführen mit geoPackage Trainingsdaten
-              br
-              form(method='post', action='/anwendungsseite/ergebnisseitegjson')
-                button.btn.btn-success() Ausführen mit GeoJSON Trainingsdaten
-              br
-              form(method='post', action='/anwendungsseite/ergebnisseiteshape')
-                button.btn.btn-success() Ausführen mit Shapefile Trainingsdaten
-              br
-              form(method='post', action='/anwendungsseite/ergebnisseitemodel')
-                button.btn.btn-success() Ausführen mit trainiertem Modell
+              p
+              .w3-row
+                .w3-half
+                  form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
+                   button.btn.btn-success() Ausführen mit geoPackage Trainingsdaten
+                  br
+                .w3-half
+                  form(method='post', action='/anwendungsseite/ergebnisseitegjson')
+                   button.btn.btn-success() Ausführen mit GeoJSON Trainingsdaten
+              .w3-row
+                .w3-half
+                  form(method='post', action='/anwendungsseite/ergebnisseiteshape')
+                    button.btn.btn-success() Ausführen mit Shapefile Trainingsdaten
+                .w3-half
+                 form(method='post', action='/anwendungsseite/ergebnisseitemodel')
+                    button.btn.btn-success() Ausführen mit trainiertem Modell
               
               
               
