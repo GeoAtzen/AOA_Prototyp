@@ -314,30 +314,6 @@ fetch("/downloads/test.tif")
         parseGeoraster(arrayBuffer).then((georaster) => {
             console.log("georaster:", georaster);
 
-            // https://github.com/GeoTIFF/georaster-layer-for-leaflet-example/blob/master/examples/separated.html#L45
-            /*const pixelValuesToColorFn = ([red, green, blue]) => {
-            let mins = georaster.mins;
-            red = Math.round(
-                (255 / (4000 - mins[0])) * (red - mins[0])
-            );
-            green = Math.round(
-                (255 / (4000 - mins[1])) * (green - mins[1])
-            );
-            blue = Math.round(
-                (255 / (4000 - mins[2])) * (blue - mins[2])
-            );
-
-            // make sure no values exceed 255
-            red = Math.min(red, 255);
-            green = Math.min(green, 255);
-            blue = Math.min(blue, 255);
-
-            // treat all black as no data
-            if (red === 0 && green === 0 && blue === 0) return null;
-
-            return `rgb(${blue}, ${green}, ${red})`;
-        };
-*/
             var predictiongeotiffdata = new GeoRasterLayer({
                 georaster: georaster,
                 //pixelValuesToColorFn,
