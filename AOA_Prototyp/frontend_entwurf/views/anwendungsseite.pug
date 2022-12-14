@@ -14,11 +14,12 @@ block content
             .card.text-dark.p-4.border-success.cardanwendungsseite
               h3 Durchführungsschritte
 
-              b 1. Bereich wählen:
-              p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
-
-              b 2. Datenupload:
-              p Laden Sie Ihre Daten, welche zur Durchführung benötigt werden hoch!
+              b 1. Bereich wählen:  
+                button.w3-button.w3-circle.w3-theme.w3-hover-teal(onclick="document.getElementById('id02').style.display='block'" title='Hilfe' style='font-size:small') ?
+              p
+              b 2. Datenupload:  
+                button.w3-button.w3-circle.w3-theme.w3-hover-teal(onclick="document.getElementById('id03').style.display='block'" title='Hilfe' style='font-size:small') ?
+              p
 
               b 2.1 Sentinel 2 Bild als .tif </b>
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
@@ -64,8 +65,24 @@ block content
                       label.form-check-label(for='flexRadioDefault20m')
                         | 30 Meter
               p 
+              b 4. Algorithmus wählen
+                .w3-dropdown-click
+                  button.w3-button.w3-black(onclick='myFunction()') Click Me!
+                  #Demo.w3-dropdown-content.w3-bar-block.w3-border
+                    a.w3-bar-item.w3-button(href='#') Link 1
+                    a.w3-bar-item.w3-button(href='#') Link 2
+                    a.w3-bar-item.w3-button(href='#') Link 3
+                script.
+                  function myFunction() {
+                  var x = document.getElementById("Demo");
+                  if (x.className.indexOf("w3-show") == -1) {
+                  x.className += " w3-show";
+                  } else {
+                  x.className = x.className.replace(" w3-show", "");
+                  }
+                  }
 
-              b 4. Ausführen
+              b 5. Ausführen
               p
               .w3-row
                 .w3-half
@@ -83,8 +100,78 @@ block content
                  form(method='post', action='/anwendungsseite/ergebnisseitemodel')
                     button.btn.btn-success() Ausführen mit trainiertem Modell
               
-              
-              
+  // Modals
+  #id02.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id02').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 1. Bereich wählen
+         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+
+  #id03.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id03').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 2. Datenupload
+         p Laden Sie Ihre Daten, welche zur Durchführung benötigt werden hoch!
+
+  #id04.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id04').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 1. Bereich wählen
+         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+
+  #id05.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id05').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 1. Bereich wählen
+         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+
+  #id06.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id06').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 1. Bereich wählen
+         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+
+  #id07.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id07').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 1. Bereich wählen
+         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+
+  #id08.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id08').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 1. Bereich wählen
+         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+
+  #id09.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id09').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 1. Bereich wählen
+         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
 
 
   script(src="/javascripts/application.js")
@@ -110,4 +197,12 @@ block content
     x.className = x.className.replace(" w3-show", "");
     }
     }
- 
+    
+    function myFunction() {
+    var x = document.getElementById("Demo");
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    } else {
+    x.className = x.className.replace(" w3-show", "");
+    }
+    }
