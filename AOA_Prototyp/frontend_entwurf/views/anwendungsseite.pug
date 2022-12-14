@@ -24,9 +24,9 @@ block content
               b 2.1 Sentinel 2 Bild als .tif </b>
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                 input(type='file', name='file' , accept=".tif")
-                input(type='submit', value='Submit')
+                input(type='submit', value='Submit' onclick='bufferAktivieren()')
+                #puff.spinner-border.float-end(role='status' style= 'display:none')
                 p(style="font-size: small") Das Anzeigen kann bis zu eine Minute dauern, bitte haben Sie Geduld!
-
               b 2.2 Sektion Trainingsdaten:
 
               b(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON:
@@ -84,6 +84,9 @@ block content
 
               b 5. Ausführen
               p
+              .clearfix
+                .spinner-border.float-end(role='status')
+                  span.visually-hidden Loading...
               .w3-row
                 .w3-half
                   form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
@@ -205,4 +208,9 @@ block content
     } else {
     x.className = x.className.replace(" w3-show", "");
     }
+    }
+
+    function bufferAktivieren() {
+    var el = document.getElementById("puff");
+    el.style = 'display: block';
     }
