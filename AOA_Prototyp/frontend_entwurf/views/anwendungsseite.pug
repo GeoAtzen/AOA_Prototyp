@@ -58,19 +58,21 @@ block content
                       input#flexRadioDefault30m.form-check-input(type='radio', name='flexRadioDefault')
                       label.form-check-label(for='flexRadioDefault20m')
                         | 30 Meter
-              p 4. Beim Klicken des "Ausführen mit ..."" Buttons wird das Training, die Prediction, die AOA und die Ermittlung der empfolenen Gebiete, welche nachtrainiert werden müssen, mit den gewählten Trainingsdaten ausgeführt. 
+              p 4. Beim Klicken des "Ausführen mit ..." Buttons wird das Training, die Prediction, die AOA und die Ermittlung der empfolenen Gebiete, welche nachtrainiert werden müssen, mit den gewählten Trainingsdaten ausgeführt. 
               
-              form(method='post', action='/anwendungsseite/ergebnisseitemodel')
-                button.btn.btn-success() Ausführen mit trainiertem Modell
-              br
               form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
                 button.btn.btn-success() Ausführen mit geoPackage Trainingsdaten
+              br
+              form(method='post', action='/anwendungsseite/ergebnisseitegjson')
+                button.btn.btn-success() Ausführen mit GeoJSON Trainingsdaten
               br
               form(method='post', action='/anwendungsseite/ergebnisseiteshape')
                 button.btn.btn-success() Ausführen mit Shapefile Trainingsdaten
               br
-              form(method='post', action='/anwendungsseite/ergebnisseitegjson')
-                button.btn.btn-success() Ausführen mit GeoJSON Trainingsdaten
+              form(method='post', action='/anwendungsseite/ergebnisseitemodel')
+                button.btn.btn-success() Ausführen mit trainiertem Modell
+              
+              
               
 
 
