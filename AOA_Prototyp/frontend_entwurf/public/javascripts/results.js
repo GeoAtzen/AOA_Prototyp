@@ -29,13 +29,13 @@ var drawControl = new L.Control.Draw({
 // adding drawControl
 map.addControl(drawControl)
 
-// Label
+// assigning a label to the drawn Polygon via prompt
 var getLabel = function (layer) {
   var label = prompt("Label des Polygons", "Label");
   return label;
 };
 
-// ClassID
+// assigning a ClassID to the drawn Polygon via prompt
 var getclassID = function (layer) {
   var classID = prompt("ClassID des Polygons", "ClassID");
   return classID;
@@ -45,6 +45,7 @@ var getclassID = function (layer) {
 var polygonsgeojson = []; 
 
 // Source: https://stackoverflow.com/questions/29736345/adding-properties-to-a-leaflet-layer-that-will-become-geojson-options
+// Declaring your own features for the drawn polygon to safe them in the geojson
 map.on(L.Draw.Event.CREATED, function (e) {
   var layer = e.layer
     feature = layer.feature = layer.feature || {};
@@ -52,9 +53,12 @@ map.on(L.Draw.Event.CREATED, function (e) {
 
   var label = getLabel(layer);
   var classID = getclassID(layer);
+  // assining the attributes entered in the prompt to be the features of the geojson
   var props = (feature.properties = feature.properties || {}); // Intialize feature.properties
   props.label = label;
   props.classID = classID;
+  
+  // adding the drawn polygons to the layer
   drawnItems.addLayer(layer);
 
   if (label == "Label") {
@@ -66,40 +70,40 @@ map.on(L.Draw.Event.CREATED, function (e) {
   }
   drawnItems.addLayer(layer);
 
-  //polygonsgeojson speichern
+  // converting the drawn poylgons to geojson and pushing them to the global array
   polygonsgeojson.push(drawnItems.toGeoJSON());
   
 });
 
 /**  
 * @function exportGeoJSON
-* @description Export to GeoJSON File
+* @description Export drawn polygons to a valid GeoJSON File
 * Source: https://stackoverflow.com/questions/58126090/leaflet-draw-saving-data-with-geojson
 */
 function exportGeoJSON() {
   
-  //test GeoJSON validity
+  // test GeoJSON validity by logging the data to the console for chacking it 
   console.log(drawnItems.toGeoJSON());
   console.log(JSON.stringify(drawnItems.toGeoJSON()));
   
-  // save drawn Polygons as JSON in jsonData
-  let jsonData = JSON.stringify(drawnItems.toGeoJSON());
+  // save drawn Polygons as GeoJSON in drawnpolygonsjson
+  let drawnpolygonsjson = JSON.stringify(drawnItems.toGeoJSON());
   
-  // telling javascript to export jsonData as JSON
+  // telling javascript to export drawnpolygonsjson as JSON format
   let dataUri =
-    "data:text/json;charset=utf-8," + encodeURIComponent(jsonData); 
+    "data:text/json;charset=utf-8," + encodeURIComponent(drawnpolygonsjson); 
   
-  // stating the export name
-  let fileexportname = "digitalized_user_trainingspolygons" + ".geojson";
+  // declaring the export name
+  let fileexportname = "digitalized_usertrainingspolygons" + ".geojson";
   
-  // download
+  // download via DOM
   let linkElement = document.createElement("a");
   linkElement.setAttribute("href", dataUri);
   linkElement.setAttribute("download", fileexportname);
 
   // if polygon is empty give out error
   let emptypolygon = '{"type":"FeatureCollection","features":[]}';
-  if (jsonData == emptypolygon) {
+  if (drawnpolygonsjson == emptypolygon) {
     alert("Sie haben noch keine Polygone gezeichnet!");
   } else {
     linkElement.click();
@@ -209,7 +213,7 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
           });
 
 // add GeoJSON to map
-var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojson", {
+var geodrawnpolygonsjson = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojson", {
   onEachFeature: function(feature, layer) {
             if (feature.properties) {
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -312,7 +316,7 @@ var baseMaps = {
 var overlayMaps = {
     "Shapefile": usershapefile,
     "Geopackage": usergeopackage,
-    "GeoJSON": geojsondata,
+    "GeoJSON": geodrawnpolygonsjson,
     "Eigene Polygone": drawnItems
 };
 
