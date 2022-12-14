@@ -58,7 +58,7 @@ app.post(
 // Uploading data handler for trainingsdata here (gpkg as .zip)
 
 app.post(
-  "/uploadtrainingsdatagpkg",
+  "/uploadtrainingsdata",
   upload.single("file"),
   (req, res) => {
     const tempPath = req.file.path;
