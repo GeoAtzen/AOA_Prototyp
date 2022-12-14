@@ -47,7 +47,7 @@ calculatePrediction <- function(sentinel, model){
   prediction <- predict(as(sentinel,"Raster"),model)
   prediction_terra <- as(prediction,"SpatRaster")
   
-  writeRaster(prediction_terra, "D:/Uni/5. Semester/Geosoft2/Prototyp bearbeiten/AOA_Prototyp/AOA_Prototyp/frontend_entwurf/public/downloads/test.tif", overwrite=TRUE)
+  writeRaster(prediction_terra, "E:/Uni/5. Semester/AOA_Prototyp/AOA_Prototyp/frontend_entwurf/public/downloads/test.tif", overwrite=TRUE)
   plot(prediction_terra)
 }
 

@@ -25,3 +25,6 @@ AOA_Prototyp/backend_entwurf/Trainingspolygone_warendorf.prj
 AOA_Prototyp/backend_entwurf/Trainingspolygone_warendorf.dbf
 AOA_Prototyp/backend_entwurf/Trainingspolygone_warendorf.cpg
 AOA_Prototyp/backend_entwurf/Trainingspolygone_Warendorf GeoJSON.geojson
+AOA_Prototyp/Beispieldaten/Trainingspolygone_Warendorf_GeoJSON.geojson
+.gitignore
+AOA_Prototyp/frontend_entwurf/public/downloadstest.tif
