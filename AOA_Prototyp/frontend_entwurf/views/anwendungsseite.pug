@@ -24,27 +24,30 @@ block content
               b 2.1 Sentinel 2 Bild als .tif </b>
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                 input(type='file', name='file' , accept=".tif")
-                input(type='submit', value='Submit' onclick='bufferAktivieren()')
-                #puff.spinner-border.float-end(role='status' style= 'display:none')
+                input(type='submit', value='Submit' onclick='bufferAktivieren(1)')
+                #puff1.spinner-border.float-end(role='status' style= 'display:none')
                 p(style="font-size: small") Das Anzeigen kann bis zu eine Minute dauern, bitte haben Sie Geduld!
               b 2.2 Sektion Trainingsdaten:
 
               b(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON:
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
                 input(type='file', name='file', accept=".gpkg, .geojson")
-                input(type='submit', value='Submit')
+                input(type='submit', value='Submit' onclick='bufferAktivieren(2)')
+                #puff2.spinner-border.float-end(role='status' style= 'display:none')
               p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen
 
               b(style="color:darkgray") 2.2.2 Zusatz: Trainingspolygone als Shapefile als .zip
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
                 input(type='file', name='file', accept=".zip")
-                input(type='submit', value='Submit')
+                input(type='submit', value='Submit' onclick='bufferAktivieren(3)')
+                #puff3.spinner-border.float-end(role='status' style= 'display:none')                
               p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
 
               b 2.3 trainiertes Modell (ohne .rds)
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                 input(type='file', name='file' accept=" ")
-                input(type='submit', value='Submit')
+                input(type='submit', value='Submit' onclick='bufferAktivieren(4)')
+                #puff4.spinner-border.float-end(role='status' style= 'display:none') 
               p 
 
               b 3. Auflösung wählen
@@ -84,9 +87,6 @@ block content
 
               b 5. Ausführen
               p
-              .clearfix
-                .spinner-border.float-end(role='status')
-                  span.visually-hidden Loading...
               .w3-row
                 .w3-half
                   form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
@@ -210,7 +210,7 @@ block content
     }
     }
 
-    function bufferAktivieren() {
-    var el = document.getElementById("puff");
+    function bufferAktivieren(numb) {
+    var el = document.getElementById("puff"+ numb);
     el.style = 'display: block';
     }
