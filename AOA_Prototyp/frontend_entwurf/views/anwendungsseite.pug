@@ -13,34 +13,37 @@ block content
         .col-lg-6.col-xs-12.mb-3
             .card.text-dark.p-4.border-success.cardanwendungsseite
               h3 Durchführungsschritte
-              p 1. Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
-              p 2. Datenupload: Laden Sie Ihre Daten, welche zur Durchführung benötigt werden hoch!
-
-              h6   2.1 Sentinel 2 Bild als .tif
+              br
+              b 1. Bereich wählen:
+              p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+              br
+              b 2. Datenupload:
+              p Laden Sie Ihre Daten, welche zur Durchführung benötigt werden hoch!
+              br
+              b 2.1 Sentinel 2 Bild als .tif </b>
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                 input(type='file', name='file' , accept=".tif")
                 input(type='submit', value='Submit')
-              p Wenn Sie ein .tif hochgeladen haben, kann es bis zu einer Minute dauern, bis dieses auf der Karte erscheint! 
-              p Danach können Sie es aber ohne weitere Wartezeiten über die Layerkontrollfunktion ein- und ausblenden!
-
-              h6   2.2 Sektion Trainingsdaten:
-
-              a   2.2.1 Trainingspolygone als GeoPackage oder GeoJSON: (Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen)0
+                p(style="font-size: small") Das Anzeigen kann bis zu eine Minute dauern, bitte haben Sie Geduld!
+              br
+              b 2.2 Sektion Trainingsdaten:
+              br
+              b(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON: (Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen)0
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatagpkg' )
                 input(type='file', name='file', accept=".gpkg, .geojson")
                 input(type='submit', value='Submit')
-
-              a   2.2.2 Zusatz: Trainingspolygone als Shapefile als .zip (Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!) 
+              br
+              b(style="color:darkgray") 2.2.2 Zusatz: Trainingspolygone als Shapefile als .zip (Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!) 
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
                 input(type='file', name='file', accept=".zip")
                 input(type='submit', value='Submit')
               br
-              h6   2.3 trainiertes Modell (ohne .rds)
+              b 2.3 trainiertes Modell (ohne .rds)
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                 input(type='file', name='file' accept=" ")
                 input(type='submit', value='Submit')
-              
-              p 3. Wählen Sie eine Auflösung
+              br
+              b 3. Auflösung wählen
                 .dropdown
                   button.btn.btndropdown.btn-success.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
                     | Auflösung
@@ -57,7 +60,9 @@ block content
                       input#flexRadioDefault30m.form-check-input(type='radio', name='flexRadioDefault')
                       label.form-check-label(for='flexRadioDefault20m')
                         | 30 Meter
-              p 4. Beim Klicken des "Ausführen mit ..." Buttons wird das Training, die Prediction, die AOA und die Ermittlung der empfolenen Gebiete, welche nachtrainiert werden müssen, mit den gewählten Trainingsdaten ausgeführt. 
+              br
+              b 4. Ausführen
+              p Beim Klicken des "Ausführen mit ..." Buttons wird das Training, die Prediction, die AOA und die Ermittlung der empfolenen Gebiete, welche nachtrainiert werden müssen, mit den gewählten Trainingsdaten ausgeführt. 
               
               form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
                 button.btn.btn-success() Ausführen mit geoPackage Trainingsdaten

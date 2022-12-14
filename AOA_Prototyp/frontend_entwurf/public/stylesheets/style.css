@@ -27,21 +27,28 @@
   }
 
 p {
-    margin-left: 2%;
+    margin-left: 1%;
+    font-size: large;
 }
 
+b {
+    margin-left: 1%;
+    font-size: large;
+}
+
+
 h1 {
-    margin-left: 2%;
+    margin-left: 1%;
 }
 
 h2 {
-    margin-left: 2%;
+    margin-left: 1%;
 }
 
 h3 {
-    margin-left: 2%;
+    margin-left: 1%;
 }
 
 h4 {
-    margin-left: 2%;
+    margin-left: 1%;
 }
