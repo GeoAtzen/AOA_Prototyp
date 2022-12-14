@@ -19,20 +19,7 @@ router.post("/ergebnisseitemodel", function (req, res, next) {
 });
 
 router.post("/ergebnisseitegpkg", function (req, res, next) {
-  
-  try {
-const files = decompress("./public/uploads/usertrainingsdatagpkg.zip", "./public/uploads", {
-         map: file => {
-             file.path = `usertrainingspolygone.gpkg`;
-             return file;
-         }
-     });
-     console.log("done!");
- } catch (error) {
-    console.log(error);
-}
 
-  
   res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffgpkg" })
   
 });
