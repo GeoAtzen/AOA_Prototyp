@@ -5,58 +5,58 @@ block content
   br
   h1 Ergebnisseite
   p Auf der Ergebnisseite werden die Ergebnisse angezeigt, welche auf der Anwendungsseite berechnet wurden. Ihnen ist es hier möglich, sich die Dateien einzeln anzeigen zu lassen und/oder diese zu downloaden.
-  .row.justify-content-md-left
         img(src= ueblink , alt="")
-        .col-lg-6.col-xs-12.mb-3
-            .card.text-dark.p-4.border-success.cardmap
-              #ergebnismap
-        .col-lg-6.col-xs-12.mb-3
-            .card.text-dark.p-4.border-success.cardmenu
-              h2 Layer
-              p Wählen Sie die Layer welche Sie angezeigt bekommen wollen mit der Layerkontrollfunktion auf der Karte oben rechts aus.
-                .card.text-dark.p-4.border-success.cardprediction
-                  
-                  h4 Prediction
-                  p Legende:
+        .w3-row
+          br
+          .w3-twothird
+                #ergebnismap
+          .w3-third
+          .card.text-dark.p-4.border-success.cardprediction
+                h2 Layer
+                p Wählen Sie die Layer welche Sie angezeigt bekommen wollen mit der Layerkontrollfunktion auf der Karte oben rechts aus.
+                  .card.text-dark.p-4.border-success.cardprediction
+                    
+                    h4 Prediction
+                    p Legende:
+                    br
+                    p Laden Sie die Prediction als GeoTIFF herunter:
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloads/prediction.tif', download='prediction.tif')
                   br
-                  p Laden Sie die Prediction als GeoTIFF herunter:
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloads/prediction.tif', download='prediction.tif')
-                br
-                .card.text-dark.p-4.border-success.cardprediction
-                  
-                  h4 AOA
+                  .card.text-dark.p-4.border-success.cardprediction
+                    
+                    h4 AOA
+                    br
+                    p Laden Sie die AOA herunter:
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloads/aoa.tif', download='aoa.tif')
                   br
-                  p Laden Sie die AOA herunter:
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloads/aoa.tif', download='aoa.tif')
-                br
-                .card.text-dark.p-4.border-success.cardprediction
-                  
-                  h4 Trainingsgebiete
+                  .card.text-dark.p-4.border-success.cardprediction
+                    
+                    h4 Trainingsgebiete
+                    br
+                    p Laden Sie Ihre hochgeladenen Trainingsdaten als .zip herunter:
+                    p GeoPackage:
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingspolygone.gpkg', download='usertrainingspolygone.gpkg')
+                    p Shapefile:
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdatashp.zip', download='usertrainingsdatashp.zip')
+                    p GeoJSON:
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdatagjson.geojson', download='usertrainingsdatagjson.geojson')
+                    p Eigene gezeichnete Trainingspolygone als .geojson:
+                      a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()')
                   br
-                  p Laden Sie Ihre hochgeladenen Trainingsdaten als .zip herunter:
-                  p GeoPackage:
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingspolygone.gpkg', download='usertrainingspolygone.gpkg')
-                  p Shapefile:
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdatashp.zip', download='usertrainingsdatashp.zip')
-                  p GeoJSON:
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdatagjson.geojson', download='usertrainingsdatagjson.geojson')
-                  p Eigene gezeichnete Trainingspolygone als .geojson:
-                    a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()')
-                br
-                .card.text-dark.p-4.border-success.cardprediction
-                  
-                  h4 empfohlene Gebiete zum nachtrainieren
-                      
-                br
-                .card.text-dark.p-4.border-success.cardprediction
-                  
-                  h4 Sentinel 2 Satelliten Bild
-                  p Laden Sie das ursprüngliche Satelliten Bild herunter:
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usersentineldata.tif', download='usersentineldata.tif')
-                br
-                br
-                p Herunterladen aller Daten als .zip:
-                  a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/', download='alldata.zip')
+                  .card.text-dark.p-4.border-success.cardprediction
+                    
+                    h4 empfohlene Gebiete zum nachtrainieren
+                        
+                  br
+                  .card.text-dark.p-4.border-success.cardprediction
+                    
+                    h4 Sentinel 2 Satelliten Bild
+                    p Laden Sie das ursprüngliche Satelliten Bild herunter:
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usersentineldata.tif', download='usersentineldata.tif')
+                  br
+                  br
+                  p Herunterladen aller Daten als .zip:
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/', download='alldata.zip')
   
   script(src="/javascripts/shp.js")
   script(src='/javascripts/leaflet.shpfile.js')
