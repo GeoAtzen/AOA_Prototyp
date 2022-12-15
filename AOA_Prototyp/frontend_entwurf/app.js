@@ -14,173 +14,172 @@ var app = express();
 
 // error handler
 const handleError = (err, res) => {
-  res
-    .status(500)
-    .contentType("text/plain")
-    .end("Oops! Something went wrong!");
+    res
+        .status(500)
+        .contentType("text/plain")
+        .end("Oops! Something went wrong!");
 };
 
 const upload = multer({
-  dest: "/public"
-  // you might also want to set some limits: https://github.com/expressjs/multer#limits
+    dest: "/public"
+        // you might also want to set some limits: https://github.com/expressjs/multer#limits
 });
 
 app.post(
-  "/uploadsentinel",
-  upload.single("file"),
-  (req, res) => {
+    "/uploadsentinel",
+    upload.single("file"),
+    (req, res) => {
 
-    const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "public/uploads/usersentineldata.tif");
+        const tempPath = req.file.path;
+        const targetPath = path.join(__dirname, "public/uploads/usersentineldata.tif");
 
-    if (path.extname(req.file.originalname).toLowerCase() === ".tif") {
-      fs.rename(tempPath, targetPath, err => {
-        if (err) return handleError(err, res);
+        if (path.extname(req.file.originalname).toLowerCase() === ".tif") {
+            fs.rename(tempPath, targetPath, err => {
+                if (err) return handleError(err, res);
 
-        res
-        .status(200)
-        .render("fileupload", { title: "Fileupload" });
+                res
+                    .status(200)
+                    .render("fileupload", { title: "Fileupload" });
 
-      });
-    } else {
-      fs.unlink(tempPath, err => {
-        if (err) return handleError(err, res);
+            });
+        } else {
+            fs.unlink(tempPath, err => {
+                if (err) return handleError(err, res);
 
-        res
-          .status(403)
-          .render("fileuploaderror", { title: "Uploadfehler" });
-          
-      });
+                res
+                    .status(403)
+                    .render("fileuploaderror", { title: "Uploadfehler" });
+
+            });
+        }
     }
-  }
 );
 
 // Uploading data handler for trainingsdata here (gpkg as .zip)
 
 app.post(
-  "/uploadtrainingsdata",
-  upload.single("file"),
-  (req, res) => {
-    const tempPath = req.file.path;
-    const targetPathgpkg = path.join(__dirname, "public/uploads/usertrainingspolygonegpkg.gpkg");
-    const targetPathgjson = path.join(__dirname, "public/uploads/usertrainingspolygonegjson.geojson");
-    
-    if (path.extname(req.file.originalname).toLowerCase() === ".gpkg") {
-      fs.rename(tempPath, targetPathgpkg, err => {
-        if (err) return handleError(err, res);
+    "/uploadtrainingsdata",
+    upload.single("file"),
+    (req, res) => {
+        const tempPath = req.file.path;
+        const targetPathgpkg = path.join(__dirname, "public/uploads/usertrainingspolygonegpkg.gpkg");
+        const targetPathgjson = path.join(__dirname, "public/uploads/usertrainingspolygonegjson.geojson");
 
-        res
-          .status(200)
-          .render("fileupload", { title: "Fileupload" })
-      });
-    } else if (path.extname(req.file.originalname).toLowerCase() === ".geojson") {
-      fs.rename(tempPath, targetPathgjson, err => {
-        if (err) return handleError(err, res);
+        if (path.extname(req.file.originalname).toLowerCase() === ".gpkg") {
+            fs.rename(tempPath, targetPathgpkg, err => {
+                if (err) return handleError(err, res);
 
-        res
-          .status(200)
-          .render("fileupload", { title: "Fileupload" })
-      });
+                res
+                    .status(200)
+                    .render("fileupload", { title: "Fileupload" })
+            });
+        } else if (path.extname(req.file.originalname).toLowerCase() === ".geojson") {
+            fs.rename(tempPath, targetPathgjson, err => {
+                if (err) return handleError(err, res);
+
+                res
+                    .status(200)
+                    .render("fileupload", { title: "Fileupload" })
+            });
+        } else {
+            fs.unlink(tempPath, err => {
+                if (err) return handleError(err, res);
+
+                res
+                    .status(403)
+                    .render("fileuploaderror", { title: "Uploadfehler" });
+            });
+        }
     }
-    else {
-      fs.unlink(tempPath, err => {
-        if (err) return handleError(err, res);
-
-        res
-          .status(403)
-          .render("fileuploaderror", { title: "Uploadfehler" });
-      });
-    }
-  }
 );
 
 // Uploading data handler for trainingsdata as shapefile (.zip)
 app.post(
-  "/uploadtrainingsdatashp",
-  upload.single("file"),
-  (req, res) => {
-    const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "public/uploads/usertrainingsdatashp.zip");
+    "/uploadtrainingsdatashp",
+    upload.single("file"),
+    (req, res) => {
+        const tempPath = req.file.path;
+        const targetPath = path.join(__dirname, "public/uploads/usertrainingsdatashp.zip");
 
-    if (path.extname(req.file.originalname).toLowerCase() === ".zip") {
-      fs.rename(tempPath, targetPath, err => {
-        if (err) return handleError(err, res);
+        if (path.extname(req.file.originalname).toLowerCase() === ".zip") {
+            fs.rename(tempPath, targetPath, err => {
+                if (err) return handleError(err, res);
 
-        res
-          .status(200)
-          .render("fileupload", { title: "Fileupload" })
-      });
-    } else {
-      fs.unlink(tempPath, err => {
-        if (err) return handleError(err, res);
+                res
+                    .status(200)
+                    .render("fileupload", { title: "Fileupload" })
+            });
+        } else {
+            fs.unlink(tempPath, err => {
+                if (err) return handleError(err, res);
 
-        res
-          .status(403)
-          .render("fileuploaderror", { title: "Uploadfehler" });
-      });
+                res
+                    .status(403)
+                    .render("fileuploaderror", { title: "Uploadfehler" });
+            });
+        }
     }
-  }
 );
 
 // Uploading data handler for trainingsdata as geojson (.json)
 app.post(
-  "/uploadtrainingsdatagjson",
-  upload.single("file"),
-  (req, res) => {
-    const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "public/uploads/usertrainingspolygonegjson.geojson");
+    "/uploadtrainingsdatagjson",
+    upload.single("file"),
+    (req, res) => {
+        const tempPath = req.file.path;
+        const targetPath = path.join(__dirname, "public/uploads/usertrainingspolygonegjson.geojson");
 
-    if (path.extname(req.file.originalname).toLowerCase() === ".geojson") {
-      fs.rename(tempPath, targetPath, err => {
-        if (err) return handleError(err, res);
+        if (path.extname(req.file.originalname).toLowerCase() === ".geojson") {
+            fs.rename(tempPath, targetPath, err => {
+                if (err) return handleError(err, res);
 
-        res
-          .status(200)
-          .render("fileupload", { title: "Fileupload" })
-      });
-    } else {
-      fs.unlink(tempPath, err => {
-        if (err) return handleError(err, res);
+                res
+                    .status(200)
+                    .render("fileupload", { title: "Fileupload" })
+            });
+        } else {
+            fs.unlink(tempPath, err => {
+                if (err) return handleError(err, res);
 
-        res
-          .status(403)
-          .render("fileuploaderror", { title: "Uploadfehler" });
-      });
+                res
+                    .status(403)
+                    .render("fileuploaderror", { title: "Uploadfehler" });
+            });
+        }
     }
-  }
 );
 
 
 // Uploading data handler for trained model here
 app.post(
-  "/uploadmodel",
-  upload.single("file"),
-  (req, res) => {
-    const tempPath = req.file.path;
-    const targetPath = path.join(__dirname, "public/uploads/usertrainedmodel");
+    "/uploadmodel",
+    upload.single("file"),
+    (req, res) => {
+        const tempPath = req.file.path;
+        const targetPath = path.join(__dirname, "public/uploads/usertrainedmodel");
 
-    if (path.extname(req.file.originalname).toLowerCase() === "") {
-      fs.rename(tempPath, targetPath, err => {
-        if (err) return handleError(err, res);
+        if (path.extname(req.file.originalname).toLowerCase() === "") {
+            fs.rename(tempPath, targetPath, err => {
+                if (err) return handleError(err, res);
 
-        res
-          .status(200)
-          .render("fileupload", { title: "Fileupload" })
-      });
-    } else {
-      fs.unlink(tempPath, err => {
-        if (err) return handleError(err, res);
+                res
+                    .status(200)
+                    .render("fileupload", { title: "Fileupload" })
+            });
+        } else {
+            fs.unlink(tempPath, err => {
+                if (err) return handleError(err, res);
 
-        res
-          .status(403)
-          .render("fileuploaderror", { title: "Uploadfehler" });
-      });
+                res
+                    .status(403)
+                    .render("fileuploaderror", { title: "Uploadfehler" });
+            });
+        }
     }
-  }
 );
 
-app.post("/anwendungsseite", function (req, res, next) {
-  res.render("anwendungsseite", { title: "Anwendungsseite" });
+app.post("/anwendungsseite", function(req, res, next) {
+    res.render("anwendungsseite", { title: "Anwendungsseite" });
 });
 
 var startRouter = require("./routes/start");
@@ -207,19 +206,19 @@ app.use("/impressum", impressumRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+app.use(function(req, res, next) {
+    next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+    // render the error page
+    res.status(err.status || 500);
+    res.render("error");
 });
 
 

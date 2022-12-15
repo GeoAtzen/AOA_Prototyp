@@ -259,5 +259,22 @@
       <Category></Category>
       <Category></Category>
     </CategoryNames>
+    <Histograms>
+      <HistItem>
+        <HistMin>0.5416666666666667</HistMin>
+        <HistMax>12.45833333333333</HistMax>
+        <BucketCount>12</BucketCount>
+        <IncludeOutOfRange>0</IncludeOutOfRange>
+        <Approximate>0</Approximate>
+        <HistCounts>148612|459511|23029|5160|1532|277854|2425|55025|237299|470950|178614|9973</HistCounts>
+      </HistItem>
+    </Histograms>
+    <Metadata>
+      <MDI key="STATISTICS_MAXIMUM">12</MDI>
+      <MDI key="STATISTICS_MEAN">6.5342489561408</MDI>
+      <MDI key="STATISTICS_MINIMUM">1</MDI>
+      <MDI key="STATISTICS_STDDEV">3.6913822568269</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">99.79</MDI>
+    </Metadata>
   </PAMRasterBand>
 </PAMDataset>

@@ -4,5 +4,7 @@ services:
     container_name: frontend
     build: .
     image: geoatzen/frontend
+    volumes:
+      - "/public/uploads/:/folder/in/container"
     ports:
       - 3000:3000 # forward webserver on 3000-http port
