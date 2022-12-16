@@ -1,13 +1,12 @@
 rm(list=ls())
 library(plumber)
-#library(mapview)
-#library(terra)
-#library(caret)
-#library(raster)
-#library(RCurl)
-#library(tiff)
-#library(sf)
-#library(randomForest)
+library(terra)
+library(caret)
+library(raster)
+library(RCurl)
+library(tiff)
+library(sf)
+library(randomForest)
 
 
 ################################################################################
