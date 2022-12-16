@@ -24,8 +24,8 @@ block content
               h4 2.1 trainiertes Modell (ohne .rds)
                 button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'" title='Hilfe') ?
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
-                input(type='file', name='file' accept=" ")
-                input(type='submit', value='Submit' onclick='bufferAktivieren(4)')
+                input(type='file', name='file' accept=" " style="color:grey;")
+                input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(4)')
                 #puff4.spinner-border.float-end(role='status' style= 'display:none') 
               p 
 
@@ -33,15 +33,15 @@ block content
                 button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'" title='Hilfe') ?
               h5(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON:
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
-                input(type='file', name='file', accept=".gpkg, .geojson")
-                input(type='submit', value='Submit' onclick='bufferAktivieren(2)')
+                input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey;")
+                input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(2)')
                 #puff2.spinner-border.float-end(role='status' style= 'display:none')
               p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen
 
               h5(style="color:darkgray") 2.2.2 Zusatz: Trainingspolygone als Shapefile als .zip
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
-                input(type='file', name='file', accept=".zip")
-                input(type='submit', value='Submit' onclick='bufferAktivieren(3)')
+                input(type='file', name='file', accept=".zip" style="color:grey;")
+                input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(3)')
                 #puff3.spinner-border.float-end(role='status' style= 'display:none')                
               p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
 
@@ -49,50 +49,32 @@ block content
               h4 2.3 Sentinel 2 Bild als .tif </b>
                 button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'" title='Hilfe') ?
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
-                input(type='file', name='file' , accept=".tif")
-                input(type='submit', value='Submit' onclick='bufferAktivieren(1)')
+                input(type='file', name='file' , accept=".tif" style="color:grey;")
+                input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(1)')
                 #puff1.spinner-border.float-end(role='status' style= 'display:none')
                 p(style="font-size: small") Das Anzeigen kann bis zu eine Minute dauern, bitte haben Sie Geduld!
 
               h4 3. Auflösung wählen
-                button.buttonFragezeichen(onclick="document.getElementById('id07').style.display='block'" title='Hilfe') ?              
-                .dropdown
-                  button.btn.btndropdown.btn-success.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
-                    | Auflösung
-                  .dropdown-menu
-                    .form-check
-                      input#flexRadioDefault10m.form-check-input(type='radio', name='flexRadioDefault')
-                      label.form-check-label(for='flexRadioDefault10m')
-                        | 10 Meter
-                    .form-check
-                      input#flexRadioDefault20m.form-check-input(type='radio', name='flexRadioDefault')
-                      label.form-check-label(for='flexRadioDefault20m')
-                        | 20 Meter
-                    .form-check
-                      input#flexRadioDefault30m.form-check-input(type='radio', name='flexRadioDefault')
-                      label.form-check-label(for='flexRadioDefault20m')
-                        | 30 Meter
+                button.buttonFragezeichen(onclick="document.getElementById('id08').style.display='block'" title='Hilfe') ?     
+                br   
+                .w3-dropdown-click
+                  #Auflo.button.w3-button.btn.btn-success(onclick='aufloNull()') Auflösungen▾
+                  #DemoZwei.w3-dropdown-content
+                    button.btn.btn-success(onclick='aufloEins()') Hoch
+                    br
+                    button.btn.btn-success(onclick='aufloZwei()') Mittel
+                    br
+                    button.btn.btn-success(onclick='aufloDrei()') Gering
               p 
               h4 4. Algorithmus wählen
                 button.buttonFragezeichen(onclick="document.getElementById('id08').style.display='block'" title='Hilfe') ?     
                 br   
                 .w3-dropdown-click
-                  button.w3-button.btn.btn-success(onclick='myFunction()') Algorithmen▾
+                  #Algo.button.w3-button.btn.btn-success(onclick='algoNull()') Algorithmen▾
                   #Demo.w3-dropdown-content
-                    button.btn.btn-success(onclick='myFunction(Random Forest)') Random Forest
-                    button.btn.btn-success(onclick='myFunction(Andere Methode)') Andere Methode
-                    button.btn.btn-success(onclick='myFunction(Andere Methode 2?)') Andere Methode 2?
-                script.
-                  function myFunction(nam) {
-                  var x = document.getElementById("Demo");
-                  if (x.className.indexOf("w3-show") == -1) {
-                  x.className += " w3-show";
-                  x = nam;
-                  } else {
-                  x.className = x.className.replace(" w3-show", "");
-                    
-                  }
-                  }
+                    button.btn.btn-success(onclick='algoEins()') Random Forest
+                    button.btn.btn-success(onclick='algoZwei()') Andere Methode
+                    button.btn.btn-success(onclick='algoDrei()') Andere Methode 2?
 
               h4 5. Ausführen
                 button.buttonFragezeichen(onclick="document.getElementById('id09').style.display='block'" title='Hilfe') ?
@@ -100,18 +82,25 @@ block content
               .w3-row
                 .w3-half
                   form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
-                   button.btn.btn-success() Ausführen mit geoPackage Trainingsdaten
+                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
+                      | geoPackage Trainingsdaten
                   br
                 .w3-half
                   form(method='post', action='/anwendungsseite/ergebnisseitegjson')
-                   button.btn.btn-success() Ausführen mit GeoJSON Trainingsdaten
+                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
+                      | GeoJSON Trainingsdaten
+                  br 
               .w3-row
                 .w3-half
                   form(method='post', action='/anwendungsseite/ergebnisseiteshape')
-                    button.btn.btn-success() Ausführen mit Shapefile Trainingsdaten
+                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
+                      | Shapefile Trainingsdaten
+                  br  
                 .w3-half
                  form(method='post', action='/anwendungsseite/ergebnisseitemodel')
-                    button.btn.btn-success() Ausführen mit trainiertem Modell
+                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>                                                                  
+                      | trainiertem Modell
+                 
               
   // Modals
   #id02.w3-modal
@@ -210,13 +199,88 @@ block content
     x.className = x.className.replace(" w3-show", "");
     }
     }
-    
-    function myFunction() {
+
+    function algoNull() {
     var x = document.getElementById("Demo");
     if (x.className.indexOf("w3-show") == -1) {
     x.className += " w3-show";
     } else {
     x.className = x.className.replace(" w3-show", "");
+    }
+    }
+    
+    function algoEins() {
+    var x = document.getElementById("Demo");
+    var y = document.getElementById("Algo");
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    } else {
+    x.className = x.className.replace(" w3-show", "");
+    y.textContent = "Random Forest";
+    }
+    }
+
+    function algoZwei() {
+    var x = document.getElementById("Demo");
+    var y = document.getElementById("Algo");
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    } else {
+    x.className = x.className.replace(" w3-show", "");
+    y.textContent = "Andere Methode";
+    }
+    }
+
+    function algoDrei() {
+    var x = document.getElementById("Demo");
+    var y = document.getElementById("Algo");
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    } else {
+    x.className = x.className.replace(" w3-show", "");
+    y.textContent = "Andere Methode 2?";
+    }
+    }
+
+    function aufloNull() {
+    var x = document.getElementById("DemoZwei");
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    } else {
+    x.className = x.className.replace(" w3-show", "");
+    }
+    }
+    
+    function aufloEins() {
+    var x = document.getElementById("DemoZwei");
+    var y = document.getElementById("Auflo");
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    } else {
+    x.className = x.className.replace(" w3-show", "");
+    y.textContent = "Hoch";
+    }
+    }
+
+    function aufloZwei() {
+    var x = document.getElementById("DemoZwei");
+    var y = document.getElementById("Auflo");
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    } else {
+    x.className = x.className.replace(" w3-show", "");
+    y.textContent = "Mittel";
+    }
+    }
+
+    function aufloDrei() {
+    var x = document.getElementById("DemoZwei");
+    var y = document.getElementById("Auflo");
+    if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    } else {
+    x.className = x.className.replace(" w3-show", "");
+    y.textContent = "Gering";
     }
     }
 
