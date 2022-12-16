@@ -17,7 +17,7 @@ EXPOSE 8000
 
 # install plumber
 RUN R -e "install.packages('plumber')"
-RUN R -e "install.packages('terra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+#RUN R -e "install.packages('terra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 
 # when the container starts, start the main.R script
 ENTRYPOINT ["Rscript", "startAPI.R"]
