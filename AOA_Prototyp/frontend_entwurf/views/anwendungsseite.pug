@@ -12,45 +12,47 @@ block content
 
         .col-lg-6.col-xs-12.mb-3
             .card.text-dark.p-4.border-success.cardanwendungsseite
-              h3 Durchführungsschritte
+              h2 Durchführungsschritte
 
-              b 1. Bereich wählen:  
+              h4 1. Bereich wählen:  
                 button.w3-button.w3-circle.w3-theme.w3-hover-teal(onclick="document.getElementById('id02').style.display='block'" title='Hilfe' style='font-size:small') ?
               p
-              b 2. Datenupload:  
+              h4 2. Datenupload:  
                 button.w3-button.w3-circle.w3-theme.w3-hover-teal(onclick="document.getElementById('id03').style.display='block'" title='Hilfe' style='font-size:small') ?
               p
 
-              b 2.1 Sentinel 2 Bild als .tif </b>
-              form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
-                input(type='file', name='file' , accept=".tif")
-                input(type='submit', value='Submit' onclick='bufferAktivieren(1)')
-                #puff1.spinner-border.float-end(role='status' style= 'display:none')
-                p(style="font-size: small") Das Anzeigen kann bis zu eine Minute dauern, bitte haben Sie Geduld!
-              b 2.2 Sektion Trainingsdaten:
-
-              b(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON:
-              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
-                input(type='file', name='file', accept=".gpkg, .geojson")
-                input(type='submit', value='Submit' onclick='bufferAktivieren(2)')
-                #puff2.spinner-border.float-end(role='status' style= 'display:none')
-              p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen
-
-              b(style="color:darkgray") 2.2.2 Zusatz: Trainingspolygone als Shapefile als .zip
-              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
-                input(type='file', name='file', accept=".zip")
-                input(type='submit', value='Submit' onclick='bufferAktivieren(3)')
-                #puff3.spinner-border.float-end(role='status' style= 'display:none')                
-              p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
-
-              b 2.3 trainiertes Modell (ohne .rds)
+              h4 2.1 trainiertes Modell (ohne .rds)
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                 input(type='file', name='file' accept=" ")
                 input(type='submit', value='Submit' onclick='bufferAktivieren(4)')
                 #puff4.spinner-border.float-end(role='status' style= 'display:none') 
               p 
 
-              b 3. Auflösung wählen
+              h4 2.2 Sektion Trainingsdaten:
+
+              h5(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON:
+              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
+                input(type='file', name='file', accept=".gpkg, .geojson")
+                input(type='submit', value='Submit' onclick='bufferAktivieren(2)')
+                #puff2.spinner-border.float-end(role='status' style= 'display:none')
+              p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen
+
+              h5(style="color:darkgray") 2.2.2 Zusatz: Trainingspolygone als Shapefile als .zip
+              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
+                input(type='file', name='file', accept=".zip")
+                input(type='submit', value='Submit' onclick='bufferAktivieren(3)')
+                #puff3.spinner-border.float-end(role='status' style= 'display:none')                
+              p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
+
+
+              h4 2.3 Sentinel 2 Bild als .tif </b>
+              form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
+                input(type='file', name='file' , accept=".tif")
+                input(type='submit', value='Submit' onclick='bufferAktivieren(1)')
+                #puff1.spinner-border.float-end(role='status' style= 'display:none')
+                p(style="font-size: small") Das Anzeigen kann bis zu eine Minute dauern, bitte haben Sie Geduld!
+
+              h4 3. Auflösung wählen
                 .dropdown
                   button.btn.btndropdown.btn-success.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
                     | Auflösung
@@ -68,7 +70,7 @@ block content
                       label.form-check-label(for='flexRadioDefault20m')
                         | 30 Meter
               p 
-              b 4. Algorithmus wählen
+              h4 4. Algorithmus wählen
                 .w3-dropdown-click
                   button.w3-button.w3-black(onclick='myFunction()') Click Me!
                   #Demo.w3-dropdown-content.w3-bar-block.w3-border
@@ -85,7 +87,7 @@ block content
                   }
                   }
 
-              b 5. Ausführen
+              h4 5. Ausführen
               p
               .w3-row
                 .w3-half
