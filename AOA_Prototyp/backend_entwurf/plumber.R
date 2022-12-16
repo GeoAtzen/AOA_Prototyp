@@ -1,13 +1,13 @@
 rm(list=ls())
 library(plumber)
-#library(mapview)
-#library(terra)
-#library(caret)
-#library(raster)
-#library(RCurl)
-#library(tiff)
-#library(sf)
-#library(randomForest)
+library(mapview)
+library(terra)
+library(caret)
+library(raster)
+library(RCurl)
+library(tiff)
+library(sf)
+library(randomForest)
 
 
 ################################################################################
@@ -48,7 +48,7 @@ calculatePrediction <- function(sentinel, model){
   prediction <- predict(as(sentinel,"Raster"),model)
   prediction_terra <- as(prediction,"SpatRaster")
   
-  writeRaster(prediction_terra, "test.tif", overwrite=TRUE)
+  writeRaster(prediction_terra, "GANZER PFAD/downloads/test.tif", overwrite=TRUE)
   plot(prediction_terra)
 }
 
