@@ -56,3 +56,12 @@ h4 {
 h5 {
     margin-left: 1%;
 }
+
+.buttonFragezeichen {
+    color: rgb(255, 255, 255);
+    border: 2px solid #198754;
+    float: right;
+    border-radius: 70%;
+    background-color: #198754;
+    font-size: medium;
+}

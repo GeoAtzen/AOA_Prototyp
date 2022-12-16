@@ -15,13 +15,14 @@ block content
               h2 Durchführungsschritte
 
               h4 1. Bereich wählen:  
-                button.w3-button.w3-circle.w3-theme.w3-hover-teal(onclick="document.getElementById('id02').style.display='block'" title='Hilfe' style='font-size:small') ?
+                button.buttonFragezeichen(onclick="document.getElementById('id02').style.display='block'" title='Hilfe') ?
               p
               h4 2. Datenupload:  
-                button.w3-button.w3-circle.w3-theme.w3-hover-teal(onclick="document.getElementById('id03').style.display='block'" title='Hilfe' style='font-size:small') ?
+                button.buttonFragezeichen(onclick="document.getElementById('id03').style.display='block'" title='Hilfe') ?
               p
 
               h4 2.1 trainiertes Modell (ohne .rds)
+                button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'" title='Hilfe') ?
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                 input(type='file', name='file' accept=" ")
                 input(type='submit', value='Submit' onclick='bufferAktivieren(4)')
@@ -29,7 +30,7 @@ block content
               p 
 
               h4 2.2 Sektion Trainingsdaten:
-
+                button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'" title='Hilfe') ?
               h5(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON:
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
                 input(type='file', name='file', accept=".gpkg, .geojson")
@@ -46,6 +47,7 @@ block content
 
 
               h4 2.3 Sentinel 2 Bild als .tif </b>
+                button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'" title='Hilfe') ?
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                 input(type='file', name='file' , accept=".tif")
                 input(type='submit', value='Submit' onclick='bufferAktivieren(1)')
@@ -53,6 +55,7 @@ block content
                 p(style="font-size: small") Das Anzeigen kann bis zu eine Minute dauern, bitte haben Sie Geduld!
 
               h4 3. Auflösung wählen
+                button.buttonFragezeichen(onclick="document.getElementById('id07').style.display='block'" title='Hilfe') ?              
                 .dropdown
                   button.btn.btndropdown.btn-success.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
                     | Auflösung
@@ -71,23 +74,28 @@ block content
                         | 30 Meter
               p 
               h4 4. Algorithmus wählen
+                button.buttonFragezeichen(onclick="document.getElementById('id08').style.display='block'" title='Hilfe') ?     
+                br   
                 .w3-dropdown-click
-                  button.w3-button.w3-black(onclick='myFunction()') Click Me!
-                  #Demo.w3-dropdown-content.w3-bar-block.w3-border
-                    a.w3-bar-item.w3-button(href='#') Link 1
-                    a.w3-bar-item.w3-button(href='#') Link 2
-                    a.w3-bar-item.w3-button(href='#') Link 3
+                  button.w3-button.btn.btn-success(onclick='myFunction()') Algorithmen▾
+                  #Demo.w3-dropdown-content
+                    button.btn.btn-success(onclick='myFunction(Random Forest)') Random Forest
+                    button.btn.btn-success(onclick='myFunction(Andere Methode)') Andere Methode
+                    button.btn.btn-success(onclick='myFunction(Andere Methode 2?)') Andere Methode 2?
                 script.
-                  function myFunction() {
+                  function myFunction(nam) {
                   var x = document.getElementById("Demo");
                   if (x.className.indexOf("w3-show") == -1) {
                   x.className += " w3-show";
+                  x = nam;
                   } else {
                   x.className = x.className.replace(" w3-show", "");
+                    
                   }
                   }
 
               h4 5. Ausführen
+                button.buttonFragezeichen(onclick="document.getElementById('id09').style.display='block'" title='Hilfe') ?
               p
               .w3-row
                 .w3-half
