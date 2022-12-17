@@ -308,27 +308,28 @@ fetch("/uploads/usersentineldata.tif")
     });
 
 // hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
-fetch("/downloads/test.tif")
-    .then((response) => response.arrayBuffer())
-    .then((arrayBuffer) => {
-        parseGeoraster(arrayBuffer).then((georaster) => {
-            console.log("georaster:", georaster);
+function loadprediction() {
+    fetch("/downloads/test.tif")
+        .then((response) => response.arrayBuffer())
+        .then((arrayBuffer) => {
+            parseGeoraster(arrayBuffer).then((georaster) => {
+                console.log("georaster:", georaster);
 
-            var predictiongeotiffdata = new GeoRasterLayer({
-                georaster: georaster,
-                //pixelValuesToColorFn,
-                resolution: 512
+                var predictiongeotiffdata = new GeoRasterLayer({
+                    georaster: georaster,
+                    //pixelValuesToColorFn,
+                    resolution: 512
+                });
+                // direktes hinzufügen zur Karte
+                predictiongeotiffdata.addTo(map);
+
+                map.fitBounds(predictiongeotiffdata.getBounds());
+
+                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
+                layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
             });
-            // direktes hinzufügen zur Karte
-            predictiongeotiffdata.addTo(map);
-
-            map.fitBounds(predictiongeotiffdata.getBounds());
-
-            // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
-            layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
         });
-    });
-
+}
 // Layer Control
 var baseMaps = {
     "OpenStreetMap": osm,
