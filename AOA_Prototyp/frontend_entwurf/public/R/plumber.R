@@ -47,7 +47,7 @@ calculatePrediction <- function(sentinel, model){
   prediction <- predict(as(sentinel,"Raster"),model)
   prediction_terra <- as(prediction,"SpatRaster")
   crs(prediction_terra) <- "EPSG:32632"
-  writeRaster(prediction_terra, "test.tif", overwrite = TRUE)
+  writeRaster(prediction_terra, "./predictions/prediction.tif", overwrite = TRUE)
   plot(prediction_terra)
 }
 

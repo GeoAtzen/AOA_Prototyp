@@ -309,7 +309,7 @@ fetch("/uploads/usersentineldata.tif")
 
 // hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadprediction() {
-    fetch("/R/test.tif")
+    fetch("/R/predictions/prediction.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
             parseGeoraster(arrayBuffer).then((georaster) => {
