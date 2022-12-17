@@ -19,6 +19,10 @@ block content
                     h4 Prediction
                     p Legende:
                     br
+                    p Wenn die Seite fertig geladen hat, drücken Sie bitte auf den Knopf um die Prediction auf der Karte anzeigen zu lassen
+                    button.btn-success(onclick='loadprediction()') Anzeigen der Prediction
+                    
+                    br
                     p Laden Sie die Prediction als GeoTIFF herunter:  
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloads/test.tif', download='prediction.tif')
                   br
