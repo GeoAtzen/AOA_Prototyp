@@ -46,8 +46,8 @@ trainModel <- function(Referenzdaten){
 calculatePrediction <- function(sentinel, model){
   prediction <- predict(as(sentinel,"Raster"),model)
   prediction_terra <- as(prediction,"SpatRaster")
-  
-  writeRaster(prediction_terra, "C:/AOA_Prototyp/AOA_Prototyp/frontend_entwurf/public/downloads/test.tif", overwrite = TRUE)
+  crs(prediction_terra) <- "EPSG:32632"
+  writeRaster(prediction_terra, "test.tif", overwrite = TRUE)
   plot(prediction_terra)
 }
 
