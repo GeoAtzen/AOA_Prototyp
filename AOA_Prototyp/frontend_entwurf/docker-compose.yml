@@ -2,10 +2,28 @@ version: "3"
 services:
   frontend:
     container_name: frontend
-    build: .
-    image: geoatzen/frontend
+    build: 
+      dockerfile: ./Dockerfile
+    image: jonthnm/frontend
     volumes:
       - "/public/uploads/:/folder/in/container"
       - "/public/downloads/:/folder/in/container"
     ports:
       - 3000:3000 # forward webserver on 3000-http port
+    depends_on:
+      - backend 
+      
+  backend:
+    container_name: backend
+    build: 
+      dockerfile: ../backend_entwurf/Dockerfile
+    image: jonthnm/backendentwurf
+    volumes:
+      - "/backend_entwurf/:/folder/in/container"
+      - "/public/uploads/:/folder/in/container"
+      - "/public/downloads/:/folder/in/container"
+      - "./public/uploads/:/folder/in/container"
+      - "./public/downloads/:/folder/in/container"
+      
+    ports:
+      - 8000:8000

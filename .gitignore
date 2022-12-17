@@ -28,3 +28,8 @@ AOA_Prototyp/backend_entwurf/Trainingspolygone_Warendorf GeoJSON.geojson
 AOA_Prototyp/Beispieldaten/Trainingspolygone_Warendorf_GeoJSON.geojson
 .gitignore
 AOA_Prototyp/frontend_entwurf/public/downloadstest.tif
+AOA_Prototyp/frontend_entwurf/backend_entwurf/.Rhistory
+AOA_Prototyp/frontend_entwurf/public/downloads/prediction.tif
+AOA_Prototyp/frontend_entwurf/public/downloads/prediction.tif.aux.xml
+AOA_Prototyp/frontend_entwurf/public/downloads/richtig.tif
+AOA_Prototyp/frontend_entwurf/public/downloads/test.tif.aux.xml
