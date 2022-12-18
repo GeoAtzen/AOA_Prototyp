@@ -19,7 +19,7 @@ app.post(
     './public/uploads/usertrainingspolygonegjson.geojson',
     './public/uploads/digitalized_usertrainingspolygons.geojson'])
 
-    let combinedgjson = mergedStream.pipe(process.stdout);
+    mergedStream.pipe(process.stdout);
     res.render("anwendungsseite", { title: "Anwendungsseite" });
     
     }

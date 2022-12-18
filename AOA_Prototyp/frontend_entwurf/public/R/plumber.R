@@ -47,6 +47,10 @@ trainModel <- function(Referenzdaten){
 calculatePrediction <- function(sentinel, model){
   prediction <- predict(as(sentinel,"Raster"),model)
   prediction_terra <- as(prediction,"SpatRaster")
+  
+  coltb <- data.frame(t(col2rgb(rainbow(12, end=.9), alpha=TRUE)))
+  coltab(prediction_terra) <- coltb
+  
   crs(prediction_terra) <- "EPSG:32632"
   writeRaster(prediction_terra, "./predictions/prediction.tif", overwrite = TRUE)
   plot(prediction_terra)
