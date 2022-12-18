@@ -26,7 +26,7 @@ block content
               h4 2.1 trainiertes Modell (ohne .rds)
                 button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'; modal = document.getElementById('id04')" title='Hilfe') ?
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
-                input(type='file', name='file' accept=" " style="color:grey;")
+                input(type='file', name='file' accept=" " style="color:grey; font-size:large;")
                 input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(4)')
                 #puff4.spinner-border.float-end(role='status' style= 'display:none') 
               p 
@@ -35,14 +35,14 @@ block content
                 button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
               h5(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON:
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
-                input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey;")
+                input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;")
                 input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(2)')
                 #puff2.spinner-border.float-end(role='status' style= 'display:none')
               p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen
 
               h5(style="color:darkgray") 2.2.2 Trainingspolygone als Shapefile als .zip
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
-                input(type='file', name='file', accept=".zip" style="color:grey;")
+                input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;")
                 input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(3)')
                 #puff3.spinner-border.float-end(role='status' style= 'display:none')                
               p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
@@ -51,7 +51,7 @@ block content
               h4 2.3 Sentinel 2 Bild als .tif </b>
                 button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'; modal = document.getElementById('id06')" title='Hilfe') ?
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
-                input(type='file', name='file' , accept=".tif" style="color:grey;")
+                input(type='file', name='file' , accept=".tif" style="color:grey; font-size:large;")
                 input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(1)')
                 #puff1.spinner-border.float-end(role='status' style= 'display:none')
                 p(style="font-size: small") Das Anzeigen kann bis zu eine Minute dauern, bitte haben Sie Geduld!
