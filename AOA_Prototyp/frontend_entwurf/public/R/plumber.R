@@ -7,6 +7,7 @@ library(RCurl)
 library(tiff)
 library(sf)
 library(randomForest)
+library(geojsonR)
 
 
 ################################################################################
@@ -99,3 +100,8 @@ function(pr) {
     # Overwrite the default serializer to return unboxed JSON
     pr_set_serializer(serializer_unboxed_json())
 }
+
+#* Merges two geojsons
+#* @serializer geojson
+#* @get /merge_files
+#merge_files(INPUT_FOLDER = "../uploads/", OUTPUT_FILE = "merged_file.geojson")

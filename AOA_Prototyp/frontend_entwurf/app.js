@@ -7,10 +7,23 @@ const fs = require("fs");
 const http = require("http");
 const multer = require("multer");
 const decompress = require("decompress");
+var geojsonMerge = require('@mapbox/geojson-merge');
+
 
 var app = express();
 
-// Uploading data handler for Sentinel 2 tif here
+app.post(
+    "/mergegeojson",
+    (req, res) => {
+    var mergedStream = geojsonMerge.mergeFeatureCollectionStream([
+    './public/uploads/usertrainingspolygonegjson.geojson',
+    './public/uploads/digitalized_usertrainingspolygons.geojson'])
+
+    let combinedgjson = mergedStream.pipe(process.stdout);
+    res.render("anwendungsseite", { title: "Anwendungsseite" });
+    
+    }
+);
 
 // error handler
 const handleError = (err, res) => {

@@ -31,14 +31,14 @@ map.addControl(drawControl)
 
 // assigning a label to the drawn Polygon via prompt
 var getLabel = function(layer) {
-    var label = prompt("Label des Polygons", "Label");
-    return label;
+    var Label = prompt("Label des Polygons", "Label");
+    return Label;
 };
 
 // assigning a ClassID to the drawn Polygon via prompt
 var getclassID = function(layer) {
-    var classID = prompt("ClassID des Polygons", "ClassID");
-    return classID;
+    var ClassID = prompt("ClassID des Polygons", "ClassID");
+    return ClassID;
 };
 
 // Global array to store the drawn polygons as GeoJSON
@@ -51,22 +51,22 @@ map.on(L.Draw.Event.CREATED, function(e) {
     feature = layer.feature = layer.feature || {};
     feature.type = feature.type || "Feature";
 
-    var label = getLabel(layer);
-    var classID = getclassID(layer);
+    var Label = getLabel(layer);
+    var ClassID = getclassID(layer);
     // assining the attributes entered in the prompt to be the features of the geojson
-    var props = (feature.properties = feature.properties || {}); // Intialize feature.properties
-    props.label = label;
-    props.classID = classID;
+    var props = (feature.properties = feature.properties || {});
+    props.Label = Label;
+    props.ClassID = ClassID;
 
     // adding the drawn polygons to the layer
     drawnItems.addLayer(layer);
 
-    if (label == "Label") {
+    if (Label == "Label") {
         layer.bindPopup("Kein Label angegeben");
-    } else if (label == "") {
+    } else if (Label == "") {
         layer.bindPopup("Kein Label angegeben");
     } else {
-        layer.bindPopup("Label: " + label + "<br>" + "ClassID: " + classID).openPopup();
+        layer.bindPopup("Label: " + Label + "<br>" + "ClassID: " + ClassID).openPopup();
     }
     drawnItems.addLayer(layer);
 
@@ -82,16 +82,23 @@ map.on(L.Draw.Event.CREATED, function(e) {
  */
 function exportGeoJSON() {
 
+    fetch("/uploads/usertrainingspolygonegjson.geojson")
+    .then((response) => response.json())
+    .then((json) => {
+        console.log(json)
+
     // test GeoJSON validity by logging the data to the console for chacking it 
     console.log(drawnItems.toGeoJSON());
     console.log(JSON.stringify(drawnItems.toGeoJSON()));
 
     // save drawn Polygons as GeoJSON in drawnpolygonsjson
     let drawnpolygonsjson = JSON.stringify(drawnItems.toGeoJSON());
+    let useruploadedgeojson = JSON.stringify(json);
+    console.log(useruploadedgeojson)
 
     // telling javascript to export drawnpolygonsjson as JSON format
     let dataUri =
-        "data:text/json;charset=utf-8," + encodeURIComponent(drawnpolygonsjson);
+        "data:text/json;charset=utf-8," + encodeURIComponent(useruploadedgeojson /* geht nicht da invalides geojson + drawnpolygonsjson */ );
 
     // declaring the export name
     let fileexportname = "digitalized_usertrainingspolygons" + ".geojson";
@@ -108,8 +115,8 @@ function exportGeoJSON() {
     } else {
         linkElement.click();
     }
+})
 }
-
 
 // Anzeigen der hochgeladenen Shapefile
 var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
