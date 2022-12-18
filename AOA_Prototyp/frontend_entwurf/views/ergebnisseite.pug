@@ -6,14 +6,16 @@ block content
   h1 Area of Applicability - Ergebnisseite
   p Auf der Ergebnisseite werden die Ergebnisse angezeigt, welche auf der Anwendungsseite berechnet wurden. Ihnen ist es hier möglich, sich die Dateien einzeln anzeigen zu lassen und/oder diese zu downloaden.
         img(src= ueblink , alt="")
-        .w3-row
-          br
-          .w3-twothird
+        .row.justify-content-md-left
+          .col-xs-12.col-sm-6.col-lg-8
                 #ergebnismap
-          .w3-third
-          .card.text-dark.p-4.border-success.cardprediction
-                h2 Layer
-                p Wählen Sie die Layer welche Sie angezeigt bekommen wollen mit der Layerkontrollfunktion auf der Karte oben rechts aus.
+          .col-xs-6.col-lg-4
+            .card.text-dark.p-4.border-success.cardprediction
+                h2 Ergebnisse und Download
+                
+                p Bitte nutzen Sie die Layerkontrollfunktion der Karte.
+                  h4
+                    button.buttonFragezeichen(onclick="document.getElementById('id10').style.display='block'; modal = document.getElementById('id10')" title='Hilfe') ?     
                   .card.text-dark.p-4.border-success.cardprediction
                     
                     h4 Prediction
@@ -72,6 +74,7 @@ block content
   script(src="/javascripts/shp.js")
   script(src='/javascripts/leaflet.shpfile.js')
   script(src="/javascripts/results.js")
+  script(src="/javascripts/application.js")
   
 
   script.

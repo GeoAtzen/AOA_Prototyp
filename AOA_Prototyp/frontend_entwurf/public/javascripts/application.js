@@ -1,3 +1,10 @@
+var modal;
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+    modal.style.display = "none";
+    }
+    }
 // erstellen einer leaflet Karte mit Europa als Startpunkt und mit OSM als Basiskarte
 var map = L.map("anwendungsmap").setView([52, 7.8], 12);
 
@@ -252,3 +259,4 @@ var overlayMaps = {
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
