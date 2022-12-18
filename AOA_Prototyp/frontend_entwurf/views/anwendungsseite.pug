@@ -4,58 +4,60 @@ block content
   br
   br
   h1 Area of Applicability - Anwendungsseite
-  p Hier können Sie die Area of Applicability anwenden. Bei Fragen zu einzelnen Schritten, klicken Sie bitte auf die Fragezeichen am rechten Bildschirmrand.
+  p Hier können Sie die Area of Applicability anwenden. Zum Anzeigen der von ihnen Hochgeladenen Daten benutzen sie bitte die Layerkontrollfunktion oben rechts auf der Karte.
 
   .row.justify-content-md-left
         .col-lg-6.col-xs-12.mb-3
               #anwendungsmap
 
         .col-lg-6.col-xs-12.mb-3
+          h4
+            button.buttonFragezeichen(onclick="document.getElementById('id10').style.display='block'; modal = document.getElementById('id10')" title='Hilfe') ?     
             .card.text-dark.p-4.border-success.cardanwendungsseite
               h2 Durchführungsschritte
 
               h4 1. Bereich wählen:  
-                button.buttonFragezeichen(onclick="document.getElementById('id02').style.display='block'" title='Hilfe') ?
+                button.buttonFragezeichen(onclick="document.getElementById('id02').style.display='block'; modal = document.getElementById('id02')" title='Hilfe') ?
               p
               h4 2. Datenupload:  
-                button.buttonFragezeichen(onclick="document.getElementById('id03').style.display='block'" title='Hilfe') ?
+                button.buttonFragezeichen(onclick="document.getElementById('id03').style.display='block'; modal = document.getElementById('id03')" title='Hilfe') ?
               p
 
               h4 2.1 trainiertes Modell (ohne .rds)
-                button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'" title='Hilfe') ?
+                button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'; modal = document.getElementById('id04')" title='Hilfe') ?
               form(method='post', enctype='multipart/form-data', action='/uploadmodel')
-                input(type='file', name='file' accept=" " style="color:grey;")
+                input(type='file', name='file' accept=" " style="color:grey; font-size:large;")
                 input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(4)')
                 #puff4.spinner-border.float-end(role='status' style= 'display:none') 
               p 
 
               h4 2.2 Sektion Trainingsdaten:
-                button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'" title='Hilfe') ?
+                button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
               h5(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON:
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
-                input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey;")
+                input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;")
                 input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(2)')
                 #puff2.spinner-border.float-end(role='status' style= 'display:none')
               p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll bitte "Layer1" nennen
 
-              h5(style="color:darkgray") 2.2.2 Zusatz: Trainingspolygone als Shapefile als .zip
+              h5(style="color:darkgray") 2.2.2 Trainingspolygone als Shapefile als .zip
               form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
-                input(type='file', name='file', accept=".zip" style="color:grey;")
+                input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;")
                 input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(3)')
                 #puff3.spinner-border.float-end(role='status' style= 'display:none')                
               p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
 
 
               h4 2.3 Sentinel 2 Bild als .tif </b>
-                button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'" title='Hilfe') ?
+                button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'; modal = document.getElementById('id06')" title='Hilfe') ?
               form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
-                input(type='file', name='file' , accept=".tif" style="color:grey;")
+                input(type='file', name='file' , accept=".tif" style="color:grey; font-size:large;")
                 input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(1)')
                 #puff1.spinner-border.float-end(role='status' style= 'display:none')
                 p(style="font-size: small") Das Anzeigen kann bis zu eine Minute dauern, bitte haben Sie Geduld!
 
               h4 3. Auflösung wählen
-                button.buttonFragezeichen(onclick="document.getElementById('id08').style.display='block'" title='Hilfe') ?     
+                button.buttonFragezeichen(onclick="document.getElementById('id07').style.display='block'; modal = document.getElementById('id07')" title='Hilfe') ?     
                 br   
                 .w3-dropdown-click
                   #Auflo.button.w3-button.btn.btn-success(onclick='aufloNull()') Auflösungen▾
@@ -67,17 +69,17 @@ block content
                     button.btn.btn-success(onclick='aufloDrei()') Gering
               p 
               h4 4. Algorithmus wählen
-                button.buttonFragezeichen(onclick="document.getElementById('id08').style.display='block'" title='Hilfe') ?     
+                button.buttonFragezeichen(onclick="document.getElementById('id08').style.display='block'; modal = document.getElementById('id08')" title='Hilfe') ?     
                 br   
                 .w3-dropdown-click
                   #Algo.button.w3-button.btn.btn-success(onclick='algoNull()') Algorithmen▾
                   #Demo.w3-dropdown-content
                     button.btn.btn-success(onclick='algoEins()') Random Forest
-                    button.btn.btn-success(onclick='algoZwei()') Andere Methode
-                    button.btn.btn-success(onclick='algoDrei()') Andere Methode 2?
+                    button.btn.btn-success(onclick='algoZwei()') Decision Tree
+                    button.btn.btn-success(onclick='algoDrei()') Andere Methode
 
               h4 5. Ausführen
-                button.buttonFragezeichen(onclick="document.getElementById('id09').style.display='block'" title='Hilfe') ?
+                button.buttonFragezeichen(onclick="document.getElementById('id09').style.display='block'; modal = document.getElementById('id09')" title='Hilfe') ?
               p
               .w3-row
                 .w3-half
@@ -119,7 +121,7 @@ block content
           i.fa.fa-remove
       .w3-container
          h3 2. Datenupload
-         p Laden Sie Ihre Daten, welche zur Durchführung benötigt werden hoch!
+         p In diesem Abschnitt können Sie die alle Daten, die zur Durchführung des Programms benötigt werden, hochladen. Die Uploads sind in verschienede Bereiche unterteilt, bitte folgen Sie den Anweisungen des jeweiligen Abschnitts.
 
   #id04.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -127,8 +129,8 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id04').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 1. Bereich wählen
-         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+         h3 2.1 Trainiertes Modell
+         p In diesem Abschnitt können sie ein bereits triniertes Modell hochladen um mit diesem direkt weiterzuarbeiten. Beim Hochladen achten si bitte auf korrekte Benennung der Datei, im Moment darf diese keine Endung haben, also z.B. nicht "Modell.rds" heißen, sondern nur "Modell" und eine Datei von der Form "Alle Dateien" sein.
 
   #id05.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -136,8 +138,8 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id05').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 1. Bereich wählen
-         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+         h3 2.2 Sektion Trainingsdaten
+         p In diesem Abschnitt können Sie Trainingspolygone hochladen. Sie können zwischen einem Upload in Form von 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON <b> oder </b> 2.2.2 Trainingspolygone als Shapefile als .zip wählen. Bitte achten Sie auf korrekte Benennung der Dateien und haben Sie Geduld, da Anzeigen kann etwas Zeit in Anspruch nehmen. Aus Ihren Trainingsdaten wird dann ein Modell erstellt.
 
   #id06.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -145,8 +147,8 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id06').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 1. Bereich wählen
-         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+         h3 2.3 Sentinel 2 Bild als .tif
+         p In diesem Abschnitt können Sie ein Sentinel 2 Bild als .tif Datei hochladen. Um eine Echtfarbkompositdarstellung zu erzeugen, achten Sie bitte darauf, ein Mehrkanal-TIF zu wählen, kein Einkanal-TIF.
 
   #id07.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -154,8 +156,8 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id07').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 1. Bereich wählen
-         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+         h3 3. Auflösung wählen
+         p In diesem Abschnitt können Sie die Auflösung der Daten wählen. Nutzen Sie hierfür das Dropdown-Menü und wählen Sie zwischen Hoch(10mx10m), Mittel (20mx20m) und Niedrig (30mx30m). Höhere Auflösungen bieten eine bessere Genauigkeit, führen aber auch zu längeren Ladezeiten.
 
   #id08.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -163,8 +165,8 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id08').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 1. Bereich wählen
-         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+         h3 4. Algorithmus wählen
+         p In diesem Abschnitt können Sie den Klassifizierungsalgorithmus, der zur Verarbeitung der Daten genutzt wird, wählen. Nutzen Sie hierfür das Dropdown-Menü und wählen Sie zwischen "Random Forest", "Decision Tree" und "Anderer Algorithmus". 
 
   #id09.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -172,8 +174,17 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id09').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 1. Bereich wählen
-         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+         h3 5. Ausführen
+         p Bitte wählen Sie in diesem Abschnitt die Methode zum Ausführen des Programms aus, die den von Ihnen gewählten ud hochgeladenen Daten entspricht. Nach dem Klick auf die richtige Methode werden Sie zur Ergebnisseite weitergeleitet. Dies kann einen Moment dauern, bitte haben Sie Geduld.
+
+  #id10.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id10').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 Durchführungsschritte
+         p ----- Vor dem finalen Release erscheint an dieser Stelle ein Video, was durch die verschiedenen Schritte führt. -----
 
 
   script(src="/javascripts/application.js")
@@ -227,7 +238,7 @@ block content
     x.className += " w3-show";
     } else {
     x.className = x.className.replace(" w3-show", "");
-    y.textContent = "Andere Methode";
+    y.textContent = "Decision Tree";
     }
     }
 
@@ -238,7 +249,7 @@ block content
     x.className += " w3-show";
     } else {
     x.className = x.className.replace(" w3-show", "");
-    y.textContent = "Andere Methode 2?";
+    y.textContent = "Andere Methode";
     }
     }
 

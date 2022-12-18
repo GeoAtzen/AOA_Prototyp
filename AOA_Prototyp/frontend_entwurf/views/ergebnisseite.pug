@@ -6,72 +6,67 @@ block content
   h1 Area of Applicability - Ergebnisseite
   p Auf der Ergebnisseite werden die Ergebnisse angezeigt, welche auf der Anwendungsseite berechnet wurden. Ihnen ist es hier möglich, sich die Dateien einzeln anzeigen zu lassen und/oder diese zu downloaden.
         img(src= ueblink , alt="")
-        .w3-row
-          br
-          .w3-twothird
+        .row.justify-content-md-left
+          .col-xs-12.col-sm-6.col-lg-8
                 #ergebnismap
-          .w3-third
-          .card.text-dark.p-4.border-success.cardprediction
-                h2 Layer
-                p Wählen Sie die Layer welche Sie angezeigt bekommen wollen mit der Layerkontrollfunktion auf der Karte oben rechts aus.
-                  .card.text-dark.p-4.border-success.cardprediction
-                    
-                    h4 Prediction
-                    p Legende:
-                    br
-                    p Wenn die Seite fertig geladen hat, drücken Sie bitte auf den Knopf um die Prediction auf der Karte anzeigen zu lassen
-                    p Erklärung für Darian: Der button wird benötigt, da die Karte geladen wird, bevor die prediction von plumber fertig ist und dann wird auf der Karte nix angezeigt
-                    p Wäre richtig geil wenn du iwie so ein Ladekreis einbauen könntest wie auf der Anzeigeseite dafür dass man halt weiß wann es fertig ist.
-                    button.btn-success(onclick='loadprediction()') Anzeigen der Prediction
-                    
-                    br
-                    p Laden Sie die Prediction als GeoTIFF herunter:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/R/predictions/prediction.tif', download='prediction.tif')
+          .col-xs-6.col-lg-4
+            h4
+              button.buttonFragezeichen(onclick="document.getElementById('id11').style.display='block'; modal = document.getElementById('id11')" title='Hilfe') ?     
+            .card.text-dark.p-4.border-success.cardprediction
+                h2 Ergebnisse und Download
+                br
+                h4 Herunterladen aller Daten als .zip: 
+                  a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/', download='alldata.zip' style='float: right;')
                   br
-                  .card.text-dark.p-4.border-success.cardprediction
+                  h4 Prediction
+                  #puff5.spinner-border.float-end(role='status' style= 'display:block')
+                  button#buttonAnzeig.btn.btn-success(style= 'display:none;' onclick='loadprediction()') Anzeigen der Prediction
+                  p Legende:
                     
+                  br
+                  p Download der Prediction als GeoTIFF:  
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloads/test.tif', download='prediction.tif' style='float: right;')
+                    br
                     h4 AOA
+                    p Download der AOA:  
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloads/aoa.tif', download='aoa.tif' style='float: right;')
                     br
-                    p Laden Sie die AOA herunter:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/R/predictions/aoa.tif', download='aoa.tif')
-                  br
-                  .card.text-dark.p-4.border-success.cardprediction
-                    
                     h4 Trainingsgebiete
-                    br
-                    p Laden Sie Ihre hochgeladenen Trainingsdaten als .zip herunter:  
-                    p GeoPackage:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingspolygonegpkg.gpkg', download='usertrainingspolygone.gpkg')
-                    p Shapefile:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdatashp.zip', download='usertrainingsdatashp.zip')
-                    p GeoJSON:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingspolygonegjson.geojson', download='usertrainingsdatagjson.geojson')
-                    p Eigene gezeichnete Trainingspolygone als .geojson:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()')
-                  br
-                  .card.text-dark.p-4.border-success.cardprediction
-                    
-                    h4 empfohlene Gebiete zum nachtrainieren
+                    h5 Ihre eigenen Trainingsdaten:  
+                    p Download GeoPackage als .zip:  
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingspolygonegpkg.gpkg', download='usertrainingspolygone.gpkg' style='float: right;')
+                    p Download Shapefile als .zip:  
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdatashp.zip', download='usertrainingsdatashp.zip' style='float: right;')
+                    p Download GeoJSON als .zip:  
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingspolygonegjson.geojson', download='usertrainingsdatagjson.geojson' style='float: right;')
+                    p Download selbstgezeichneter Polygone als .geojson:  
+                      a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()' style='float: right;')
+                    br                 
+                    h4 Gebiete zum Nachtrainieren
                         
+                    br         
+                    h4 Sentinel 2 Bild
+                    p Download des ursprünglichen Satellitenbildes:  
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usersentineldata.tif', download='usersentineldata.tif' style='float: right;')
                   br
-                  .card.text-dark.p-4.border-success.cardprediction
-                    
-                    h4 Sentinel 2 Satelliten Bild
-                    p Laden Sie das ursprüngliche Satelliten Bild herunter:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usersentineldata.tif', download='usersentineldata.tif')
-                  br
-                  br
-                  p Herunterladen aller Daten als .zip:  
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/', download='alldata.zip')
-                  br
-                  p Dieser Button führt zurück zur Ergebnisseite und soll die gezeichneten Polygone als GeoJSON mit den hochgeladenen Polygonen als GeoJSON verbinden um diese erneut zu verwenden
-                  form(method='post', action='/mergegeojson')
-                   button.btn.btn-success() Zurück zur Anwendung für erneute Ausführung!
+                  form(method='post', action='/mergegeojson' style='margin:auto;')
+                    button.btn.btn-success() Zurück zur Anwendungsseite
+                  p(style="font-size: small") Mit Klicken auf diesen Button gelangen sie zur Anwendungsseite zurück und die gezeichneten Polygone werden mit den hochgeladenen Polygonen verbunden um diese erneut zu verwenden.
 
+
+  #id11.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id11').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 Ergebnisse und Download
+         p Auf dieser werden die Ergebnisse angezeigt, welche auf der Anwendungsseite berechnet wurden. Ihnen ist es hier möglich, sich die Dateien einzeln anzeigen zu lassen und/oder diese zu downloaden. Bitte nutzen Sie auch hier die Layerkontrollfunktion der Karte um die von ihnen gewünschte visuelle Darstellung anzuzeigen.
 
   script(src="/javascripts/shp.js")
   script(src='/javascripts/leaflet.shpfile.js')
   script(src="/javascripts/results.js")
+  script(src="/javascripts/application.js")
   
 
   script.
