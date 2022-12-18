@@ -11,6 +11,8 @@ window.onload= function() {
     console.log('ist geladen');
     var anzeig = document.getElementById("puff5");
     anzeig.style.display = "none";
+    var anzeig2 = document.getElementById("buttonAnzeig");
+    anzeig2.style.display ="block";
 }
 // erstellen einer leaflet Karte mit Europa als Startpunkt und mit OSM als Basiskarte
 var map = L.map("anwendungsmap").setView([52, 7.8], 12);
