@@ -64,6 +64,7 @@ block content
                   p Herunterladen aller Daten als .zip:  
                     a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/', download='alldata.zip')
                   br
+                  p Dieser Button führt zurück zur Ergebnisseite und soll die gezeichneten Polygone als GeoJSON mit den hochgeladenen Polygonen als GeoJSON verbinden um diese erneut zu verwenden
                   form(method='post', action='/mergegeojson')
                    button.btn.btn-success() Zurück zur Anwendung für erneute Ausführung!
 
