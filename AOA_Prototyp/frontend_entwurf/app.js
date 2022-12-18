@@ -12,14 +12,14 @@ var geojsonMerge = require('@mapbox/geojson-merge');
 
 var app = express();
 
-app.post( /*
+app.post(
     "/mergegeojson",
     (req, res) => {
-    var mergedStream = geojsonMerge.mergeFeatureCollectionStream([
+    /*var mergedStream = geojsonMerge.mergeFeatureCollectionStream([
     './public/uploads/usertrainingspolygonegjson.geojson',
     './public/uploads/digitalized_usertrainingspolygons.geojson'])
 
-    mergedStream.pipe(process.stdout); */
+    mergedStream.pipe(process.stdout);*/
     res.render("anwendungsseite", { title: "Anwendungsseite" });
     
     }
