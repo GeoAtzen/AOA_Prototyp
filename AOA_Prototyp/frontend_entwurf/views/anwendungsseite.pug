@@ -11,6 +11,8 @@ block content
               #anwendungsmap
 
         .col-lg-6.col-xs-12.mb-3
+          h4
+            button.buttonFragezeichen(onclick="document.getElementById('id10').style.display='block'; modal = document.getElementById('id10')" title='Hilfe') ?     
             .card.text-dark.p-4.border-success.cardanwendungsseite
               h2 Durchführungsschritte
 
@@ -174,6 +176,15 @@ block content
       .w3-container
          h3 5. Ausführen
          p Bitte wählen Sie in diesem Abschnitt die Methode zum Ausführen des Programms aus, die den von Ihnen gewählten ud hochgeladenen Daten entspricht. Nach dem Klick auf die richtige Methode werden Sie zur Ergebnisseite weitergeleitet. Dies kann einen Moment dauern, bitte haben Sie Geduld.
+
+  #id10.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id10').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 Durchführungsschritte
+         p ----- Vor dem finalen Release erscheint an dieser Stelle ein Video, was durch die verschiedenen Schritte führt. -----
 
 
   script(src="/javascripts/application.js")
