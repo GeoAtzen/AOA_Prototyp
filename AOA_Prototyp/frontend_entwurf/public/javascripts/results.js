@@ -83,39 +83,39 @@ map.on(L.Draw.Event.CREATED, function(e) {
 function exportGeoJSON() {
 
     fetch("/uploads/usertrainingspolygonegjson.geojson")
-    .then((response) => response.json())
-    .then((json) => {
-        console.log(json)
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json)
 
-    // test GeoJSON validity by logging the data to the console for chacking it 
-    console.log(drawnItems.toGeoJSON());
-    console.log(JSON.stringify(drawnItems.toGeoJSON()));
+            // test GeoJSON validity by logging the data to the console for chacking it 
+            console.log(drawnItems.toGeoJSON());
+            console.log(JSON.stringify(drawnItems.toGeoJSON()));
 
-    // save drawn Polygons as GeoJSON in drawnpolygonsjson
-    let drawnpolygonsjson = JSON.stringify(drawnItems.toGeoJSON());
-    let useruploadedgeojson = JSON.stringify(json);
-    console.log(useruploadedgeojson)
+            // save drawn Polygons as GeoJSON in drawnpolygonsjson
+            let drawnpolygonsjson = JSON.stringify(drawnItems.toGeoJSON());
+            let useruploadedgeojson = JSON.stringify(json);
+            console.log(useruploadedgeojson)
 
-    // telling javascript to export drawnpolygonsjson as JSON format
-    let dataUri =
-        "data:text/json;charset=utf-8," + encodeURIComponent(useruploadedgeojson /* geht nicht da invalides geojson + drawnpolygonsjson */ );
+            // telling javascript to export drawnpolygonsjson as JSON format
+            let dataUri =
+                "data:text/json;charset=utf-8," + encodeURIComponent(drawnpolygonsjson /* geht nicht da invalides geojson + useruploadedgeojson */ );
 
-    // declaring the export name
-    let fileexportname = "digitalized_usertrainingspolygons" + ".geojson";
+            // declaring the export name
+            let fileexportname = "digitalized_usertrainingspolygons" + ".geojson";
 
-    // download via DOM
-    let linkElement = document.createElement("a");
-    linkElement.setAttribute("href", dataUri);
-    linkElement.setAttribute("download", fileexportname);
+            // download via DOM
+            let linkElement = document.createElement("a");
+            linkElement.setAttribute("href", dataUri);
+            linkElement.setAttribute("download", fileexportname);
 
-    // if polygon is empty give out error
-    let emptypolygon = '{"type":"FeatureCollection","features":[]}';
-    if (drawnpolygonsjson == emptypolygon) {
-        alert("Sie haben noch keine Polygone gezeichnet!");
-    } else {
-        linkElement.click();
-    }
-})
+            // if polygon is empty give out error
+            let emptypolygon = '{"type":"FeatureCollection","features":[]}';
+            if (drawnpolygonsjson == emptypolygon) {
+                alert("Sie haben noch keine Polygone gezeichnet!");
+            } else {
+                linkElement.click();
+            }
+        })
 }
 
 // Anzeigen der hochgeladenen Shapefile
