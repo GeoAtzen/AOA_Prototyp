@@ -17,7 +17,7 @@ services:
     container_name: backend
     build: 
       dockerfile: ./public/R/Dockerfile
-    image: jonthnm/backendentwurf
+    image: jonthnm/testbackend
     volumes:
       - "/backend_entwurf/:/folder/in/container"
       - "/public/uploads/:/folder/in/container"
