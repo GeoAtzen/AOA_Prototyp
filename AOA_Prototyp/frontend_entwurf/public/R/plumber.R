@@ -8,6 +8,12 @@ library(tiff)
 library(sf)
 library(randomForest)
 library(geojsonR)
+library(doParallel)
+library(parallel)
+library(viridis)
+library(latticeExtra)
+library(tmap)
+library(CAST)
 
 
 ################################################################################
