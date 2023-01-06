@@ -5,7 +5,6 @@ block content
   br
   h1 Area of Applicability - Ergebnisseite
   p Auf der Ergebnisseite werden die Ergebnisse angezeigt, welche auf der Anwendungsseite berechnet wurden. Ihnen ist es hier möglich, sich die Dateien einzeln anzeigen zu lassen und/oder diese zu downloaden.
-        img(src= ueblink , alt="")
         .row.justify-content-md-left
           .col-xs-12.col-sm-6.col-lg-8
                 #ergebnismap
@@ -21,8 +20,7 @@ block content
                   h4 Prediction
                   #puff5.spinner-border.float-end(role='status' style= 'display:block')
                   button#buttonAnzeig.btn.btn-success(style= 'display:none;' onclick='loadprediction()') Anzeigen der Prediction
-                  p Legende:
-                    
+                  img(src= ueblink, alt='', width='100%', height="100%")
                   br
                   p Download der Prediction als GeoTIFF:  
                     a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/R/predictions/prediction.tif', download='prediction.tif' style='float: right;')

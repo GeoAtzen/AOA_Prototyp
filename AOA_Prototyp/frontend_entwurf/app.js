@@ -45,7 +45,7 @@ app.post(
     (req, res) => {
 
         const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "public/uploads/usersentineldata.tif");
+        const targetPath = path.join(__dirname, "/public/uploads/usersentineldata.tif");
 
         if (path.extname(req.file.originalname).toLowerCase() === ".tif") {
             fs.rename(tempPath, targetPath, err => {
@@ -69,8 +69,7 @@ app.post(
     }
 );
 
-// Uploading data handler for trainingsdata here (gpkg as .zip)
-
+// Uploading data handler for trainingsdata here
 app.post(
     "/uploadtrainingsdata",
     upload.single("file"),
@@ -135,34 +134,6 @@ app.post(
     }
 );
 
-// Uploading data handler for trainingsdata as geojson (.json)
-app.post(
-    "/uploadtrainingsdatagjson",
-    upload.single("file"),
-    (req, res) => {
-        const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "public/uploads/usertrainingspolygonegjson.geojson");
-
-        if (path.extname(req.file.originalname).toLowerCase() === ".geojson") {
-            fs.rename(tempPath, targetPath, err => {
-                if (err) return handleError(err, res);
-
-                res
-                    .status(200)
-                    .render("fileupload", { title: "Fileupload" })
-            });
-        } else {
-            fs.unlink(tempPath, err => {
-                if (err) return handleError(err, res);
-
-                res
-                    .status(403)
-                    .render("fileuploaderror", { title: "Uploadfehler" });
-            });
-        }
-    }
-);
-
 
 // Uploading data handler for trained model here
 app.post(
@@ -172,7 +143,7 @@ app.post(
         const tempPath = req.file.path;
         const targetPath = path.join(__dirname, "public/uploads/usertrainedmodel");
 
-        if (path.extname(req.file.originalname).toLowerCase() === "") {
+        if (path.extname(req.file.originalname).toLowerCase() === ".rds") {
             fs.rename(tempPath, targetPath, err => {
                 if (err) return handleError(err, res);
 
