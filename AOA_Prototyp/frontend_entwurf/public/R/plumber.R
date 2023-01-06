@@ -82,7 +82,9 @@ getLegend <- function(prediction_terra, colors){
   
   Legend <- get_legend(legendPlot)
   
+  png(filename="your/file/location/name.png")
   plot(Legend)
+  dev.off()
   
 }
 
