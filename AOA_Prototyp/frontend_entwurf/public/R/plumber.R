@@ -53,14 +53,81 @@ trainModel <- function(Referenzdaten){
 calculatePrediction <- function(sentinel, model){
   prediction <- predict(as(sentinel,"Raster"),model)
   prediction_terra <- as(prediction,"SpatRaster")
-  
-  coltb <- data.frame(t(col2rgb(rainbow(12, end=.9), alpha=TRUE)))
-  coltab(prediction_terra) <- coltb
+  prediction_terra <- setColor(prediction_terra)
   
   crs(prediction_terra) <- "EPSG:32632"
+  
   writeRaster(prediction_terra, "./predictions/prediction.tif", overwrite = TRUE)
   plot(prediction_terra)
 }
+
+#################################################################################
+#################################################################################
+getLegend <- function(prediction_terra, colors){
+  
+  colors <- colors[-1]
+  
+  legendPlot <- ggplot()+
+    geom_spatraster(data=prediction_terra)+
+    scale_fill_manual(values = colors)
+  
+  Legend <- get_legend(legendPlot)
+  
+  plot(Legend)
+  
+}
+
+setColor <- function(prediction_terra){
+  
+  list <- as.data.frame(levels(prediction_terra))
+  colors <- c("#000000")
+  for(i in 1:nrow(list)){
+   
+    switch(list[i,2],
+           "Acker"={
+             colors <- append(colors, "#A0522D")
+           },
+           "Acker_bepflanzt"={
+             colors <- append(colors, "#98FB98")
+           },
+           "Binnengewaesser"={
+             colors <- append(colors, "#7FFFd4")
+           },
+           "Industrie"={
+             colors <- append(colors, "#C0C0C0")
+           },
+           "Innenstadt"={
+             colors <- append(colors, "#F5F5F5")
+           },
+           "Kunstrasen"={
+             colors <- append(colors, "#00FF00")
+           },
+           "Laubwald"={
+             colors <- append(colors, "#228B22")
+           },
+           "Mischwald"={
+             colors <- append(colors, "#006400")
+           },
+           "Parklandschaft"={
+             colors <- append(colors, "#696969")
+           },
+           "Siedlung"={
+             colors <- append(colors, "#B22222")
+           },
+           "Versiegelt"={
+             colors <- append(colors, "#000000")
+           },
+           "Wiese"={
+             colors <- append(colors, "#00FF00")
+           },
+           colors <- append(colors, "#000000") 
+    )
+  }
+  coltab(prediction_terra) <- colors
+  getLegend(prediction_terra, colors)
+  return(prediction_terra)
+}
+
 
 #* Calculates LULC Classification
 #* @serializer png
