@@ -10,13 +10,13 @@ library(randomForest)
 library(cowplot)
 library(tidyterra)
 library(CAST)
+library(viridis)
+library(parallel)
+library(doParallel)
 #library(geojsonR)
-#library(doParallel)
-#library(parallel)
-#library(viridis)
 #library(latticeExtra)
 #library(tmap)
-#library(CAST)
+
 
 
 ######################################################################################################################################################################
@@ -65,12 +65,17 @@ calculatePrediction <- function(sentinel, model){
   writeRaster(prediction_terra, "./predictions/prediction.tif", overwrite = TRUE)
   plot(prediction_terra)
   
+  
+  # Zum schneller machen
   cl <- makeCluster(4) 
-  registerDoParallel(cl)  
-  AOA <- aoa(sentinel_resampled,model,cl=cl) 
+  registerDoParallel(cl) 
+  
+  # Berechnung AOA (dauert sehr lange)
+  AOA <- aoa(sentinel,model,cl=cl) 
 
+  # Grau ist außerhalb von AOA
   spplot(prediction, col.regions=viridis(100),main="prediction for AOA")
-    spplot(AOA$AOA, col.regions=rocket(100))
+    spplot(AOA$AOA, col.regions=c("grey", "transparent"))
 
 }
 
