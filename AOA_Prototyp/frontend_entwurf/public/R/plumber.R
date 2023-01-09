@@ -69,7 +69,7 @@ calculatePrediction <- function(sentinel, model){
   registerDoParallel(cl)  # calculate clusters in parallel to speed up the process
   AOA <- aoa(sentinel_resampled,model,cl=cl)  # estimate AOA
 
-  spplot(prediciton, col.regions=viridis(100),main="prediction for AOA")
+  spplot(prediction, col.regions=viridis(100),main="prediction for AOA")
     spplot(AOA$AOA, col.regions=rocket(100))
 
 }
