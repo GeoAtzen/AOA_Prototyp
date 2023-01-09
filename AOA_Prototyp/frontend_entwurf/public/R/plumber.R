@@ -65,9 +65,9 @@ calculatePrediction <- function(sentinel, model){
   writeRaster(prediction_terra, "./predictions/prediction.tif", overwrite = TRUE)
   plot(prediction_terra)
   
-  cl <- makeCluster(4) # devide data into 4 clusters
-  registerDoParallel(cl)  # calculate clusters in parallel to speed up the process
-  AOA <- aoa(sentinel_resampled,model,cl=cl)  # estimate AOA
+  cl <- makeCluster(4) 
+  registerDoParallel(cl)  
+  AOA <- aoa(sentinel_resampled,model,cl=cl) 
 
   spplot(prediction, col.regions=viridis(100),main="prediction for AOA")
     spplot(AOA$AOA, col.regions=rocket(100))
