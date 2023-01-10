@@ -23,11 +23,13 @@ block content
                   img(src= ueblink, alt='', width='100%', height="100%")
                   br
                   p Download der Prediction als GeoTIFF:  
-                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/R/predictions/prediction.tif', download='prediction.tif' style='float: right;')
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/R/data/prediction.tif', download='prediction.tif' style='float: right;')
                     br
                     h4 AOA
+                    
+                    button#buttonAnzeig.btn.btn-success(onclick='loadaoa()') Anzeigen der AOA
                     p Download der AOA:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloads/aoa.tif', download='aoa.tif' style='float: right;')
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/R/data/aoa.tif', download='aoa.tif' style='float: right;')
                     br
                     h4 Trainingsgebiete
                     h5 Ihre eigenen Trainingsdaten:  

@@ -12,17 +12,19 @@ var geojsonMerge = require('@mapbox/geojson-merge');
 
 var app = express();
 
+// Zurück zur Anwendungsseite und im optimalfall mergen der beiden geojson FeatureCollections
 app.post(
     "/mergegeojson",
     (req, res) => {
+        /*
         var mergedStream = geojsonMerge.mergeFeatureCollectionStream([
             './public/uploads/usertrainingspolygonegjson.geojson',
-            './public/uploads/digitalized_usertrainingspolygons.geojson'
+            './public/uploads/usertrainingspolygonegjson.geojson'
         ])
-
-        mergedStream.pipe(process.stdout);
+        //console.log(mergedStream)
+        //mergedStream.pipe(process.stdout); 
+        */
         res.render("anwendungsseite", { title: "Anwendungsseite" });
-
     }
 );
 
@@ -69,8 +71,7 @@ app.post(
     }
 );
 
-// Uploading data handler for trainingsdata here (gpkg as .zip)
-
+// Uploading data handler for trainingsdata here
 app.post(
     "/uploadtrainingsdata",
     upload.single("file"),
@@ -135,34 +136,6 @@ app.post(
     }
 );
 
-// Uploading data handler for trainingsdata as geojson (.json)
-app.post(
-    "/uploadtrainingsdatagjson",
-    upload.single("file"),
-    (req, res) => {
-        const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "public/uploads/usertrainingspolygonegjson.geojson");
-
-        if (path.extname(req.file.originalname).toLowerCase() === ".geojson") {
-            fs.rename(tempPath, targetPath, err => {
-                if (err) return handleError(err, res);
-
-                res
-                    .status(200)
-                    .render("fileupload", { title: "Fileupload" })
-            });
-        } else {
-            fs.unlink(tempPath, err => {
-                if (err) return handleError(err, res);
-
-                res
-                    .status(403)
-                    .render("fileuploaderror", { title: "Uploadfehler" });
-            });
-        }
-    }
-);
-
 
 // Uploading data handler for trained model here
 app.post(
@@ -170,9 +143,9 @@ app.post(
     upload.single("file"),
     (req, res) => {
         const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "public/uploads/usertrainedmodel");
+        const targetPath = path.join(__dirname, "public/uploads/usertrainedmodel.rds");
 
-        if (path.extname(req.file.originalname).toLowerCase() === "") {
+        if (path.extname(req.file.originalname).toLowerCase() === ".rds") {
             fs.rename(tempPath, targetPath, err => {
                 if (err) return handleError(err, res);
 
