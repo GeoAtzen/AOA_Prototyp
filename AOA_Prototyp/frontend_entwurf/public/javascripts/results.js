@@ -269,7 +269,7 @@ var geodrawnpolygonsjson = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjs
 });
 
 // hinzufügen des .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
-fetch("http://localhost:3000/uploads/usersentineldata.tif")
+fetch("/uploads/usersentineldata.tif")
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
         parseGeoraster(arrayBuffer).then((georaster) => {
@@ -316,8 +316,7 @@ fetch("http://localhost:3000/uploads/usersentineldata.tif")
 
 // hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadprediction() {
-    // link ändern
-    fetch('http://backendgeoatzen:8000/data/predictionlegende.png')
+    fetch('/R/data/predictionlegende.png')
     	.then(function(data){
         return data.blob();
       })
@@ -325,8 +324,7 @@ function loadprediction() {
       	var legende = URL.createObjectURL(img);
         $('img').attr('src', legende);
       })
-    // link ändern
-    fetch("http://backendgeoatzen:8000/usr/src/app/data/prediction.tif")
+    fetch("/R/data/prediction.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
             parseGeoraster(arrayBuffer).then((georaster) => {
