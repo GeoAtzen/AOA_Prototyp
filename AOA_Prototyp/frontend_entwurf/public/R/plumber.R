@@ -75,8 +75,8 @@ calculatePrediction <- function(sentinel, model){
   AOA <- aoa(sentinel,model,cl=cl)
 
   # Grau ist außerhalb von AOA
-  spplot(prediction, col.regions=viridis(100),main="prediction for AOA")
-   spplot(AOA$AOA, col.regions=c("grey", "transparent"))
+  spplot(prediction_terra, col.regions=viridis(100),main="prediction for AOA")
+    spplot(AOA$AOA, col.regions=c("grey", "transparent"))
 
 }
 
