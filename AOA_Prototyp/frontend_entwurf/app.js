@@ -141,7 +141,7 @@ app.post(
     upload.single("file"),
     (req, res) => {
         const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "public/uploads/usertrainedmodel");
+        const targetPath = path.join(__dirname, "public/uploads/usertrainedmodel.rds");
 
         if (path.extname(req.file.originalname).toLowerCase() === ".rds") {
             fs.rename(tempPath, targetPath, err => {

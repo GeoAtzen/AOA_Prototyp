@@ -67,17 +67,16 @@ calculatePrediction <- function(sentinel, model){
   writeRaster(prediction_terra, "./predictions/prediction.tif", overwrite = TRUE)
   plot(prediction_terra)
   
-  
   # Zum schneller machen
   cl <- makeCluster(4) 
   registerDoParallel(cl) 
   
   # Berechnung AOA (dauert sehr lange)
-  AOA <- aoa(sentinel,model,cl=cl) 
+  AOA <- aoa(sentinel,model,cl=cl)
 
   # Grau ist außerhalb von AOA
   spplot(prediction, col.regions=viridis(100),main="prediction for AOA")
-    spplot(AOA$AOA, col.regions=c("grey", "transparent"))
+   spplot(AOA$AOA, col.regions=c("grey", "transparent"))
 
 }
 
@@ -200,7 +199,7 @@ function(){
   httr::GET(url,httr::write_disk(path=geotiff_file))
   sentinel <- rast(geotiff_file)
   
-  model_download <- ("http://localhost:3000/uploads/usertrainedmodel")
+  model_download <- ("http://localhost:3000/uploads/usertrainedmodel.rds")
   model <- readRDS(url(model_download))
   
   calculatePrediction(sentinel, model)
