@@ -16,7 +16,13 @@ library(doParallel)
 library(tmap)
 library(sp)
 library(geojson)
-#library(latticeExtra)
+library(kernlab)
+library(jsonlite)
+library(lattice)
+library(latticeExtra)
+library(Orcs)
+library(rgeos)
+library(rjson)
 #library(tmap)
 
 
@@ -90,17 +96,55 @@ calculatePrediction <- function(sentinel, model){
   #writeRaster(DIPlot, "./data/DI.tif", overwrite = TRUE)
   #print("Fertig mit DI")
 
-  AOA_only_outside <- reclassify(AOA$AOA, cbind(1, NA))
-  
+  # Further trainingsareas
+
+  # 1: Geht nicht da reclassify nicht geht, da kein S4 Typ?? (checke ich nicht aber sagt stackoverflow)
+  # Fehler: 
+  #<simpleError in (function (classes, fdef, mtable) {    methods <- .findInheritedMethods(classes, fdef, mtable)    
+  #if (length(methods) == 1L)         
+  #return(methods[[1L]])    
+  #else if (length(methods) == 0L) {        
+  #cnames <- paste0("\"", vapply(classes, as.character,             ""), 
+  #"\"", collapse = ", ")        
+  #stop(gettextf("unable to find an inherited method for function %s for signature %s",             
+  #sQuote(fdef@generic), sQuote(cnames)), domain = NA)    }    
+  #else stop("Internal error in finding inherited methods; didn't return a unique method",         
+  #domain = NA)})(list("aoa"), new("standardGeneric", .Data = function (x, rcl,     ...) 
+  #standardGeneric("reclassify"), generic = structure("reclassify", package = "raster"),     
+  #package = "raster", group = list(), valueClass = character(0),     signature = c("x", "rcl"), 
+  #default = NULL, skeleton = (function (x,         rcl, ...)     
+  #stop(gettextf("invalid call in method dispatch to '%s' (no default method)",         
+  #"reclassify"), domain = NA))(x, rcl, ...)), 
+  #<environment>): kann keine vererbte Methode finden für Funktion ‘reclassify’ für Signatur ‘"aoa"’>
+
+  #AOA_only_outside <- reclassify(AOA, cbind(1, NA))
+
   # get new sampling locations within areas outside AOA (method = random)
-  samples <- sampleRandom(AOA_only_outside, size=20, sp=TRUE)
+  #samples <- sampleRandom(AOA_only_outside, size=20, sp=TRUE)
   
   # convert sampling locations to geojson
-  samples_geojson <- as.geojson(samples)
-  write(samples_geojson, "./data/samplingLocationsOutput.geojson")
+  #samples_geojson <- as.geojson(samples)
+  #write(samples_geojson, "./data/samplingLocationsOutput.geojson")
+  
+
+  # 2: geht nicht
+  # Fehler:
+  # <simpleError in calculatePrediction(sentinel, model): no slot of name "data" for this object of class "SpatRaster">
+
+  # Calculate a MultiPolygon from the AOA, which can be seen as the area where the user needs to find further training data
+  #x <- AOA$AOA@data@values
+  #print("test")
+  #furtherTrainAreas <- rasterToPolygons(AOA$AOA, fun = function(x) {x == 0}, dissolve = TRUE)
+  #furtherTrainAreas <- spTransform(furtherTrainAreas, CRS("+init=epsg:32632"))
+    
+  #furtherTrainAreas <- spsample(furtherTrainAreas, n = 20, type = "random")
+  
+  # Saves the calculated furtherTrainAreas to a GeoJSON-file
+  #furtherTrainAreasGeoJSON <- as.geojson(furtherTrainAreas)
+  #geo_write(furtherTrainAreasGeoJSON, "R/data/furtherTrainAreas.geojson")
+  #print("Fertig mit vorschlägen")
 
 }
-
 ######################################################################################################################################################################
 ######################################################################################################################################################################
 ######################################################################################################################################################################
