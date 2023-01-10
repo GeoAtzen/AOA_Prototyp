@@ -15,7 +15,7 @@ library(parallel)
 library(doParallel)
 library(tmap)
 library(sp)
-#library(geojsonR)
+library(geojson)
 #library(latticeExtra)
 #library(tmap)
 
@@ -64,7 +64,7 @@ calculatePrediction <- function(sentinel, model){
   
   crs(prediction_terra) <- "EPSG:32632"
   
-  writeRaster(prediction_terra, "./predictions/prediction.tif", overwrite = TRUE)
+  writeRaster(prediction_terra, "./data/prediction.tif", overwrite = TRUE)
   plot(prediction_terra)
   
   # Zum schneller machen
@@ -74,9 +74,30 @@ calculatePrediction <- function(sentinel, model){
   # Berechnung AOA (dauert sehr lange)
   AOA <- aoa(sentinel,model,cl=cl)
 
+  #crs(AOA$AOA) <- "EPSG:32632"
+
   # Grau ist außerhalb von AOA
-  spplot(prediction_terra, col.regions=viridis(100),main="prediction for AOA")
-    spplot(AOA$AOA, col.regions=c("grey", "transparent"))
+  #spplot(prediction_terra, col.regions=viridis(100),main="prediction for AOA")
+  #  spplot(AOA$AOA, col.regions=c("grey", "transparent"))
+
+  AOAPlot <- AOA$AOA
+  crs(AOAPlot) <- "EPSG:32632"
+  writeRaster(AOAPlot, "./data/aoa.tif", overwrite = TRUE)
+  print("Fertig mit AOA")
+
+  #DIPlot <- AOA$DI
+  #crs(DIPlot) <- "EPSG:32632"
+  #writeRaster(DIPlot, "./data/DI.tif", overwrite = TRUE)
+  #print("Fertig mit DI")
+
+  AOA_only_outside <- reclassify(AOA$AOA, cbind(1, NA))
+  
+  # get new sampling locations within areas outside AOA (method = random)
+  samples <- sampleRandom(AOA_only_outside, size=20, sp=TRUE)
+  
+  # convert sampling locations to geojson
+  samples_geojson <- as.geojson(samples)
+  write(samples_geojson, "./data/samplingLocationsOutput.geojson")
 
 }
 
@@ -97,7 +118,7 @@ getLegend <- function(prediction_terra, colors){
   
   Legend <- get_legend(legendPlot)
   
-  png(filename="./predictions/predictionlegende.png")
+  png(filename="./data/predictionlegende.png")
   plot(Legend)
   dev.off()
   

@@ -316,7 +316,7 @@ fetch("/uploads/usersentineldata.tif")
 
 // hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadprediction() {
-    fetch('/R/predictions/predictionlegende.png')
+    fetch('/R/data/predictionlegende.png')
     	.then(function(data){
         return data.blob();
       })
@@ -324,7 +324,7 @@ function loadprediction() {
       	var legende = URL.createObjectURL(img);
         $('img').attr('src', legende);
       })
-    fetch("/R/predictions/prediction.tif")
+    fetch("/R/data/prediction.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
             parseGeoraster(arrayBuffer).then((georaster) => {
@@ -345,6 +345,68 @@ function loadprediction() {
             });
         });
 }
+
+function loadaoa() {
+    fetch("/R/data/aoa.tif")
+        .then((response) => response.arrayBuffer())
+        .then((arrayBuffer) => {
+            parseGeoraster(arrayBuffer).then((georaster) => {
+                console.log("georaster:", georaster);
+
+                var aoageotiffdata = new GeoRasterLayer({
+                    georaster: georaster,
+                    //pixelValuesToColorFn,
+                    resolution: 512
+                });
+                // direktes hinzufügen zur Karte
+                aoageotiffdata.addTo(map);
+
+                map.fitBounds(aoageotiffdata.getBounds());
+
+                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
+                layerControl.addOverlay(aoageotiffdata, 'AOA');
+            });
+        });
+}
+
+/*
+function loadDI() {
+    fetch("/R/data/DI.tif")
+        .then((response) => response.arrayBuffer())
+        .then((arrayBuffer) => {
+            parseGeoraster(arrayBuffer).then((georaster) => {
+                console.log("georaster:", georaster);
+
+                var aoageotiffdata = new GeoRasterLayer({
+                    georaster: georaster,
+                    //pixelValuesToColorFn,
+                    resolution: 512
+                });
+                // direktes hinzufügen zur Karte
+                aoageotiffdata.addTo(map);
+
+                map.fitBounds(aoageotiffdata.getBounds());
+
+                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
+                layerControl.addOverlay(aoageotiffdata, 'AOA');
+            });
+        });
+}
+
+*/
+
+// add GeoJSON to map
+var geodrawnpolygonsjson = new L.GeoJSON.AJAX("/R/data/samplingLocationsOutput.geojson", {
+    onEachFeature: function(feature, layer) {
+        if (feature.properties) {
+            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                return k + ": " + feature.properties[k];
+            }).join("<br />"), {
+                maxHeight: 200
+            });
+        }
+    }
+});
 // Layer Control
 var baseMaps = {
     "OpenStreetMap": osm,
