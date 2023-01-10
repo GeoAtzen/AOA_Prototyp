@@ -1,29 +1,28 @@
 version: "3"
 services:
   frontend:
-    container_name: frontend
     build: 
       dockerfile: ./Dockerfile
-    image: jonthnm/frontend
+    image: jonthnm/frontendgeosoft
+    # schreibt alle Daten die in Docker im Workingdirectory gespeichert werden (auch?) lokal in den ordner /public/uploads
     volumes:
-      - "/public/uploads/:/folder/in/container"
-      - "/public/downloads/:/folder/in/container"
+     - ./public/uploads:/usr/src/app/data
     ports:
       - 3000:3000 # forward webserver on 3000-http port
+    container_name: frontend
     depends_on:
-      - backend 
-      
-  backend:
-    container_name: backend
+      - backendgeoatzen
+
+#imagename://servicename:zweiterPort
+
+  backendgeoatzen:
     build: 
-      dockerfile: ./public/R/Dockerfile
-    image: jonthnm/testbackend
+      dockerfile: ./backend/Dockerfile
+    image: jonthnm/backendgeosoft
+    # schreibt alle Daten die in Docker im Workingdirectory gespeichert werden (auch?) lokal in den ordner /public/uploads
     volumes:
-      - "/backend_entwurf/:/folder/in/container"
-      - "/public/uploads/:/folder/in/container"
-      - "/public/downloads/:/folder/in/container"
-      - "./public/uploads/:/folder/in/container"
-      - "./public/downloads/:/folder/in/container"
-      
+     - ./public/uploads:/usr/src/app/data
+    container_name: backendgeoatzen
     ports:
       - 8000:8000
+

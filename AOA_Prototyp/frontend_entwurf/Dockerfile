@@ -1,21 +1,25 @@
+# Create a layer from the node:19 Docker image
 FROM node:19
 
-# Create app directory
+# Create an application directory
+#RUN mkdir -p /app
+
+# Set /app directory as working directory
 WORKDIR /usr/src/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-
-COPY /public/uploads/ ./
-COPY package*.json ./
+# Install required frontend dependencies
+COPY package*.json /usr/src/app
 
 RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
 
 # Bundle app source
-COPY . .
+#COPY /public/backend/ ./
+#COPY /public/backend/predictions/ ./
+#COPY /public/backend/ ./
+#COPY /public/backend/predictions/ ./
+COPY . /usr/src/app
 
 EXPOSE 3000
 CMD [ "npm", "start" ]

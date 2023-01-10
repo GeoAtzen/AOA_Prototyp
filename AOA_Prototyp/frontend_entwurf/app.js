@@ -45,7 +45,7 @@ app.post(
     (req, res) => {
 
         const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "public/uploads/usersentineldata.tif");
+        const targetPath = path.join(__dirname, "/public/uploads/usersentineldata.tif");
 
         if (path.extname(req.file.originalname).toLowerCase() === ".tif") {
             fs.rename(tempPath, targetPath, err => {

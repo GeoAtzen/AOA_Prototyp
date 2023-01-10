@@ -1,6 +1,21 @@
 var express = require("express");
 var router = express.Router();
 const decompress = require("decompress");
+const multer = require("multer");
+const fs = require("fs");
+
+// error handler
+const handleError = (err, res) => {
+    res
+        .status(500)
+        .contentType("text/plain")
+        .end("Oops! Something went wrong!");
+};
+
+const upload = multer({
+    dest: "/public"
+        // you might also want to set some limits: https://github.com/expressjs/multer#limits
+});
 
 /**
  * GET Befehl für die Messungen ansehen Seite

@@ -1,15 +1,24 @@
-FROM rocker/r-ver:4.0.2
+FROM rstudio/plumber
+
+WORKDIR /usr/src/app
 
 # install the linux libraries needed for plumber
-RUN apt-get -y update && apt-get install -y \
+RUN apt-get update -qq && apt-get install -y libcurl4-openssl-dev \
+    libssl-dev \
+    libjq-dev \
+    libprotobuf-dev \
+    protobuf-compiler \
+    make \
+    libgeos-dev \
     libudunits2-dev \
     libgdal-dev \
-    libgeos-dev \
+    gdal-bin \
     libproj-dev \
-    libmysqlclient-dev 
+    libv8-dev
 
 RUN apt-get install -y --no-install-recommends libxt6
 
+RUN R -e "install.packages(c('randomForest', 'terra', 'caret', 'raster', 'RCurl', 'tiff', 'sf','plumber','cowplot','tidyterra'))"
 RUN R -e "install.packages('plumber', dependencies=TRUE)"
 RUN R -e "install.packages('terra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('caret', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
@@ -18,6 +27,8 @@ RUN R -e "install.packages('RCurl', dependencies=TRUE, repos='https://cran.uni-m
 RUN R -e "install.packages('tiff', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('sf', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('randomForest', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+RUN R -e "install.packages('cowplot', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+RUN R -e "install.packages('tidyterra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 
 #RUN R -e "install.packages('geojsonR', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 #RUN R -e "install.packages('doParallel', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
@@ -27,26 +38,25 @@ RUN R -e "install.packages('randomForest', dependencies=TRUE, repos='https://cra
 #RUN R -e "install.packages('tmap', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 #RUN R -e "install.packages('CAST', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 
-# create the application folder
-#RUN mkdir -p ~/application
+# Create an application directory
+#RUN mkdir -p /R
 
-# copy everything from the current directory into the container
-#COPY "/" "application/"
-#WORKDIR "application/" 
-WORKDIR /usr/src/app
+# Set /R directory as working directory
+#WORKDIR /app
 
-# Copy app code source from our local folder into the docker /usr/src/app working directory
-COPY ./public/uploads/ ./
-COPY ./public/R/plumber.R ./
-COPY ./public/R/startAPI.R ./
+# Copy app code source from our local folder into the docker /R working directory
+COPY backend/ /usr/src/app
+COPY backend/predictions/ /usr/src/app
+COPY . .
+COPY . /usr/src/app
 
 # install plumber
 #RUN R -e "install.packages(c('randomForest', 'terra', 'caret', 'raster', 'RCurl', 'tiff', 'sf','plumber'))"
 
-# open port 80 to traffic
+# open port 8000 to traffic
 EXPOSE 8000
 
 # when the container starts, start the main.R script
-ENTRYPOINT ["Rscript", "startAPI.R"]
+#ENTRYPOINT ["Rscript", "startAPI.R"]
 
-# CMD ["startAPI.R"]
+CMD ["plumber.R"]
