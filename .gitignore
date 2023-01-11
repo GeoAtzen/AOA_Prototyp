@@ -49,3 +49,4 @@ AOA_Prototyp/frontend_entwurf/public/R/data/prediction.tif
 AOA_Prototyp/frontend_entwurf/public/R/data/predictionlegende.png
 .gitignore
 AOA_Prototyp/Beispieldaten/.Rhistory
+AOA_Prototyp/frontend_entwurf/public/R/data/prediction.tif.aux.xml
