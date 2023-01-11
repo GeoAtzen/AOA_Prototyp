@@ -10,9 +10,13 @@ window.onclick = function(event) {
 window.onload= function() {
     console.log('ist geladen');
     var anzeig = document.getElementById("puff5");
+    var anzeig2 = document.getElementById("puff6");
     anzeig.style.display = "none";
-    var anzeig2 = document.getElementById("buttonAnzeig");
-    anzeig2.style.display ="block";
+    anzeig2.style.display = "none";
+    var anzeig3 = document.getElementById("buttonAnzeig");
+    anzeig3.style.display ="block";
+    var anzeig4 = document.getElementById("buttonAnzeigAOA")
+    anzeig4.style.display ="block";
 }
 // erstellen einer leaflet Karte mit Europa als Startpunkt und mit OSM als Basiskarte
 var map = L.map("anwendungsmap").setView([52, 7.8], 12);
