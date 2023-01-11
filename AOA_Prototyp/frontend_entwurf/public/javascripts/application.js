@@ -2,23 +2,23 @@ var modal;
 
 window.onclick = function(event) {
     if (event.target == modal) {
-    modal.style.display = "none";
+        modal.style.display = "none";
     }
-    }
-
-
-window.onload= function() {
-    console.log('ist geladen');
-    var anzeig = document.getElementById("puff5");
-    var anzeig2 = document.getElementById("puff6");
-    anzeig.style.display = "none";
-    anzeig2.style.display = "none";
-    var anzeig3 = document.getElementById("buttonAnzeig");
-    anzeig3.style.display ="block";
-    var anzeig4 = document.getElementById("buttonAnzeigAOA")
-    anzeig4.style.display ="block";
 }
-// erstellen einer leaflet Karte mit Europa als Startpunkt und mit OSM als Basiskarte
+
+
+window.onload = function() {
+        console.log('ist geladen');
+        var anzeig = document.getElementById("puff5");
+        var anzeig2 = document.getElementById("puff6");
+        anzeig.style.display = "none";
+        anzeig2.style.display = "none";
+        var anzeig3 = document.getElementById("buttonAnzeig");
+        anzeig3.style.display = "block";
+        var anzeig4 = document.getElementById("buttonAnzeigAOA")
+        anzeig4.style.display = "block";
+    }
+    // erstellen einer leaflet Karte mit Europa als Startpunkt und mit OSM als Basiskarte
 var map = L.map("anwendungsmap").setView([52, 7.8], 12);
 
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -272,4 +272,3 @@ var overlayMaps = {
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
-

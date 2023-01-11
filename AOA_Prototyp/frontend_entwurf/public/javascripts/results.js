@@ -220,7 +220,7 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
 });
 
 // add GeoJSON to map
-var geodrawnpolygonsjson = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojson", {
+var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -317,13 +317,13 @@ fetch("/uploads/usersentineldata.tif")
 // hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadprediction() {
     fetch('/R/data/predictionlegende.png')
-    	.then(function(data){
-        return data.blob();
-      })
-      .then(function(img){
-      	var legende = URL.createObjectURL(img);
-        $('img').attr('src', legende);
-      })
+        .then(function(data) {
+            return data.blob();
+        })
+        .then(function(img) {
+            var legende = URL.createObjectURL(img);
+            $('img').attr('src', legende);
+        })
     fetch("/R/data/prediction.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
@@ -396,7 +396,7 @@ function loadDI() {
 */
 
 // add GeoJSON to map
-var geodrawnpolygonsjson = new L.GeoJSON.AJAX("/R/data/samplingLocationsOutput.geojson", {
+var samplinglocations = new L.GeoJSON.AJAX("/R/data/samplingLocationsOutput.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -416,7 +416,7 @@ var baseMaps = {
 var overlayMaps = {
     "Shapefile": usershapefile,
     "Geopackage": usergeopackage,
-    "GeoJSON": geodrawnpolygonsjson,
+    "GeoJSON": geojsondata,
     "Eigene Polygone": drawnItems
 };
 
