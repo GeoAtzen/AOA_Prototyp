@@ -87,6 +87,11 @@ calculatePrediction <- function(sentinel, model){
   #  spplot(AOA$AOA, col.regions=c("grey", "transparent"))
 
   AOAPlot <- AOA$AOA
+  cellValue <- c(1, 0)
+  colorV <- c("#d3d3d3", rgb(0,0,0,0))
+  colorD <- data.frame(cellValue = cellValue, color = colorV)
+  coltab(AOAPlot) <- colorD
+  plot(AOAPlot)
   crs(AOAPlot) <- "EPSG:32632"
   writeRaster(AOAPlot, "./data/aoa.tif", overwrite = TRUE)
   print("Fertig mit AOA")
