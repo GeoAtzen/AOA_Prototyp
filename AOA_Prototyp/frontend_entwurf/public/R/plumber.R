@@ -102,7 +102,15 @@ calculatePrediction <- function(sentinel, model){
   #print("Fertig mit DI")
 
   # Further trainingsareas
+  #  Lösung
+  DIGanz <- as.polygons(selectHighest(AOA$DI, 2000))
+  writeVector(DIGanz,R/data/DIGanz.gpkg", overwrite=T) #
 
+  samplinglocations <- st_read("R/data/DIGanz.gpkg")
+
+  st_write(samplinglocations, "R/data/samplinglocations.geojson, delete_dsn = TRUE)
+  
+  #######################################################################################################
   # 1: Geht nicht da reclassify nicht geht, da kein S4 Typ?? (checke ich nicht aber sagt stackoverflow)
   # Fehler: 
   #<simpleError in (function (classes, fdef, mtable) {    methods <- .findInheritedMethods(classes, fdef, mtable)    
