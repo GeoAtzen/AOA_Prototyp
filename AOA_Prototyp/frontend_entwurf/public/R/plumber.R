@@ -64,6 +64,7 @@ trainModel <- function(Referenzdaten){
 # Diese Funktion erhält ein Tif und ein trainiertes Modell und kann damit die
 # Prediction erstellen, welche dann auf den Server geschrieben wird.
 calculatePrediction <- function(sentinel, model){
+
   prediction <- predict(as(sentinel,"Raster"),model)
   prediction_terra <- as(prediction,"SpatRaster")
   prediction_terra <- setColor(prediction_terra)
@@ -100,12 +101,14 @@ calculatePrediction <- function(sentinel, model){
   #crs(DIPlot) <- "EPSG:32632"
   #writeRaster(DIPlot, "./data/DI.tif", overwrite = TRUE)
   #print("Fertig mit DI")
-
   # Further trainingsareas
 
   DIGanz <- as.polygons(selectHighest(AOA$DI, 2000))
-  writeVector(DIGanz, "./data/samples.gpkg", overwrite=TRUE)
+  writeVector(DIGanz, "./data/sampling/samples.shp", overwrite=TRUE)
+  #system("zip ./data/sampling/samples.shp")
+
   print("Fertig mit DI Sampling Locations")
+
 
   #samplinglocations <- st_read("./data/samples.gpkg")
   #samplinglocationsCRS = st_set_crs(samplinglocations, "EPSG:4326")

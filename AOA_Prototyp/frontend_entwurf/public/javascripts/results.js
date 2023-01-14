@@ -395,24 +395,7 @@ function loadDI() {
 
 */
 
-// add GeoJSON to map
-var samplinglocations = new L.GeoJSON.AJAX("/R/data/samplinglocations.geojson", {
-    onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                return k + ": " + feature.properties[k];
-            }).join("<br />"), {
-                maxHeight: 200
-            });
-        }
-    }
-});
-
-// Anzeigen des hochgeladenen geopackages
-// Anmerkung: Layer MUSS so heißen wie Datei
-var samplingpkg = new L.geoPackageFeatureLayer([], {
-    geoPackageUrl: '/R/data/samples.gpkg',
-    layerName: 'samples',
+var samplingshp = new L.Shapefile("/R/data/sampling/samples", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -425,7 +408,7 @@ var samplingpkg = new L.geoPackageFeatureLayer([], {
     style: function(feature) {
         switch (feature.properties.DI) {
             case "1":
-                return { color: "#000000" };
+                return { color: "#d18b2c" };
             default:
                 return { color: "#000000" };
         }
@@ -439,8 +422,7 @@ var baseMaps = {
 };
 
 var overlayMaps = {
-    "Samples GPKG": samplingpkg,
-    "Samples": samplinglocations,
+    "Sampling Locations": samplingshp,
     "Shapefile": usershapefile,
     "Geopackage": usergeopackage,
     "GeoJSON": geojsondata,
