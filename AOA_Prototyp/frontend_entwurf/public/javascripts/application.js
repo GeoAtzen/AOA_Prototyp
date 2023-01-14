@@ -116,7 +116,7 @@ var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
 // Anmerkung: Layer MUSS layer1 heißen
 var usergeopackage = new L.geoPackageFeatureLayer([], {
     geoPackageUrl: '/uploads/usertrainingspolygonegpkg.gpkg',
-    layerName: 'layer1',
+    layerName: 'samples',
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
