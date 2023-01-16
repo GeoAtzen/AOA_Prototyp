@@ -51,7 +51,7 @@ block content
                     h4 Trainiertes Modell hochladen
                     button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'; modal = document.getElementById('id04')" title='Hilfe') ?
                     form(method='post', enctype='multipart/form-data', action='/uploadmodel')
-                    input(type='file', name='file' accept=".rds" style="color:grey; font-size:large;")
+                    input(type='file', name='file' accept=".rds" style="color:grey; font-size:large;" onclick="document.getElementById('traniertesModelltrain').style.display='block';")
                     input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(4)')
                     #puff4.spinner-border.float-end(role='status' style= 'display:none') 
 
@@ -61,14 +61,14 @@ block content
                       h4 Trainingspolygone als GeoPackage oder GeoJSON:
                         button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
                       form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
-                        input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;" onclick="document.getElementById('shapefilezeug').style.display='none';")
+                        input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;" onclick="document.getElementById('shapefilezeug').style.display='none'; document.getElementById('geopackagegeojson').style.display='block';")
                         input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(2);")
                         #puff2.spinner-border.float-end(role='status' style= 'display:none')
                       p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll, bitte "Layer1" nennen
                     #shapefilezeug
                       h4  Trainingspolygone als Shapefile als .zip
                       form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
-                        input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;" onclick="document.getElementById('geozeug').style.display='none';")
+                        input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;" onclick="document.getElementById('geozeug').style.display='none';document.getElementById('shapefiletrain').style.display='block';")
                         input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(3);")
                         #puff3.spinner-border.float-end(role='status' style= 'display:none')                
                       p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
@@ -85,6 +85,7 @@ block content
                 h4 Ausführen
                   button.buttonFragezeichen(onclick="document.getElementById('id09').style.display='block'; modal = document.getElementById('id09')" title='Hilfe') ?
                 p
+              #geopackagegeojson(style= "display:none") 
                 .w3-row
                   .w3-half
                     form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
@@ -96,16 +97,15 @@ block content
                       button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
                         | GeoJSON Trainingsdaten
                     br 
-                .w3-row
-                  .w3-half
-                    form(method='post', action='/anwendungsseite/ergebnisseiteshape')
-                      button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
-                        | Shapefile Trainingsdaten
-                    br  
-                  .w3-half
-                  form(method='post', action='/anwendungsseite/ergebnisseitemodel')
-                      button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>                                                                  
-                        | trainiertem Modell
+              #shapefiletrain(style= "display:none") 
+                form(method='post', action='/anwendungsseite/ergebnisseiteshape')
+                  button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
+                    | Shapefile Trainingsdaten
+                br  
+              #traniertesModelltrain(style= "display:none") 
+                form(method='post', action='/anwendungsseite/ergebnisseitemodel')
+                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>                                                                  
+                      | trainiertem Modell
                  
               
   // Modals
