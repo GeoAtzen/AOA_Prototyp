@@ -3,105 +3,109 @@ extends layout
 block content
   br
   br
-  h1 Area of Applicability - Anwendungsseite
-  p Hier können Sie die Area of Applicability anwenden. Zum Anzeigen der von Ihnen hochgeladenen Daten benutzen Sie bitte die Layerkontrollfunktion oben rechts auf der Karte.
-
+  h1 Anwendung
+  p Verwenden Sie die Layerkontrollfunktion oben rechts auf der Karte, um hochgeladene Daten anzuzeigen.
   .row.justify-content-md-left
         .col-lg-6.col-xs-12.mb-3
               #anwendungsmap
 
         .col-lg-6.col-xs-12.mb-3
-          h4
+          
+          h3
             button.buttonFragezeichen(onclick="document.getElementById('id10').style.display='block'; modal = document.getElementById('id10')" title='Hilfe') ?     
             .card.text-dark.p-4.border-success.cardanwendungsseite
-              h2 Durchführungsschritte
-
-              h4 1. Bereich wählen:  
-                button.buttonFragezeichen(onclick="document.getElementById('id02').style.display='block'; modal = document.getElementById('id02')" title='Hilfe') ?
-              p
-              h4 2. Datenupload:  
-                button.buttonFragezeichen(onclick="document.getElementById('id03').style.display='block'; modal = document.getElementById('id03')" title='Hilfe') ?
-              p
-
-              h4 2.1 trainiertes Modell
-                button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'; modal = document.getElementById('id04')" title='Hilfe') ?
-              form(method='post', enctype='multipart/form-data', action='/uploadmodel')
-                input(type='file', name='file' accept=".rds" style="color:grey; font-size:large;")
-                input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(4)')
-                #puff4.spinner-border.float-end(role='status' style= 'display:none') 
-              p 
-
-              h4 2.2 Sektion Trainingsdaten:
-                button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
-              h5(style="color:darkgray") 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON:
-              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
-                input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;")
-                input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(2)')
-                #puff2.spinner-border.float-end(role='status' style= 'display:none')
-              p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll, bitte "Layer1" nennen
-
-              h5(style="color:darkgray") 2.2.2 Trainingspolygone als Shapefile als .zip
-              form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
-                input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;")
-                input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(3)')
-                #puff3.spinner-border.float-end(role='status' style= 'display:none')                
-              p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
-
-
-              h4 2.3 Sentinel 2 Bild als .tif </b>
-                button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'; modal = document.getElementById('id06')" title='Hilfe') ?
-              form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
-                input(type='file', name='file' , accept=".tif" style="color:grey; font-size:large;")
-                input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(1)')
-                #puff1.spinner-border.float-end(role='status' style= 'display:none')
-                p(style="font-size: small") Das Anzeigen kann bis zu einer Minute dauern, bitte haben Sie Geduld!
-
-              h4 3. Auflösung wählen
-                button.buttonFragezeichen(onclick="document.getElementById('id07').style.display='block'; modal = document.getElementById('id07')" title='Hilfe') ?     
-                br   
-                .w3-dropdown-click
-                  #Auflo.button.w3-button.btn.btn-success(onclick='aufloNull()') Auflösungen▾
-                  #DemoZwei.w3-dropdown-content
-                    button.btn.btn-success(onclick='aufloEins()') Hoch
-                    br
-                    button.btn.btn-success(onclick='aufloZwei()') Mittel
-                    br
-                    button.btn.btn-success(onclick='aufloDrei()') Gering
-              p 
-              h4 4. Algorithmus wählen
-                button.buttonFragezeichen(onclick="document.getElementById('id08').style.display='block'; modal = document.getElementById('id08')" title='Hilfe') ?     
-                br   
-                .w3-dropdown-click
-                  #Algo.button.w3-button.btn.btn-success(onclick='algoNull()') Algorithmen▾
-                  #Demo.w3-dropdown-content
-                    button.btn.btn-success(onclick='algoEins()') Random Forest
-                    button.btn.btn-success(onclick='algoZwei()') Decision Tree
-                    button.btn.btn-success(onclick='algoDrei()') Andere Methode
-
-              h4 5. Ausführen
-                button.buttonFragezeichen(onclick="document.getElementById('id09').style.display='block'; modal = document.getElementById('id09')" title='Hilfe') ?
-              p
-              .w3-row
-                .w3-half
-                  form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
-                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
-                      | geoPackage Trainingsdaten
+              #abfrage
+                h3(style= "text-align: center; font-weight: bold;") Haben Sie bereits ein trainiertes Modell?
                   br
-                .w3-half
-                  form(method='post', action='/anwendungsseite/ergebnisseitegjson')
-                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
-                      | GeoJSON Trainingsdaten
-                  br 
-              .w3-row
-                .w3-half
-                  form(method='post', action='/anwendungsseite/ergebnisseiteshape')
-                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
-                      | Shapefile Trainingsdaten
-                  br  
-                .w3-half
-                 form(method='post', action='/anwendungsseite/ergebnisseitemodel')
-                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>                                                                  
-                      | trainiertem Modell
+                  p 
+                  .w3-row
+                    .w3-half
+                      button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainingsdaten').style.display='none'; document.getElementById('abfrage').style.display='none';") Ja
+                    .w3-half
+                      button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainiertesModell').style.display='none'; document.getElementById('abfrage').style.display='none';") Nein
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+              #rest(style= "display:none")   
+                h4 Bereich auf der Karte auswählen 
+                  button.buttonFragezeichen(onclick="document.getElementById('id02').style.display='block'; modal = document.getElementById('id02')" title='Hilfe') ?
+                p
+
+
+                  #trainiertesModell
+                    h4 Trainiertes Modell hochladen
+                    button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'; modal = document.getElementById('id04')" title='Hilfe') ?
+                    form(method='post', enctype='multipart/form-data', action='/uploadmodel')
+                    input(type='file', name='file' accept=".rds" style="color:grey; font-size:large;")
+                    input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(4)')
+                    #puff4.spinner-border.float-end(role='status' style= 'display:none') 
+
+
+                  #trainingsdaten
+                    #geozeug
+                      h4 Trainingspolygone als GeoPackage oder GeoJSON:
+                        button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
+                      form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
+                        input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;" onclick="document.getElementById('shapefilezeug').style.display='none';")
+                        input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(2);")
+                        #puff2.spinner-border.float-end(role='status' style= 'display:none')
+                      p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll, bitte "Layer1" nennen
+                    #shapefilezeug
+                      h4  Trainingspolygone als Shapefile als .zip
+                      form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
+                        input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;" onclick="document.getElementById('geozeug').style.display='none';")
+                        input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(3);")
+                        #puff3.spinner-border.float-end(role='status' style= 'display:none')                
+                      p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
+
+
+                h4 Sentinel 2 Bild als .tif hochladen </b>
+                  button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'; modal = document.getElementById('id06')" title='Hilfe') ?
+                form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
+                  input(type='file', name='file' , accept=".tif" style="color:grey; font-size:large;")
+                  input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(1)')
+                  #puff1.spinner-border.float-end(role='status' style= 'display:none')
+                  p(style="font-size: small") Das Anzeigen kann bis zu einer Minute dauern, bitte haben Sie Geduld!
+
+                h4 Ausführen
+                  button.buttonFragezeichen(onclick="document.getElementById('id09').style.display='block'; modal = document.getElementById('id09')" title='Hilfe') ?
+                p
+                .w3-row
+                  .w3-half
+                    form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
+                      button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
+                        | geoPackage Trainingsdaten
+                    br
+                  .w3-half
+                    form(method='post', action='/anwendungsseite/ergebnisseitegjson')
+                      button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
+                        | GeoJSON Trainingsdaten
+                    br 
+                .w3-row
+                  .w3-half
+                    form(method='post', action='/anwendungsseite/ergebnisseiteshape')
+                      button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>
+                        | Shapefile Trainingsdaten
+                    br  
+                  .w3-half
+                  form(method='post', action='/anwendungsseite/ergebnisseitemodel')
+                      button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;") Ausführen mit <br>                                                                  
+                        | trainiertem Modell
                  
               
   // Modals
