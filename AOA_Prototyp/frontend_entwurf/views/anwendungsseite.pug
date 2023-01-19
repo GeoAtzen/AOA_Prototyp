@@ -43,8 +43,7 @@ block content
                     br
                     br
                 #rest(style= "display:none")   
-                  h4 Bereich auf der Karte auswählen 
-                    button.buttonFragezeichen(onclick="document.getElementById('id02').style.display='block'; modal = document.getElementById('id02')" title='Hilfe') ?
+
                   p
 
 
@@ -82,10 +81,13 @@ block content
                     input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(1)')
                     #puff1.spinner-border.float-end(role='status' style= 'display:none')
                     p(style="font-size: small") Das Anzeigen kann bis zu einer Minute dauern, bitte haben Sie Geduld!
-
+                  h4 Bereich auf der Karte auswählen 
+                    button.buttonFragezeichen(onclick="document.getElementById('id02').style.display='block'; modal = document.getElementById('id02')" title='Hilfe') ?
+                  br
                   h4 Ausführen
                     button.buttonFragezeichen(onclick="document.getElementById('id09').style.display='block'; modal = document.getElementById('id09')" title='Hilfe') ?
                   p
+                  
                 #geopackagegeojson(style= "display:none") 
                   .w3-row
                     .w3-half
