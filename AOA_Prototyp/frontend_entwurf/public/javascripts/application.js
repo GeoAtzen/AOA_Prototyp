@@ -260,6 +260,133 @@ fetch("./predictions/usersentineldata.tif")
         });
     });
 
+// aoi modell
+const areaofinterestTextmdl = document.getElementById("aoibbmdl");
+areaofinterestTextmdl.value = "";
+
+var aoimdl;
+map.on("draw:created", function (e) {
+  var areaofinterestmdl = e.layer;
+  aoimdl = [
+    areaofinterestmdl._bounds._southWest.lng,
+    areaofinterestmdl._bounds._northEast.lng,
+    areaofinterestmdl._bounds._southWest.lat,
+    areaofinterestmdl._bounds._northEast.lat,
+  ];
+  console.log(aoimdl);
+  areaofinterestTextmdl.value = aoimdl;
+  console.log(areaofinterestTextmdl.value);
+});
+
+// Löschen des letzten Punkts
+map.on(L.Draw.Event.DRAWSTART, function (e) {
+  if (aoimdl != null) {
+    map.removeLayer(aoimdl);
+    areaofinterestTextmdl.value = "";
+  }
+});
+
+map.on("draw:deleted", function (e) {
+  aoimdl = null;
+  areaofinterestTextmdl.value = "";
+});
+
+// aoi gpkg
+const areaofinterestTextgpkg = document.getElementById("aoibbgpkg");
+areaofinterestTextgpkg.value = "";
+
+var aoigpkg;
+map.on("draw:created", function (e) {
+  var areaofinterestgpkg = e.layer;
+  aoigpkg = [
+    areaofinterestgpkg._bounds._southWest.lng,
+    areaofinterestgpkg._bounds._northEast.lng,
+    areaofinterestgpkg._bounds._southWest.lat,
+    areaofinterestgpkg._bounds._northEast.lat,
+  ];
+  console.log(aoigpkg);
+  areaofinterestTextgpkg.value = aoigpkg;
+  console.log(areaofinterestTextgpkg.value);
+});
+
+// Löschen des letzten Punkts
+map.on(L.Draw.Event.DRAWSTART, function (e) {
+  if (aoigpkg != null) {
+    map.removeLayer(aoigpkg);
+    areaofinterestTextgpkg.value = "";
+  }
+});
+
+map.on("draw:deleted", function (e) {
+  aoigpkg = null;
+  areaofinterestTextgpkg.value = "";
+});
+
+// aoi gjson
+const areaofinterestTextgjson = document.getElementById("aoibbgjson");
+areaofinterestTextgjson.value = "";
+
+var aoigjson;
+map.on("draw:created", function (e) {
+  var areaofinterestgjson = e.layer;
+  aoigjson = [
+    areaofinterestgjson._bounds._southWest.lng,
+    areaofinterestgjson._bounds._northEast.lng,
+    areaofinterestgjson._bounds._southWest.lat,
+    areaofinterestgjson._bounds._northEast.lat,
+  ];
+  console.log(aoigjson);
+  areaofinterestTextgjson.value = aoigjson;
+  console.log(areaofinterestTextgjson.value);
+});
+
+// Löschen des letzten Punkts
+map.on(L.Draw.Event.DRAWSTART, function (e) {
+  if (aoigjson != null) {
+    map.removeLayer(aoigjson);
+    areaofinterestTextgjson.value = "";
+  }
+});
+
+map.on("draw:deleted", function (e) {
+  aoigjson = null;
+  areaofinterestTextgjson.value = "";
+});
+
+// aoi shp
+const areaofinterestTextshp = document.getElementById("aoibbshp");
+areaofinterestTextshp.value = "";
+
+var aoishp;
+map.on("draw:created", function (e) {
+  var areaofinterestshp = e.layer;
+  aoishp = [
+    areaofinterestshp._bounds._southWest.lng,
+    areaofinterestshp._bounds._northEast.lng,
+    areaofinterestshp._bounds._southWest.lat,
+    areaofinterestshp._bounds._northEast.lat,
+  ];
+  console.log(aoishp);
+  areaofinterestTextshp.value = aoishp;
+  console.log(areaofinterestTextshp.value);
+});
+
+// Löschen des letzten Punkts
+map.on(L.Draw.Event.DRAWSTART, function (e) {
+  if (aoishp != null) {
+    map.removeLayer(aoishp);
+    areaofinterestTextshp.value = "";
+  }
+});
+
+map.on("draw:deleted", function (e) {
+  aoishp = null;
+  areaofinterestTextshp.value = "";
+});
+
+
+
+
 // Layer Control
 var baseMaps = {
     "OpenStreetMap": osm,

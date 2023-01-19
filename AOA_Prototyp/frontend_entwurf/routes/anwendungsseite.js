@@ -3,6 +3,7 @@ var router = express.Router();
 const decompress = require("decompress");
 const multer = require("multer");
 const fs = require("fs");
+var request = require("request");
 
 // error handler
 const handleError = (err, res) => {
@@ -27,7 +28,7 @@ router.get("/", function (req, res, next) {
 
 router.post("/ergebnisseitemodel", function (req, res, next) {
   // Code zum ausführen des R Skripts
-
+  console.log("aoi: " + req.body.aoibbmdl);
   
   res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffmodel" })
   
@@ -35,13 +36,15 @@ router.post("/ergebnisseitemodel", function (req, res, next) {
 
 router.post("/ergebnisseitegpkg", function (req, res, next) {
 
+  console.log("aoi: " + req.body.aoibbgpkg);
+
   res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffgpkg" })
   
 });
 
 router.post("/ergebnisseiteshape", function (req, res, next) {
   // Code zum ausführen des R Skripts
-
+  console.log("aoi: " + req.body.aoibbshp);
   
   res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffshape" })
   
@@ -49,11 +52,10 @@ router.post("/ergebnisseiteshape", function (req, res, next) {
 
 router.post("/ergebnisseitegjson", function (req, res, next) {
   // Code zum ausführen des R Skripts
-
+  console.log("aoi: " + req.body.aoibbgjson);
   
   res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffgjson" })
   
 });
-
 
 module.exports = router;
