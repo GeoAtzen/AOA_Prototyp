@@ -21,9 +21,9 @@ block content
                     p 
                     .w3-row
                       .w3-half
-                        button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainingsdaten').style.display='none'; document.getElementById('abfrage').style.display='none';") Ja
+                        button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainingsdaten').style.display='none'; document.getElementById('abfrage').style.display='none'; document.getElementById('traniertesModelltrain').style.display='block';") Ja
                       .w3-half
-                        button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainiertesModell').style.display='none'; document.getElementById('abfrage').style.display='none';") Nein
+                        button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainiertesModell').style.display='none'; document.getElementById('abfrage').style.display='none';  document.getElementById('geopackagegeojson').style.display='block'; document.getElementById('shapefiletrain').style.display='block';") Nein
                     br
                     br
                     br
@@ -52,7 +52,7 @@ block content
                       h4 Trainiertes Modell hochladen
                       button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'; modal = document.getElementById('id04')" title='Hilfe') ?
                       form(method='post', enctype='multipart/form-data', action='/uploadmodel')
-                      input(type='file', name='file' accept=".rds" style="color:grey; font-size:large;" onclick="document.getElementById('traniertesModelltrain').style.display='block';")
+                      input(type='file', name='file' accept=".rds" style="color:grey; font-size:large;")
                       input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(4)')
                       #puff4.spinner-border.float-end(role='status' style= 'display:none') 
 
@@ -62,14 +62,14 @@ block content
                         h4 Trainingspolygone als GeoPackage oder GeoJSON:
                           button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
                         form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
-                          input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;" onclick="document.getElementById('shapefilezeug').style.display='none'; document.getElementById('geopackagegeojson').style.display='block';")
+                          input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;" onclick="document.getElementById('shapefilezeug').style.display='none';")
                           input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(2);")
                           #puff2.spinner-border.float-end(role='status' style= 'display:none')
                         p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll, bitte "Layer1" nennen
                       #shapefilezeug
                         h4  Trainingspolygone als Shapefile als .zip
                         form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
-                          input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;" onclick="document.getElementById('geozeug').style.display='none';document.getElementById('shapefiletrain').style.display='block';")
+                          input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;" onclick="document.getElementById('geozeug').style.display='none';")
                           input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(3);")
                           #puff3.spinner-border.float-end(role='status' style= 'display:none')                
                         p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
