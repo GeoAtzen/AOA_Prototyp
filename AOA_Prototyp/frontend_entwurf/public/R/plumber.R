@@ -229,7 +229,14 @@ function(){
 #* Calculates LULC Classification
 #* @serializer png
 #* @get /tiffmodel
-function(){
+function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
+  #print(ymin)
+  maske_raster <- c(xmin, xmax, ymin, ymax)
+  maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
+
+  class(maske_raster) <- "numeric"
+  class(maske_training) <- "numeric"
+
   url <- ("http://localhost:3000/uploads/usersentineldata.tif")
   geotiff_file <- tempfile(fileext='.tif')
   httr::GET(url,httr::write_disk(path=geotiff_file))
@@ -237,6 +244,15 @@ function(){
   
   model_download <- ("http://localhost:3000/uploads/usertrainedmodel.rds")
   model <- readRDS(url(model_download))
+
+  print("bis hier geht")
+
+  # Daten auf Maske zuschneiden
+  if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
+    sentinel <- crop(sentinel, extent(maske_training))
+    sf_use_s2(FALSE)
+  }
+
   
   calculatePrediction(sentinel, model)
 }

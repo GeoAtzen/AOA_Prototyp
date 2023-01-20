@@ -28,9 +28,36 @@ router.get("/", function (req, res, next) {
 
 router.post("/ergebnisseitemodel", function (req, res, next) {
   // Code zum ausführen des R Skripts
+  let url = "http://localhost:8000/"
+
+  let aoiSplit = "";
   console.log("aoi: " + req.body.aoibbmdl);
+
+  if (req.body.aoibbmdl != "") {
+    aoiSplit = req.body.aoibbmdl.split(",");
+  }
+  aoiSplit != ""
+        ? (url +=
+            "tiffmodel?ymin=" +
+            aoiSplit[2] +
+            "&ymax=" +
+            aoiSplit[3] +
+            "&xmin=" +
+            aoiSplit[0] +
+            "&xmax=" +
+            aoiSplit[1])
+        : (url += "tiffmodel");
+  console.log(url);
+
+  request(url, { json: true }, (err, res2, body) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.render("ergebnisseite", { title: "Ergebnisseite" });
+  });
+
   
-  res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffmodel" })
+  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffmodel" })
   
 });
 
