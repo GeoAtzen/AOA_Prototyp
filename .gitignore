@@ -53,3 +53,8 @@ AOA_Prototyp/frontend_entwurf/public/R/data/prediction.tif.aux.xml
 AOA_Prototyp/frontend_entwurf/public/R/.RData
 AOA_Prototyp/frontend_entwurf/public/R/data/DIGanz.gpkg
 AOA_Prototyp/frontend_entwurf/public/R/data/samples.gpkg
+AOA_Prototyp/frontend_entwurf/public/R/data/samples.shx
+AOA_Prototyp/frontend_entwurf/public/R/data/samples.shp
+AOA_Prototyp/frontend_entwurf/public/R/data/samples.prj
+AOA_Prototyp/frontend_entwurf/public/R/data/samples.dbf
+AOA_Prototyp/frontend_entwurf/public/R/data/samples.cpg

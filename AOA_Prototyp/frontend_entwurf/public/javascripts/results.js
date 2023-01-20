@@ -395,7 +395,7 @@ function loadDI() {
 
 */
 
-var samplingshp = new L.Shapefile("/R/data/sampling/samples", {
+var samplingshp = new L.Shapefile("/R/data/samples", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {

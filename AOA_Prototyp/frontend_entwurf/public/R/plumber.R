@@ -23,6 +23,7 @@ library(latticeExtra)
 library(Orcs)
 library(rgeos)
 library(rjson)
+library(rgdal)
 #library(tmap)
 
 
@@ -104,7 +105,7 @@ calculatePrediction <- function(sentinel, model){
   # Further trainingsareas
 
   DIGanz <- as.polygons(selectHighest(AOA$DI, 2000))
-  writeVector(DIGanz, "./data/sampling/samples.shp", overwrite=TRUE)
+  writeVector(DIGanz, "./data/samples.shp", overwrite=TRUE)
   #system("zip ./data/sampling/samples.shp")
 
   print("Fertig mit DI Sampling Locations")
@@ -230,12 +231,6 @@ function(){
 #* @serializer png
 #* @get /tiffmodel
 function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
-  #print(ymin)
-  maske_raster <- c(xmin, xmax, ymin, ymax)
-  maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
-
-  class(maske_raster) <- "numeric"
-  class(maske_training) <- "numeric"
 
   url <- ("http://localhost:3000/uploads/usersentineldata.tif")
   geotiff_file <- tempfile(fileext='.tif')
@@ -245,15 +240,53 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
   model_download <- ("http://localhost:3000/uploads/usertrainedmodel.rds")
   model <- readRDS(url(model_download))
 
+  print(ymin)
+  #long <- c( ymin, ymax)
+  #class(long) <- "numeric"
+  #lat <- c( xmin, xmax)
+  #class(lat) <- "numeric"
+  #cord.dec = SpatialPoints(cbind(long, lat), proj4string = CRS("+proj=longlat"))
+  #print(cord.dec)maske_raster
+  # wildcard <- code von Luca zur Abfrage des EPSG Codes
+  # cord.UTM <- spTransform(cord.dec, CRS("+init=epsg:wildcard"))
+
+  #cord.UTM <- spTransform(cord.dec, CRS("+init=epsg:32632"))
+  #maske_raster <- as(cord.UTM,'SpatialPolygons')
+  #print(cord.UTM)
+  #print(maske_raster)
+  v <- c(xmin, xmax, ymin, ymax)
+  class(v) <- "numeric"
+  e <- extent(v)
+  maske_raster <- as(e,'SpatialPolygons')
+
+  print(maske_raster)
+  
+  proj4string(maske_raster) <- CRS("+proj=longlat")
+  
+  cord.UTM <- spTransform(maske_raster, CRS("+init=epsg:32632"))
+  print(cord.UTM)
+  #print(crs(maske_raster))
+
+  #crs(maske_raster) <- "+proj=utm +zone=32U ellps=WGS84"
+
+  #print(maske_raster)
+
+  print(sentinel)
+  
+  #maske_raster <- c(xmin, xmax, ymin, ymax)
+  maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
+
+  #class(maske_raster) <- "numeric"
+  class(maske_training) <- "numeric"
+
   print("bis hier geht")
 
   # Daten auf Maske zuschneiden
   if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
-    sentinel <- crop(sentinel, extent(maske_training))
+    sentinel <- crop(sentinel, extent(cord.UTM))
     sf_use_s2(FALSE)
   }
 
-  
   calculatePrediction(sentinel, model)
 }
 
