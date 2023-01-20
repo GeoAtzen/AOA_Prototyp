@@ -108,7 +108,7 @@ var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
             case "Wiese":
                 return { color: "#00FF00" };
             default:
-                return { color: "##000000" };
+                return { color: "#000000" };
         }
     },
 });
@@ -117,7 +117,7 @@ var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
 // Anmerkung: Layer MUSS layer1 heißen
 var usergeopackage = new L.geoPackageFeatureLayer([], {
     geoPackageUrl: '/uploads/usertrainingspolygonegpkg.gpkg',
-    layerName: 'samples',
+    layerName: 'layer1',
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
