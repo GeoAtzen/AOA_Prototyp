@@ -43,7 +43,14 @@ block content
                       a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()' style='float: right;')
                     br                 
                     h4 Gebiete zum Nachtrainieren
-                        
+                      button.buttonFragezeichen(onclick="document.getElementById('id12').style.display='block'; modal = document.getElementById('id12')" title='Hilfe') ?
+                    p Benutzen Sie zum Ein- und Ausblenden bitte die Layer Kontrollfunktion auf der Karte oben rechts!
+                    p Herunterladen der selbstgezeichneten Polygone als .geojson: 
+                      a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()' style='float: right;')
+                      button.btn.btn-success#add-polygon-btn Überprüfen der gezeichneten Polygone:
+                      form(method='post', action='/anwendungsseite/mergegeojson' style='margin:auto;')
+                        textarea#polygons(name="polygons") 
+                        button.btn.btn-success() Mit hochgeladenem GeoJSON zu einer FeatureCollection zusammenführen! Datei wird auf Knopfdruck heruntergeladen! 
                     br         
                     h4 Sentinel 2 Bild
                     p Download des ursprünglichen Satellitenbildes:  
@@ -62,7 +69,66 @@ block content
       .w3-container
          h3 Ergebnisse und Download
          p Auf dieser werden die Ergebnisse angezeigt, welche auf der Anwendungsseite berechnet wurden. Ihnen ist es hier möglich, sich die Dateien einzeln anzeigen zu lassen und/oder diese zu downloaden. Bitte nutzen Sie auch hier die Layerkontrollfunktion der Karte um die von ihnen gewünschte visuelle Darstellung anzuzeigen.
-
+  
+  #id12.w3-modal
+    .w3-modal-content.w3-card-4.w3-animate-top
+      header.w3-container.w3-teal.w3-display-container
+        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id12').style.display='none'")
+          i.fa.fa-remove
+      .w3-container
+         h3 Digitalisierungshilfe: 
+         p Benutzen Sie zum digialisieren und Labeln neuer Trainingspolygone die Zeichnen Funktion oben links auf der Karte! Orientieren Sie sich am besten an den "Sampling Locations" welche sie ebenfalls mit der Layerkontroll Funktion oben rechts ein- und ausblenden können! 
+         table
+          thead
+            tr
+              th Label
+              th ClassID
+          tbody
+            tr
+              td Acker
+              td 9
+            tr
+              td Acker_bepflanzt
+              td 10
+            tr
+              td Bahnschiene
+              td 18
+            tr
+              td Baumgruppe
+              td 7
+            tr
+              td Binnengewaesser
+              td 5
+            tr
+              td Industrie
+              td 11
+            tr
+              td Innenstadt
+              td 13
+            tr
+              td Kunstrasen
+              td 16
+            tr
+              td Laubwald
+              td 1
+            tr
+              td Mischwald
+              td 3
+            tr
+              td Parklandschaft
+              td 24
+            tr
+              td Siedlung
+              td 12
+            tr
+              td Strand
+              td 14
+            tr
+              td Versiegelt
+              td 8
+            tr
+              td Wiese
+              td 6
   script(src="/javascripts/shp.js")
   script(src='/javascripts/leaflet.shpfile.js')
   script(src="/javascripts/results.js")
